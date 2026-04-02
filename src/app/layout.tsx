@@ -6,6 +6,9 @@ import "./globals.css";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
 
 export const metadata: Metadata = {
+  verification: {
+    google: "bRgnvlb-svjtVk7G_TzQ4Upk4pjpA6VtOX4Mg1sTy9w",
+  },
   title: {
     default: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
     template: "%s | AI업무학교",
