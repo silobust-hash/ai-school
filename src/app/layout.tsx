@@ -7,7 +7,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronom
 
 export const metadata: Metadata = {
   verification: {
-    google: "bRgnvlb-svjtVk7G_TzQ4Upk4pjpA6VtOX4Mg1sTy9w",
+    google: [
+      "bRgnvlb-svjtVk7G_TzQ4Upk4pjpA6VtOX4Mg1sTy9w",
+      "jDjQK62YKg_1xwI2u6s_g0vlKnPswsoAdYUf_jnPQk8",
+    ],
     other: {
       "naver-site-verification": "9ba643b70c9a976977e2e3f00918bbfebc1773d9",
     },
