@@ -8,6 +8,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronom
 export const metadata: Metadata = {
   verification: {
     google: "bRgnvlb-svjtVk7G_TzQ4Upk4pjpA6VtOX4Mg1sTy9w",
+    other: {
+      "naver-site-verification": "9ba643b70c9a976977e2e3f00918bbfebc1773d9",
+    },
   },
   title: {
     default: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
