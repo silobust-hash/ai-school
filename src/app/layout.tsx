@@ -107,6 +107,12 @@ const personJsonLd = {
   knowsAbout: KNOWS_ABOUT,
   description: "19년차 공인노무사이자 AI 활용 교육자. 비개발자 전문직을 위한 AI 교육을 진행합니다.",
   url: "https://silronomu.com",
+  hasCredential: {
+    "@type": "EducationalOccupationalCredential",
+    credentialCategory: "공인노무사",
+    recognizedBy: { "@type": "GovernmentOrganization", name: "고용노동부" },
+    identifier: { "@type": "PropertyValue", name: "공인노무사 직무개시등록번호", value: "제1243호" },
+  },
   sameAs: SAME_AS,
 };
 
