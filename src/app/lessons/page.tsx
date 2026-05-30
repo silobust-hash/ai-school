@@ -56,6 +56,20 @@ const allLessons = [
       { id: "5-5", title: "더 깊이 배우기" },
     ],
   },
+  {
+    course: 6,
+    courseTitle: "2026, AI 엔지니어링의 현재",
+    lessons: [
+      { id: "6-1", title: "프롬프트에서 하네스까지: 3년의 진화" },
+      { id: "6-2", title: "2026 최신 모델 지도: Opus 4.8 · GPT-5.5 · Gemini 3.1" },
+      { id: "6-3", title: "하네스 엔지니어링 실전: 에이전트 환경 설계하기" },
+      { id: "6-4", title: "다이나믹 워크플로우와 울트라코드: 자율 다단계 실행" },
+      { id: "6-5", title: "제2의 두뇌: 옵시디언 + CLI 시대의 지식관리" },
+      { id: "6-6", title: "모바일 에이전트: 코덱스 앱과 어디서나 AI" },
+      { id: "6-7", title: "오픈소스 오케스트레이션 생태계 — 내 손으로 AI 팀 꾸리기" },
+      { id: "6-8", title: "마켓플레이스로 내 AI 도구 관리하기 — 클론·풀·푸시 쉽게 이해" },
+    ],
+  },
 ];
 
 export default function LessonsPage() {
@@ -101,7 +115,7 @@ export default function LessonsPage() {
       </div>
 
       <div className="mt-16 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-2xl p-8 border border-teal-100 text-center">
-        <h3 className="text-lg font-bold mb-2">전체 5과, 27개 강의</h3>
+        <h3 className="text-lg font-bold mb-2">전체 6과, 35개 강의</h3>
         <p className="text-slate-500 text-sm leading-relaxed">
           1과부터 순서대로 따라가시면 됩니다.
           <br />

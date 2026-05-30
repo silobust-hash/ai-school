@@ -181,7 +181,7 @@ export const lessonsCourse5: Record<string, Lesson> = {
     title: "더 깊이 배우기",
     summary: "학습 로드맵을 정리하고 다음 단계를 안내합니다",
     prev: "5-4",
-    next: null,
+    next: "6-1",
     sections: [
       {
         heading: "여기까지 온 당신, 이미 절반은 왔습니다",
