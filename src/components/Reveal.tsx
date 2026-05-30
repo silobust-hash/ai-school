@@ -35,6 +35,15 @@ export default function Reveal({
       return;
     }
 
+    // Above-the-fold safety: if the element is already within the viewport
+    // on mount, reveal it immediately so first-screen content is never
+    // stuck at opacity:0 waiting for a scroll that may never happen.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
