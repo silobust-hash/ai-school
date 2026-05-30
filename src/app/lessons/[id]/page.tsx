@@ -4,6 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import LessonReactions from "./LessonReactions";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+const SITE_LAUNCH_DATE = "2026-04-02";
+
 export const revalidate = 60; // Revalidate every 60 seconds for ISR
 
 export function generateStaticParams() {
@@ -27,13 +30,37 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title: `${staticLesson.title} | AI업무학교`,
       description: staticLesson.summary,
       alternates: { canonical: `/lessons/${id}` },
+      openGraph: {
+        type: "article",
+        title: `${staticLesson.title} | AI업무학교`,
+        description: staticLesson.summary,
+        url: `${SITE_URL}/lessons/${id}`,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: staticLesson.title,
+        description: staticLesson.summary,
+      },
     };
   }
 
+  const title = lesson.title as string;
+  const summary = (lesson.summary as string) || undefined;
   return {
-    title: `${lesson.title} | AI업무학교`,
-    description: (lesson.summary as string) || undefined,
+    title: `${title} | AI업무학교`,
+    description: summary,
     alternates: { canonical: `/lessons/${id}` },
+    openGraph: {
+      type: "article",
+      title: `${title} | AI업무학교`,
+      description: summary,
+      url: `${SITE_URL}/lessons/${id}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: summary,
+    },
   };
 }
 
@@ -57,19 +84,50 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
   const prevId = lesson.prev ? lesson.prev : null;
   const nextId = lesson.next ? lesson.next : null;
 
+  const datePublished = (lesson.datePublished as string) || SITE_LAUNCH_DATE;
+  const dateModified = (lesson.dateModified as string) || datePublished;
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: lesson.title,
     description: lesson.summary,
-    author: { "@type": "Person", name: "박실로", jobTitle: "공인노무사" },
-    publisher: { "@type": "Organization", name: "한동노무법인" },
+    mainEntityOfPage: `${SITE_URL}/lessons/${id}`,
+    articleSection: lesson.phase,
+    datePublished,
+    dateModified,
+    author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: "박실로", jobTitle: "공인노무사" },
+    publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "한동노무법인" },
     isPartOf: {
       "@type": "Course",
+      "@id": `${SITE_URL}/#course`,
       name: "AI업무학교",
     },
     educationalLevel: "Beginner",
     inLanguage: "ko",
+  };
+
+  const learningResourceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    name: lesson.title,
+    description: lesson.summary,
+    educationalLevel: "Beginner",
+    inLanguage: "ko",
+    isPartOf: { "@id": `${SITE_URL}/#course` },
+    teaches: lesson.keyTakeaways,
+    isAccessibleForFree: true,
+    learningResourceType: "lesson",
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "홈", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "커리큘럼", item: `${SITE_URL}/curriculum` },
+      { "@type": "ListItem", position: 3, name: lesson.title, item: `${SITE_URL}/lessons/${id}` },
+    ],
   };
 
   const faqJsonLd = lesson.faq && lesson.faq.length > 0 ? {
@@ -87,11 +145,23 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
       {/* JSON-LD: Article structured data (server-generated, trusted content) */}
       <script
         type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}

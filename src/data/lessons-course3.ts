@@ -4,6 +4,7 @@ export const lessonsCourse3: Record<string, Lesson> = {
   "3-1": {
     id: "3-1",
     phase: "3과",
+    datePublished: "2026-04-02",
     title: "하네스엔지니어링이란",
     summary: "AI를 도구로서 제어하는 개념, CLAUDE.md와 설정 파일의 역할을 배웁니다",
     prev: "2-5",
@@ -48,6 +49,7 @@ export const lessonsCourse3: Record<string, Lesson> = {
   "3-2": {
     id: "3-2",
     phase: "3과",
+    datePublished: "2026-04-02",
     title: "터미널과 친해지기",
     summary: "터미널 기초, 핵심 명령어 10개를 배워 두려움을 극복합니다",
     prev: "3-1",
@@ -92,6 +94,7 @@ export const lessonsCourse3: Record<string, Lesson> = {
   "3-3": {
     id: "3-3",
     phase: "3과",
+    datePublished: "2026-04-02",
     title: "Git과 GitHub 기초",
     summary: "버전관리의 개념, 레포/커밋/푸시/풀을 실생활 비유로 이해합니다",
     prev: "3-2",
@@ -136,6 +139,7 @@ export const lessonsCourse3: Record<string, Lesson> = {
   "3-4": {
     id: "3-4",
     phase: "3과",
+    datePublished: "2026-04-02",
     title: "Claude Code 설치하기",
     summary: "Node.js와 Claude Code를 설치하고 첫 실행을 해봅니다",
     prev: "3-3",
@@ -186,6 +190,7 @@ export const lessonsCourse3: Record<string, Lesson> = {
   "3-5": {
     id: "3-5",
     phase: "3과",
+    datePublished: "2026-04-02",
     title: "바이브코딩으로 웹사이트 만들기",
     summary: "Claude Code와 대화하며 코딩하는 바이브코딩으로 첫 웹사이트를 만듭니다",
     prev: "3-4",
@@ -230,6 +235,7 @@ export const lessonsCourse3: Record<string, Lesson> = {
   "3-6": {
     id: "3-6",
     phase: "3과",
+    datePublished: "2026-04-02",
     title: "Vercel로 세상에 공개하기",
     summary: "만든 웹사이트를 Vercel에 배포하고 도메인을 설정하는 방법을 배웁니다",
     prev: "3-5",

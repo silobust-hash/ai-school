@@ -4,6 +4,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-1": {
     id: "6-1",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "프롬프트에서 하네스까지: 3년의 진화",
     summary:
       "2022년 프롬프트엔지니어링부터 2026년 하네스엔지니어링까지, AI 활용 패러다임이 어떻게 바뀌었는지 정리합니다",
@@ -50,6 +51,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-2": {
     id: "6-2",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "2026 최신 모델 지도: Opus 4.8 · GPT-5.5 · Gemini 3.1",
     summary:
       "2026년 상반기 현재 주요 AI 모델의 특징과 용도를 비교해 어떤 상황에 어떤 모델을 쓸지 파악합니다",
@@ -96,6 +98,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-3": {
     id: "6-3",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "하네스 엔지니어링 실전: 에이전트 환경 설계하기",
     summary:
       "CLAUDE.md 구조화, MCP 연결, 스킬 패키지화를 통해 나만의 AI 작업환경을 설계하는 방법을 배웁니다",
@@ -142,6 +145,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-4": {
     id: "6-4",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "다이나믹 워크플로우와 울트라코드: 자율 다단계 실행",
     summary:
       "Claude Code의 Dynamic Workflows와 Ultracode 기능으로 AI가 수백 개의 하위 작업을 병렬로 처리하는 원리를 이해합니다",
@@ -188,6 +192,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-5": {
     id: "6-5",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "제2의 두뇌: 옵시디언 + CLI 시대의 지식관리",
     summary:
       "마크다운 볼트를 제2의 두뇌로 삼고 Claude Code가 읽고 쓰는 AI 연동 지식관리 워크플로우를 배웁니다",
@@ -234,6 +239,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-6": {
     id: "6-6",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "모바일 에이전트: 코덱스 앱과 어디서나 AI",
     summary:
       "OpenAI Codex 모바일 앱과 Claude Design으로 스마트폰에서도 AI 에이전트를 모니터링하고 업무를 처리하는 시대를 살펴봅니다",
@@ -285,6 +291,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-7": {
     id: "6-7",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "오픈소스 오케스트레이션 생태계 — 내 손으로 AI 팀 꾸리기",
     summary:
       "OMC·oh-my-codex·bkit·헤르메스·오픈클로 등 오픈소스 하네스 도구들을 카탈로그로 살펴보고, AI 한 명이 아니라 팀을 부리는 방법을 익힙니다",
@@ -379,6 +386,7 @@ export const lessonsCourse6: Record<string, Lesson> = {
   "6-8": {
     id: "6-8",
     phase: "6과",
+    datePublished: "2026-05-30",
     title: "마켓플레이스로 내 AI 도구 관리하기 — 클론·풀·푸시 쉽게 이해",
     summary:
       "플러그인 마켓플레이스의 원리와 git 클론·풀·푸시를 비개발자 눈높이로 이해하고, 내가 만든 도구를 여러 기기와 동료에게 공유하는 방법을 배웁니다",

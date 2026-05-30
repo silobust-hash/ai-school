@@ -1,10 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+
 export const metadata: Metadata = {
   title: "커리큘럼 | AI업무학교",
   description:
-    "5과 27개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 완전 정복 로드맵.",
+    "6과 35개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 완전 정복 로드맵.",
   alternates: { canonical: "/curriculum" },
 };
 
@@ -86,17 +88,70 @@ const courses = [
       { id: "5-5", title: "더 깊이 배우기" },
     ],
   },
+  {
+    phase: "6과",
+    title: "2026, AI 엔지니어링의 현재",
+    description:
+      "프롬프트에서 하네스·에이전트까지, 2026년 AI 엔지니어링 생태계의 최신 지형을 살펴봅니다.",
+    gradient: "from-indigo-400 to-blue-600",
+    badgeColor: "bg-indigo-100 text-indigo-700",
+    lessons: [
+      { id: "6-1", title: "프롬프트에서 하네스까지: 3년의 진화" },
+      { id: "6-2", title: "2026 최신 모델 지도: Opus 4.8 · GPT-5.5 · Gemini 3.1" },
+      { id: "6-3", title: "하네스 엔지니어링 실전: 에이전트 환경 설계하기" },
+      { id: "6-4", title: "다이나믹 워크플로우와 울트라코드: 자율 다단계 실행" },
+      { id: "6-5", title: "제2의 두뇌: 옵시디언 + CLI 시대의 지식관리" },
+      { id: "6-6", title: "모바일 에이전트: 코덱스 앱과 어디서나 AI" },
+      { id: "6-7", title: "오픈소스 오케스트레이션 생태계 — 내 손으로 AI 팀 꾸리기" },
+      { id: "6-8", title: "마켓플레이스로 내 AI 도구 관리하기 — 클론·풀·푸시 쉽게 이해" },
+    ],
+  },
 ];
+
+const allCurriculumLessons = courses.flatMap((course) => course.lessons);
+
+const itemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListOrder: "https://schema.org/ItemListOrderAscending",
+  numberOfItems: allCurriculumLessons.length,
+  itemListElement: allCurriculumLessons.map((lesson, idx) => ({
+    "@type": "ListItem",
+    position: idx + 1,
+    url: `${SITE_URL}/lessons/${lesson.id}`,
+    name: lesson.title,
+  })),
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "홈", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "커리큘럼", item: `${SITE_URL}/curriculum` },
+  ],
+};
 
 export default function CurriculumPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
+      {/* JSON-LD: curriculum ItemList + breadcrumb (static content, no user input) */}
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Header */}
       <div className="text-center mb-16">
         <div className="inline-block px-4 py-1.5 bg-teal-50 text-teal-600 rounded-full text-sm font-semibold mb-4">
-          5과 27개 강의
+          6과 35개 강의
         </div>
-        <h1 className="text-4xl font-bold mb-4">5과 커리큘럼</h1>
+        <h1 className="text-4xl font-bold mb-4">6과 커리큘럼</h1>
         <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">
           프롬프트엔지니어링부터 에이전트엔지니어링까지,
           <br />

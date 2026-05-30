@@ -4,6 +4,7 @@ export const lessonsCourse4: Record<string, Lesson> = {
   "4-1": {
     id: "4-1",
     phase: "4과",
+    datePublished: "2026-04-02",
     title: "AI 에이전트란 무엇인가",
     summary: "에이전트의 개념, 단순 챗봇과의 차이, 에이전트엔지니어링의 등장을 이해합니다",
     prev: "3-6",
@@ -47,6 +48,7 @@ export const lessonsCourse4: Record<string, Lesson> = {
   "4-2": {
     id: "4-2",
     phase: "4과",
+    datePublished: "2026-04-02",
     title: "MCP로 AI 능력 확장하기",
     summary: "MCP(Model Context Protocol) 개념과 Gmail/캘린더/노션 연결을 배웁니다",
     prev: "4-1",
@@ -97,6 +99,7 @@ export const lessonsCourse4: Record<string, Lesson> = {
   "4-3": {
     id: "4-3",
     phase: "4과",
+    datePublished: "2026-04-02",
     title: "Skills과 Plugins",
     summary: "스킬/플러그인 개념과 커뮤니티 도구 활용, 마켓플레이스를 탐색합니다",
     prev: "4-2",
@@ -146,6 +149,7 @@ export const lessonsCourse4: Record<string, Lesson> = {
   "4-4": {
     id: "4-4",
     phase: "4과",
+    datePublished: "2026-04-02",
     title: "자동화 워크플로우 설계",
     summary: "업무 프로세스를 AI 워크플로우로 전환하는 방법과 자동화 사례를 배웁니다",
     prev: "4-3",
@@ -190,6 +194,7 @@ export const lessonsCourse4: Record<string, Lesson> = {
   "4-5": {
     id: "4-5",
     phase: "4과",
+    datePublished: "2026-04-02",
     title: "멀티에이전트와 미래",
     summary: "여러 에이전트 협업, Auto Mode, Dispatch 등 AI의 미래를 살펴봅니다",
     prev: "4-4",

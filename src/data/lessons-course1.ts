@@ -3,6 +3,8 @@ export interface Lesson {
   phase: string;
   title: string;
   summary: string;
+  datePublished?: string;
+  dateModified?: string;
   prev: string | null;
   next: string | null;
   sections: Array<{
@@ -26,6 +28,7 @@ export const lessonsCourse1: Record<string, Lesson> = {
   "1-1": {
     id: "1-1",
     phase: "1과",
+    datePublished: "2026-04-02",
     title: "AI가 바꾸는 일하는 방식",
     summary:
       "AI가 직장인의 일상 업무를 어떻게 변화시키고 있는지 실제 사례를 통해 알아봅니다",
@@ -72,6 +75,7 @@ export const lessonsCourse1: Record<string, Lesson> = {
   "1-2": {
     id: "1-2",
     phase: "1과",
+    datePublished: "2026-04-02",
     title: "ChatGPT vs Claude vs Gemini — 어떤 AI를 쓸까?",
     summary:
       "주요 AI 서비스를 비교하고, 업무 상황별로 어떤 AI가 적합한지 알아봅니다",
@@ -118,6 +122,7 @@ export const lessonsCourse1: Record<string, Lesson> = {
   "1-3": {
     id: "1-3",
     phase: "1과",
+    datePublished: "2026-04-02",
     title: "좋은 프롬프트의 조건",
     summary:
       "AI에게 원하는 결과를 얻기 위한 프롬프트 작성법, 프롬프트엔지니어링의 기초를 배웁니다",
@@ -172,6 +177,7 @@ export const lessonsCourse1: Record<string, Lesson> = {
   "1-4": {
     id: "1-4",
     phase: "1과",
+    datePublished: "2026-04-02",
     title: "업무별 프롬프트 템플릿",
     summary:
       "보고서, 이메일, 요약, 데이터 분석 등 실무에서 바로 쓸 수 있는 프롬프트 모음입니다",
@@ -248,6 +254,7 @@ export const lessonsCourse1: Record<string, Lesson> = {
   "1-5": {
     id: "1-5",
     phase: "1과",
+    datePublished: "2026-04-02",
     title: "AI와 대화하는 기술",
     summary:
       "AI와 효과적으로 소통하는 방법, 할루시네이션 대처법, 단계적 질문 기법을 배웁니다",
@@ -306,6 +313,7 @@ export const lessonsCourse1: Record<string, Lesson> = {
   "1-6": {
     id: "1-6",
     phase: "1과",
+    datePublished: "2026-04-02",
     title: "실습: 나만의 업무 프롬프트 만들기",
     summary:
       "지금까지 배운 프롬프트 작성법을 실제 내 업무에 적용하는 실습 프로젝트입니다",

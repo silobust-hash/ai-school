@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+
 export const metadata: Metadata = {
   title: "소개 | AI업무학교",
   description:
@@ -7,37 +9,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-const personJsonLd = {
+// Person is defined once in the root layout (#person). This page references it
+// as a ProfilePage to avoid a duplicate Person node in the site graph.
+const profilePageJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "박실로",
-  alternateName: ["Park Silro", "실로노무사"],
-  jobTitle: "공인노무사",
-  worksFor: { "@type": "Organization", name: "한동노무법인" },
-  knowsAbout: [
-    "노동법",
-    "근로기준법",
-    "산업안전보건법",
-    "Claude Code",
-    "AI 업무 자동화",
-    "프롬프트엔지니어링",
-    "컨텍스트엔지니어링",
-    "바이브코딩",
-    "비개발자 AI 활용",
-  ],
-  description:
-    "19년차 공인노무사이자 AI 활용 교육자. 비개발자 전문직을 위한 AI 교육을 진행합니다.",
-  url: "https://silronomu.com",
-  sameAs: [
-    "https://blog.silronomu.com",
-    "https://edu.silronomu.com",
-    "https://ai-school.silronomu.com",
-    "https://www.threads.com/@silrobag",
-  ],
+  "@type": "ProfilePage",
+  mainEntity: { "@id": `${SITE_URL}/#person` },
 };
 
 export default function AboutPage() {
-  const jsonLdString = JSON.stringify(personJsonLd);
+  const jsonLdString = JSON.stringify(profilePageJsonLd);
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
       <script
@@ -102,12 +83,12 @@ export default function AboutPage() {
                   <h3 className="font-bold text-slate-800">AI업무학교</h3>
                 </div>
                 <p className="text-slate-500 text-sm leading-relaxed">
-                  AI 기초부터 고급까지 5과 27개 강의. 프롬프트엔지니어링,
+                  AI 기초부터 고급까지 6과 35개 강의. 프롬프트엔지니어링,
                   컨텍스트엔지니어링, 바이브코딩, 에이전트엔지니어링.
                 </p>
               </div>
               <span className="text-xs font-semibold text-teal-600 bg-teal-100 px-3 py-1.5 rounded-full shrink-0">
-                5과 · 27강
+                6과 · 35강
               </span>
             </div>
           </div>

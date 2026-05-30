@@ -4,6 +4,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
   "2-1": {
     id: "2-1",
     phase: "2과",
+    datePublished: "2026-04-02",
     title: "컨텍스트가 전부다",
     summary: "같은 질문에도 다른 답이 나오는 이유, 컨텍스트 윈도우 개념을 쉽게 이해합니다",
     prev: "1-6",
@@ -47,6 +48,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
   "2-2": {
     id: "2-2",
     phase: "2과",
+    datePublished: "2026-04-02",
     title: "긴 문서 다루기",
     summary: "100만 토큰 컨텍스트를 활용해 대용량 문서를 분석하고 요약하는 방법을 배웁니다",
     prev: "2-1",
@@ -91,6 +93,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
   "2-3": {
     id: "2-3",
     phase: "2과",
+    datePublished: "2026-04-02",
     title: "시스템 프롬프트와 커스텀 지침",
     summary: "AI의 기본 성격과 행동을 설정하는 시스템 프롬프트 작성법을 배웁니다",
     prev: "2-2",
@@ -135,6 +138,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
   "2-4": {
     id: "2-4",
     phase: "2과",
+    datePublished: "2026-04-02",
     title: "나만의 AI 비서 만들기",
     summary: "GPTs, Claude Projects, Gems로 반복 업무를 자동화하는 커스텀 AI를 만듭니다",
     prev: "2-3",
@@ -178,6 +182,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
   "2-5": {
     id: "2-5",
     phase: "2과",
+    datePublished: "2026-04-02",
     title: "RAG와 지식 연결",
     summary: "파일 업로드, 지식베이스, NotebookLM 등 AI에 지식을 연결하는 방법을 배웁니다",
     prev: "2-4",

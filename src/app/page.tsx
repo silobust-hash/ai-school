@@ -1,36 +1,50 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+
 export const metadata: Metadata = {
   title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
   description:
-    "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 19년차 노무사가 5과 27개 강의로 가르칩니다.",
+    "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 19년차 노무사가 6과 35개 강의로 가르칩니다.",
   alternates: { canonical: "/" },
 };
 
 const courseJsonLd = {
   "@context": "https://schema.org",
   "@type": "Course",
+  "@id": `${SITE_URL}/#course`,
   name: "AI업무학교: 문과 출신도 AI로 일하는 시대",
   description:
     "프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 전체 로드맵",
+  courseCode: "AISCHOOL",
+  isAccessibleForFree: true,
   provider: {
     "@type": "Organization",
+    "@id": `${SITE_URL}/#org`,
     name: "한동노무법인",
     url: "https://silronomu.com",
   },
   instructor: {
     "@type": "Person",
+    "@id": `${SITE_URL}/#person`,
     name: "박실로",
     jobTitle: "공인노무사",
   },
   educationalLevel: "Beginner",
   inLanguage: "ko",
-  numberOfCredits: 5,
+  numberOfCredits: 6,
+  about: [
+    "프롬프트엔지니어링",
+    "컨텍스트엔지니어링",
+    "하네스엔지니어링",
+    "에이전트엔지니어링",
+  ],
   hasCourseInstance: {
     "@type": "CourseInstance",
     courseMode: "online",
     courseWorkload: "PT30H",
+    url: `${SITE_URL}/curriculum`,
   },
   teaches: [
     "프롬프트엔지니어링 기초와 실전",
@@ -38,6 +52,7 @@ const courseJsonLd = {
     "바이브코딩과 웹사이트 배포",
     "AI 에이전트와 자동화 워크플로우",
     "프론트엔드/백엔드/API 기초 교양",
+    "하네스엔지니어링 실전과 2026 AI 에이전트 생태계",
   ],
 };
 
@@ -164,6 +179,23 @@ const courses = [
       "데이터베이스 기초 — 정보를 저장하고 불러오기",
       "Git & GitHub — 변경 이력 관리의 이유",
       "개발자와 협업하기 — 소통을 위한 최소 지식",
+    ],
+  },
+  {
+    phase: "6과",
+    title: "2026, AI 엔지니어링의 현재",
+    subtitle: "하네스·에이전트 생태계의 최신 지형",
+    emoji: "🧭",
+    color: "from-indigo-400 to-blue-600",
+    lessons: [
+      "프롬프트에서 하네스까지 — 3년의 진화",
+      "2026 최신 모델 지도 — Opus·GPT·Gemini",
+      "하네스 엔지니어링 실전 — 에이전트 환경 설계",
+      "다이나믹 워크플로우와 자율 다단계 실행",
+      "제2의 두뇌 — 옵시디언 + CLI 지식관리",
+      "모바일 에이전트 — 어디서나 AI",
+      "오픈소스 오케스트레이션 — AI 팀 꾸리기",
+      "마켓플레이스로 내 AI 도구 관리하기",
     ],
   },
 ];
@@ -318,7 +350,7 @@ export default function Home() {
       {/* Curriculum Preview */}
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">5과 커리큘럼</h2>
+          <h2 className="text-3xl font-bold mb-4">6과 커리큘럼</h2>
           <p className="text-slate-500 text-lg">
             AI를 처음 만나는 순간부터, 나만의 자동화 워크플로우를 완성하는 날까지
           </p>

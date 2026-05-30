@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     default: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
     template: "%s | AI업무학교",
   },
-  description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 문과 출신 19년차 노무사가 5과 27개 강의로 AI 업무 활용법을 가르칩니다.",
+  description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 문과 출신 19년차 노무사가 6과 35개 강의로 AI 업무 활용법을 가르칩니다.",
   keywords: ["AI 강의", "AI 교육", "프롬프트엔지니어링", "컨텍스트엔지니어링", "바이브코딩", "비개발자 AI", "AI 업무 자동화", "AI업무학교", "클로드 코드"],
   authors: [{ name: "박실로", url: "https://silronomu.com" }],
   creator: "박실로 (공인노무사)",
@@ -34,12 +34,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "AI업무학교",
     title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
-    description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 5과 27개 강의.",
+    description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 6과 35개 강의.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "AI업무학교 — 문과 출신도 AI로 일하는 시대" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI업무학교 | 문과 출신도 AI로 일하는 시대",
-    description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 5과 27개 강의.",
+    description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 6과 35개 강의.",
+    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -54,39 +56,73 @@ export const metadata: Metadata = {
   },
 };
 
+// Unified knowsAbout / sameAs definitions reused across the site graph.
+const KNOWS_ABOUT = [
+  "노동법",
+  "근로기준법",
+  "산업안전보건법",
+  "Claude Code",
+  "AI 업무 자동화",
+  "프롬프트엔지니어링",
+  "컨텍스트엔지니어링",
+  "바이브코딩",
+  "비개발자 AI 활용",
+];
+
+const SAME_AS = [
+  "https://silronomu.com/",
+  "https://blog.silronomu.com/",
+  "https://sanjae.silronomu.com/",
+  "https://edu.silronomu.com/",
+  "https://ai-school.silronomu.com/",
+  "https://xn--hc0b21e4rq52a9zgfzlxub.com/",
+  "https://xn--hc0b21et01ao2a.com/",
+  "https://xn--hc0bn7fv7j9tf6rl.net/",
+  "https://blog.naver.com/5215678",
+  "https://silronomusa.blogspot.com/",
+  "https://www.facebook.com/share/17SYegaFj5/",
+  "https://www.instagram.com/silrobag/",
+  "https://www.threads.net/@silrobag",
+  "https://x.com/silrobag",
+  "https://youtube.com/channel/UCAkNJ16PNf2cNfhXsVbh-gg",
+  "https://www.linkedin.com/in/실로-박-385a1a104/",
+];
+
+const organizationJsonLd = {
+  "@type": "EducationalOrganization",
+  "@id": `${SITE_URL}/#org`,
+  name: "한동노무법인",
+  url: "https://silronomu.com",
+  logo: `${SITE_URL}/og.png`,
+  sameAs: SAME_AS,
+};
+
 const personJsonLd = {
-  "@context": "https://schema.org",
   "@type": "Person",
+  "@id": `${SITE_URL}/#person`,
   name: "박실로",
   alternateName: ["Park Silro", "실로노무사"],
   jobTitle: "공인노무사",
-  worksFor: {
-    "@type": "Organization",
-    name: "한동노무법인",
-  },
-  knowsAbout: [
-    "노동법", "근로기준법", "Claude Code", "AI 업무 자동화",
-    "프롬프트엔지니어링", "컨텍스트엔지니어링", "바이브코딩",
-    "비개발자 AI 활용",
-  ],
+  worksFor: { "@id": `${SITE_URL}/#org` },
+  knowsAbout: KNOWS_ABOUT,
   description: "19년차 공인노무사이자 AI 활용 교육자. 비개발자 전문직을 위한 AI 교육을 진행합니다.",
   url: "https://silronomu.com",
-  sameAs: [
-    "https://blog.silronomu.com",
-    "https://edu.silronomu.com",
-    "https://ai-school.silronomu.com",
-    "https://www.threads.com/@silrobag",
-  ],
+  sameAs: SAME_AS,
 };
 
 const websiteJsonLd = {
-  "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "AI업무학교",
+  "@id": `${SITE_URL}/#website`,
   url: SITE_URL,
+  name: "AI업무학교",
   description: "문과 출신도 AI로 일하는 시대. 프롬프트엔지니어링부터 에이전트엔지니어링까지.",
-  author: { "@type": "Person", name: "박실로" },
-  publisher: { "@type": "Organization", name: "한동노무법인" },
+  inLanguage: "ko",
+  publisher: { "@id": `${SITE_URL}/#org` },
+};
+
+const siteGraphJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [organizationJsonLd, websiteJsonLd, personJsonLd],
 };
 
 export default function RootLayout({
@@ -99,11 +135,9 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          // JSON-LD structured data graph for SEO — static content, no user input
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd) }}
         />
       </head>
       <body className="antialiased">

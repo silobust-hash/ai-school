@@ -4,6 +4,7 @@ export const lessonsCourse5: Record<string, Lesson> = {
   "5-1": {
     id: "5-1",
     phase: "5과",
+    datePublished: "2026-04-02",
     title: "프론트엔드와 백엔드",
     summary: "웹의 구조를 '보이는 것'과 '보이지 않는 것'으로 쉽게 이해합니다",
     prev: "4-5",
@@ -47,6 +48,7 @@ export const lessonsCourse5: Record<string, Lesson> = {
   "5-2": {
     id: "5-2",
     phase: "5과",
+    datePublished: "2026-04-02",
     title: "API란 무엇인가",
     summary: "API를 식당 주문 비유로 설명하고 REST API 기초를 배웁니다",
     prev: "5-1",
@@ -91,6 +93,7 @@ export const lessonsCourse5: Record<string, Lesson> = {
   "5-3": {
     id: "5-3",
     phase: "5과",
+    datePublished: "2026-04-02",
     title: "데이터베이스 기초",
     summary: "데이터 저장의 원리, SQL/NoSQL, CRUD 개념을 쉽게 이해합니다",
     prev: "5-2",
@@ -135,6 +138,7 @@ export const lessonsCourse5: Record<string, Lesson> = {
   "5-4": {
     id: "5-4",
     phase: "5과",
+    datePublished: "2026-04-02",
     title: "클라우드와 서버",
     summary: "클라우드의 개념, AWS/Vercel/Netlify 차이, 서버리스를 이해합니다",
     prev: "5-3",
@@ -178,6 +182,7 @@ export const lessonsCourse5: Record<string, Lesson> = {
   "5-5": {
     id: "5-5",
     phase: "5과",
+    datePublished: "2026-04-02",
     title: "더 깊이 배우기",
     summary: "학습 로드맵을 정리하고 다음 단계를 안내합니다",
     prev: "5-4",
