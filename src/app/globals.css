@@ -1,39 +1,244 @@
 @import "tailwindcss";
 
+/* ============================================================
+   AI업무학교 — Design System
+   프리미엄 에디토리얼 교육 브랜드
+   Palette: deep teal "ink" + warm paper neutral + ember accent
+   ============================================================ */
+
 :root {
-  --color-primary: #0d9488;
-  --color-primary-dark: #0f766e;
-  --color-accent: #f59e0b;
-  --color-bg: #fafafa;
+  /* Brand — refined, deep teal/emerald (no candy gradients) */
+  --color-primary: #0c7a6e;        /* teal 600, slightly desaturated */
+  --color-primary-dark: #0a5d54;   /* teal 700 */
+  --color-primary-deep: #063b36;   /* near-black teal, for ink sections */
+  --color-primary-soft: #e2f1ee;   /* teal wash */
+
+  /* Accent — warm ember, used sparingly as a sharp counterpoint */
+  --color-accent: #e8843a;         /* warm amber-orange */
+  --color-accent-soft: #fbeadd;
+
+  /* Neutrals — warm paper, not pure white */
+  --color-bg: #faf9f6;             /* warm paper */
+  --color-bg-elevated: #ffffff;
   --color-card: #ffffff;
-  --color-text: #1e293b;
-  --color-text-light: #64748b;
-  --color-border: #e2e8f0;
+  --color-ink: #16201e;            /* primary text — warm near-black */
+  --color-ink-soft: #44524f;       /* secondary text */
+  --color-ink-faint: #7a8783;      /* tertiary / captions */
+  --color-border: #e8e6df;         /* warm hairline */
+  --color-border-strong: #d9d6cc;
+
+  /* Dark ("ink") section tokens */
+  --color-dark-bg: #05201d;        /* deep teal-black */
+  --color-dark-bg-2: #08332e;
+  --color-dark-text: #eef3f1;
+  --color-dark-text-soft: #9fb6b0;
+  --color-dark-border: rgba(255, 255, 255, 0.1);
+
+  /* Type scale (fluid) */
+  --step-fluid-hero: clamp(2.75rem, 1.5rem + 6.2vw, 5.75rem);
+  --step-fluid-h2: clamp(1.9rem, 1.2rem + 2.6vw, 3rem);
+
+  /* Shadows — layered, soft, warm-tinted */
+  --shadow-sm: 0 1px 2px rgba(22, 32, 30, 0.04), 0 1px 3px rgba(22, 32, 30, 0.06);
+  --shadow-md: 0 4px 12px -2px rgba(22, 32, 30, 0.08), 0 2px 6px -2px rgba(22, 32, 30, 0.06);
+  --shadow-lg: 0 18px 40px -12px rgba(22, 32, 30, 0.16), 0 8px 16px -8px rgba(22, 32, 30, 0.08);
+  --shadow-glow: 0 0 0 1px rgba(12, 122, 110, 0.18), 0 14px 40px -10px rgba(12, 122, 110, 0.4);
+}
+
+@theme inline {
+  /* Expose tokens to Tailwind utilities (bg-paper, text-ink, etc.) */
+  --color-paper: var(--color-bg);
+  --color-paper-elevated: var(--color-bg-elevated);
+  --color-ink-base: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-faint: var(--color-ink-faint);
+  --color-brand: var(--color-primary);
+  --color-brand-dark: var(--color-primary-dark);
+  --color-brand-deep: var(--color-primary-deep);
+  --color-ember: var(--color-accent);
 }
 
 body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  color: var(--color-text);
+  color: var(--color-ink);
   background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Korean numerals/Latin tabular feel for headings handled per-element */
 }
 
+/* Tighter, more confident Korean display typography */
+.font-display {
+  letter-spacing: -0.035em;
+  word-break: keep-all;       /* prevent awkward Korean mid-word breaks */
+  line-height: 1.08;
+}
+.text-balance {
+  text-wrap: balance;
+}
+.keep-all {
+  word-break: keep-all;
+}
+
+/* ---- Pretendard (weights expanded for stronger hierarchy) ---- */
 @font-face {
   font-family: 'Pretendard';
   src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
-
 @font-face {
   font-family: 'Pretendard';
-  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
-  font-weight: 700;
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
+  font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
-
 @font-face {
   font-family: 'Pretendard';
   src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   Texture utilities — modern backgrounds (no blurry blobs)
+   ============================================================ */
+
+/* Subtle grain over dark sections (data-URI SVG noise) */
+.bg-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Fine dot grid — light sections */
+.bg-dotgrid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(22, 32, 30, 0.06) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* Fine dot grid — dark sections */
+.bg-dotgrid-dark {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.07) 1px, transparent 0);
+  background-size: 26px 26px;
+}
+
+/* Line grid — used behind hero */
+.bg-linegrid {
+  background-image:
+    linear-gradient(to right, rgba(22, 32, 30, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(22, 32, 30, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Radial gradient mesh — replaces blobs. Deep, intentional teal. */
+.bg-mesh-dark {
+  background-color: var(--color-dark-bg);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(12, 122, 110, 0.55), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 95% 20%, rgba(8, 78, 71, 0.65), transparent 55%),
+    radial-gradient(ellipse 90% 70% at 60% 110%, rgba(13, 90, 82, 0.5), transparent 60%);
+}
+
+/* Soft top-fade mask for grids */
+.mask-fade-b {
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+/* Gradient hairline border via padding-box trick */
+.border-gradient {
+  position: relative;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+.border-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(12, 122, 110, 0.5), rgba(232, 132, 58, 0.35) 60%, transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Motion — scroll reveal + micro-interactions
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Ambient float for hero accent marks */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+/* Marquee shimmer line under headings (subtle ember sweep) */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* CTA glow button */
+.btn-glow {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+.btn-glow:active {
+  transform: translateY(0);
 }

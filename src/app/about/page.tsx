@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Reveal from "@/components/Reveal";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
 
@@ -20,139 +21,170 @@ const profilePageJsonLd = {
 export default function AboutPage() {
   const jsonLdString = JSON.stringify(profilePageJsonLd);
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
+    <div className="bg-[var(--color-bg)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdString }}
       />
 
-      {/* Profile section */}
-      <div className="text-center mb-16">
-        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-teal-400 to-emerald-500 mx-auto mb-6 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
-          박
-        </div>
-        <h1 className="text-3xl font-bold text-slate-800 mb-2">박실로</h1>
-        <p className="text-teal-600 font-semibold mb-3">공인노무사 · AI 교육자</p>
-        <p className="text-slate-500 text-lg leading-relaxed">
-          &ldquo;AI로 일하고, 전문가로서 판단합니다&rdquo;
-        </p>
-      </div>
-
-      {/* Why a labor attorney teaches AI */}
-      <section className="mb-14">
-        <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-sm font-bold shrink-0">
-            1
-          </span>
-          왜 노무사가 AI 교육을?
-        </h2>
-        <div className="space-y-4 pl-10">
-          {[
-            "19년간 노동법 전문가로 일하면서, AI가 전문직의 업무 방식을 근본적으로 바꾸고 있다는 것을 체감했습니다.",
-            "직접 Claude Code로 업무 도구를 만들고, 플러그인을 개발하고, 웹앱을 배포하면서 배운 것들을 정리했습니다.",
-            "비개발자로서 AI를 배운 경험이야말로, 같은 입장의 분들에게 가장 공감가는 교육이 될 수 있다고 믿습니다.",
-          ].map((text, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-3 text-slate-600 leading-relaxed"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-400 mt-2.5 shrink-0" />
-              {text}
+      {/* ===== Profile header — ink hero ===== */}
+      <section className="relative overflow-hidden bg-mesh-dark bg-grain text-[var(--color-dark-text)] -mt-16 pt-16">
+        <div className="bg-dotgrid-dark absolute inset-0 opacity-50" aria-hidden />
+        <div className="relative max-w-3xl mx-auto px-6 py-20 text-center">
+          <Reveal>
+            <div className="mx-auto mb-7 grid place-items-center w-24 h-24 rounded-2xl bg-white/10 ring-1 ring-white/15 text-4xl font-extrabold backdrop-blur-sm shadow-[var(--shadow-lg)]">
+              박
             </div>
-          ))}
+          </Reveal>
+          <Reveal delay={80}>
+            <h1 className="font-display text-4xl md:text-5xl font-extrabold">박실로</h1>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="mt-3 inline-flex items-center gap-2 text-sm font-semibold">
+              <span className="text-[var(--color-dark-text)]">공인노무사</span>
+              <span className="h-1 w-1 rounded-full bg-[var(--color-accent)]" aria-hidden />
+              <span className="text-[var(--color-dark-text)]">AI 교육자</span>
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-6 text-[var(--color-dark-text-soft)] text-lg leading-relaxed keep-all">
+              &ldquo;AI로 일하고, 전문가로서 판단합니다&rdquo;
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* Courses offered */}
-      <section className="mb-14">
-        <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-sm font-bold shrink-0">
-            2
-          </span>
-          운영하는 교육 과정
-        </h2>
-        <div className="pl-10 space-y-4">
-          {/* AI School */}
-          <div className="bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl p-6 border border-teal-100">
-            <div className="flex items-start justify-between gap-4 flex-wrap">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-bold px-2.5 py-1 bg-teal-100 text-teal-700 rounded-full">
-                    이 사이트
-                  </span>
-                  <h3 className="font-bold text-slate-800">AI업무학교</h3>
-                </div>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  AI 기초부터 고급까지 6과 35개 강의. 프롬프트엔지니어링,
-                  컨텍스트엔지니어링, 바이브코딩, 에이전트엔지니어링.
-                </p>
-              </div>
-              <span className="text-xs font-semibold text-teal-600 bg-teal-100 px-3 py-1.5 rounded-full shrink-0">
-                6과 · 35강
+      <div className="max-w-3xl mx-auto px-6 py-20">
+        {/* ===== Why a labor attorney teaches AI ===== */}
+        <Reveal>
+          <section className="mb-16">
+            <h2 className="text-xl font-bold text-[var(--color-ink)] mb-7 flex items-center gap-3">
+              <span className="grid place-items-center w-8 h-8 rounded-lg bg-[var(--color-primary-soft)] text-[var(--color-primary-dark)] text-sm font-extrabold shrink-0">
+                1
               </span>
-            </div>
-          </div>
-
-          {/* Claude Code Course */}
-          <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-            <div className="flex items-start justify-between gap-4 flex-wrap">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-bold px-2.5 py-1 bg-slate-200 text-slate-600 rounded-full">
-                    심화 과정
-                  </span>
-                  <h3 className="font-bold text-slate-800">클로드 코드 강의</h3>
-                </div>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  Claude Code 심화 12단계 52개 강의.
-                  AI업무학교를 마친 후 자연스럽게 연결됩니다.
-                </p>
-                <a
-                  href="https://edu.silronomu.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-3 text-sm text-teal-600 hover:text-teal-700 font-medium"
+              왜 노무사가 AI 교육을?
+            </h2>
+            <div className="space-y-5 pl-11">
+              {[
+                "19년간 노동법 전문가로 일하면서, AI가 전문직의 업무 방식을 근본적으로 바꾸고 있다는 것을 체감했습니다.",
+                "직접 Claude Code로 업무 도구를 만들고, 플러그인을 개발하고, 웹앱을 배포하면서 배운 것들을 정리했습니다.",
+                "비개발자로서 AI를 배운 경험이야말로, 같은 입장의 분들에게 가장 공감가는 교육이 될 수 있다고 믿습니다.",
+              ].map((text, i) => (
+                <div
+                  key={i}
+                  className="relative flex items-start gap-3 text-[var(--color-ink-soft)] text-[15px] leading-relaxed keep-all"
                 >
-                  edu.silronomu.com →
-                </a>
-              </div>
-              <span className="text-xs font-semibold text-slate-600 bg-slate-200 px-3 py-1.5 rounded-full shrink-0">
-                12단계 · 52강
-              </span>
+                  <span className="mt-[0.6em] h-1.5 w-1.5 rounded-full bg-[var(--color-primary)] shrink-0" aria-hidden />
+                  {text}
+                </div>
+              ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        </Reveal>
 
-      {/* Links */}
-      <section>
-        <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <span className="w-8 h-8 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-sm font-bold shrink-0">
-            3
-          </span>
-          링크
-        </h2>
-        <div className="pl-10">
-          <div className="flex flex-wrap gap-3">
-            {[
-              { label: "홈페이지", href: "https://silronomu.com" },
-              { label: "블로그", href: "https://blog.silronomu.com" },
-              { label: "Threads", href: "https://www.threads.com/@silrobag" },
-            ].map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:border-teal-300 hover:text-teal-700 hover:bg-teal-50 transition-all"
-              >
-                {link.label}
-                <span className="text-slate-400 text-xs">→</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* ===== Courses offered ===== */}
+        <Reveal>
+          <section className="mb-16">
+            <h2 className="text-xl font-bold text-[var(--color-ink)] mb-7 flex items-center gap-3">
+              <span className="grid place-items-center w-8 h-8 rounded-lg bg-[var(--color-primary-soft)] text-[var(--color-primary-dark)] text-sm font-extrabold shrink-0">
+                2
+              </span>
+              운영하는 교육 과정
+            </h2>
+            <div className="pl-11 space-y-4">
+              {/* AI School — highlighted */}
+              <div className="relative overflow-hidden rounded-2xl border border-[var(--color-primary)]/25 bg-[var(--color-card)] p-6 shadow-[var(--shadow-sm)]">
+                <span
+                  className="absolute left-0 top-0 h-full w-1"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom, var(--color-primary), #15b8a6)",
+                  }}
+                  aria-hidden
+                />
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs font-bold px-2.5 py-1 bg-[var(--color-primary-soft)] text-[var(--color-primary-dark)] rounded-full">
+                        이 사이트
+                      </span>
+                      <h3 className="font-bold text-[var(--color-ink)]">AI업무학교</h3>
+                    </div>
+                    <p className="text-[var(--color-ink-soft)] text-sm leading-relaxed keep-all">
+                      AI 기초부터 고급까지 6과 35개 강의. 프롬프트엔지니어링,
+                      컨텍스트엔지니어링, 바이브코딩, 에이전트엔지니어링.
+                    </p>
+                  </div>
+                  <span className="text-xs font-semibold text-[var(--color-primary-dark)] bg-[var(--color-primary-soft)] px-3 py-1.5 rounded-full shrink-0">
+                    6과 · 35강
+                  </span>
+                </div>
+              </div>
+
+              {/* Claude Code Course */}
+              <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-6">
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs font-bold px-2.5 py-1 bg-[var(--color-border)] text-[var(--color-ink-soft)] rounded-full">
+                        심화 과정
+                      </span>
+                      <h3 className="font-bold text-[var(--color-ink)]">클로드 코드 강의</h3>
+                    </div>
+                    <p className="text-[var(--color-ink-soft)] text-sm leading-relaxed keep-all">
+                      Claude Code 심화 12단계 52개 강의.
+                      AI업무학교를 마친 후 자연스럽게 연결됩니다.
+                    </p>
+                    <a
+                      href="https://edu.silronomu.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 mt-3 text-sm text-[var(--color-primary-dark)] hover:gap-2 transition-all font-semibold"
+                    >
+                      edu.silronomu.com <span aria-hidden>→</span>
+                    </a>
+                  </div>
+                  <span className="text-xs font-semibold text-[var(--color-ink-soft)] bg-[var(--color-border)] px-3 py-1.5 rounded-full shrink-0">
+                    12단계 · 52강
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
+        {/* ===== Links ===== */}
+        <Reveal>
+          <section>
+            <h2 className="text-xl font-bold text-[var(--color-ink)] mb-7 flex items-center gap-3">
+              <span className="grid place-items-center w-8 h-8 rounded-lg bg-[var(--color-primary-soft)] text-[var(--color-primary-dark)] text-sm font-extrabold shrink-0">
+                3
+              </span>
+              링크
+            </h2>
+            <div className="pl-11">
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { label: "홈페이지", href: "https://silronomu.com" },
+                  { label: "블로그", href: "https://blog.silronomu.com" },
+                  { label: "Threads", href: "https://www.threads.com/@silrobag" },
+                ].map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-[var(--color-border-strong)] text-[var(--color-ink-soft)] text-sm font-semibold hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] hover:bg-[var(--color-primary-soft)]/50 transition-all"
+                  >
+                    {link.label}
+                    <span className="text-[var(--color-ink-faint)] text-xs" aria-hidden>→</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        </Reveal>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import Reveal from "@/components/Reveal";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
 
@@ -115,6 +116,7 @@ const courses = [
     subtitle: "AI에게 원하는 것을 얻는 기술",
     emoji: "🌟",
     color: "from-amber-400 to-orange-500",
+    accent: "#e8843a",
     lessons: [
       "AI 시대, 문과 출신의 새로운 기회",
       "ChatGPT vs Claude — 어떤 AI를 어떻게 쓸까",
@@ -130,6 +132,7 @@ const courses = [
     subtitle: "100만 토큰 시대의 AI 활용법",
     emoji: "📚",
     color: "from-sky-400 to-blue-500",
+    accent: "#2e8bc0",
     lessons: [
       "컨텍스트란? — AI의 기억과 이해 구조",
       "100만 토큰 시대 — 문서 전체를 AI에 넣기",
@@ -144,6 +147,7 @@ const courses = [
     subtitle: "AI와 대화하며 웹사이트 만들기",
     emoji: "🚀",
     color: "from-emerald-400 to-teal-500",
+    accent: "#0c7a6e",
     lessons: [
       "하네스엔지니어링이란? — AI 활용 환경 구성",
       "바이브코딩 기초 — 대화로 코드 만들기",
@@ -158,6 +162,7 @@ const courses = [
     subtitle: "AI 에이전트와 자동화 워크플로우",
     emoji: "🤖",
     color: "from-violet-400 to-purple-500",
+    accent: "#7c5cda",
     lessons: [
       "AI 에이전트란? — 스스로 생각하고 행동하는 AI",
       "MCP 서버로 업무 도구 연동하기",
@@ -173,6 +178,7 @@ const courses = [
     subtitle: "개발자 언어를 이해하는 비개발자",
     emoji: "💡",
     color: "from-rose-400 to-pink-500",
+    accent: "#d6557f",
     lessons: [
       "프론트엔드 vs 백엔드 — 웹이 작동하는 방식",
       "API란? — 서비스들이 대화하는 방법",
@@ -187,6 +193,7 @@ const courses = [
     subtitle: "하네스·에이전트 생태계의 최신 지형",
     emoji: "🧭",
     color: "from-indigo-400 to-blue-600",
+    accent: "#4f6bd8",
     lessons: [
       "프롬프트에서 하네스까지 — 3년의 진화",
       "2026 최신 모델 지도 — Opus·GPT·Gemini",
@@ -238,9 +245,21 @@ const features = [
   },
 ];
 
+// Bento layout sizing — varied tile spans for an asymmetric grid.
+// Index order matches `features`; copy is untouched.
+const bentoSpans = [
+  "lg:col-span-3 lg:row-span-2", // 프롬프트엔지니어링 — hero tile
+  "lg:col-span-3",               // 컨텍스트엔지니어링
+  "lg:col-span-2",               // 바이브코딩
+  "lg:col-span-2 lg:row-span-2", // 에이전트엔지니어링 — tall
+  "lg:col-span-2",               // MCP & 도구 연동
+  "lg:col-span-2",               // 개발 기초 교양
+  "lg:col-span-2",               // 클로드 코드 심화 연결
+];
+
 export default function Home() {
   return (
-    <div>
+    <div className="bg-[var(--color-bg)]">
       <script
         type="application/ld+json"
         // JSON-LD structured data for SEO — static content, no user input
@@ -254,181 +273,412 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-teal-600 via-emerald-600 to-teal-800 text-white">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-20 w-96 h-96 bg-amber-300 rounded-full blur-3xl" />
-        </div>
-        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
-          <div className="inline-block px-4 py-1.5 bg-white/15 backdrop-blur rounded-full text-sm font-medium mb-6">
-            AI 시대의 새로운 업무 역량
+      {/* ============ HERO — asymmetric, type-forward ============ */}
+      <section className="relative overflow-hidden -mt-16 pt-16">
+        {/* layered background: line grid + dot grid, masked fade */}
+        <div className="absolute inset-0 bg-linegrid mask-fade-b" aria-hidden />
+        <div
+          className="absolute -top-40 -right-40 h-[34rem] w-[34rem] rounded-full opacity-60 blur-[120px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(12,122,110,0.22), transparent 70%)",
+          }}
+          aria-hidden
+        />
+
+        <div className="relative max-w-6xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28">
+          <div className="grid lg:grid-cols-12 gap-12 items-end">
+            {/* Left — headline */}
+            <div className="lg:col-span-8">
+              <Reveal>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--color-border-strong)] bg-[var(--color-bg-elevated)] text-[13px] font-semibold text-[var(--color-ink-soft)]">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-primary)] opacity-60 animate-ping" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-primary)]" />
+                  </span>
+                  AI 시대의 새로운 업무 역량
+                </div>
+              </Reveal>
+
+              <Reveal delay={80}>
+                <h1 className="font-display mt-7 text-[var(--color-ink)] text-[clamp(2.75rem,1.4rem+6.4vw,5.75rem)] font-extrabold">
+                  코딩 몰라도
+                  <br />
+                  괜찮아요.
+                </h1>
+              </Reveal>
+
+              <Reveal delay={160}>
+                <h1 className="font-display mt-1 text-[clamp(2.75rem,1.4rem+6.4vw,5.75rem)] font-extrabold">
+                  <span className="relative inline-block">
+                    <span className="relative z-10 bg-gradient-to-r from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[#15b8a6] bg-clip-text text-transparent">
+                      AI로 일하는 법
+                    </span>
+                    {/* ember underline */}
+                    <span
+                      className="absolute left-0 -bottom-1 h-[0.18em] w-full rounded-full opacity-90"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, var(--color-accent), transparent)",
+                      }}
+                      aria-hidden
+                    />
+                  </span>
+                  <span className="text-[var(--color-ink)]">을 배우세요.</span>
+                </h1>
+              </Reveal>
+            </div>
+
+            {/* Right — supporting copy + CTAs */}
+            <div className="lg:col-span-4">
+              <Reveal delay={240}>
+                <p className="text-[var(--color-ink-soft)] text-lg leading-relaxed keep-all">
+                  19년차 노무사가 직접 만든 AI 활용 교육 과정.
+                  프롬프트엔지니어링부터 에이전트엔지니어링까지, 기초부터 고급까지.
+                </p>
+              </Reveal>
+              <Reveal delay={320}>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    href="/curriculum"
+                    className="btn-glow inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[var(--color-primary-deep)] text-white font-semibold shadow-[var(--shadow-md)]"
+                  >
+                    커리큘럼 보기
+                    <span aria-hidden className="text-[var(--color-accent)]">→</span>
+                  </Link>
+                  <Link
+                    href="/lessons"
+                    className="inline-flex items-center px-7 py-3.5 rounded-xl bg-[var(--color-bg-elevated)] text-[var(--color-ink)] font-semibold border border-[var(--color-border-strong)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors"
+                  >
+                    바로 시작하기
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-            코딩 몰라도 괜찮아요.
-            <br />
-            <span className="text-amber-300">AI로 일하는 법</span>을 배우세요.
-          </h1>
-          <p className="text-lg md:text-xl text-teal-100 max-w-2xl mb-10 leading-relaxed">
-            19년차 노무사가 직접 만든 AI 활용 교육 과정.
-            <br />
-            프롬프트엔지니어링부터 에이전트엔지니어링까지, 기초부터 고급까지.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/curriculum"
-              className="px-8 py-3.5 bg-white text-teal-700 font-semibold rounded-xl hover:bg-teal-50 transition-colors shadow-lg"
-            >
-              커리큘럼 보기
-            </Link>
-            <Link
-              href="/lessons"
-              className="px-8 py-3.5 bg-white/15 backdrop-blur text-white font-semibold rounded-xl hover:bg-white/25 transition-colors border border-white/20"
-            >
-              바로 시작하기
-            </Link>
-          </div>
+
+          {/* Stat strip — editorial rhythm */}
+          <Reveal delay={420}>
+            <dl className="mt-16 md:mt-20 grid grid-cols-3 max-w-2xl divide-x divide-[var(--color-border)]">
+              {[
+                { n: "6과", l: "체계적 커리큘럼" },
+                { n: "35강", l: "단계별 실전 강의" },
+                { n: "0원", l: "누구나 무료 수강" },
+              ].map((s) => (
+                <div key={s.l} className="px-5 first:pl-0">
+                  <dt className="font-display text-3xl md:text-4xl font-extrabold text-[var(--color-ink)] tabular-nums">
+                    {s.n}
+                  </dt>
+                  <dd className="mt-1 text-sm text-[var(--color-ink-faint)] font-medium">
+                    {s.l}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </section>
 
-      {/* Who is this for */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">이런 분을 위해 만들었습니다</h2>
-          <p className="text-slate-500 text-lg">
+      {/* ============ WHO IS THIS FOR ============ */}
+      <section className="relative max-w-6xl mx-auto px-6 py-24">
+        <Reveal>
+          <p className="text-sm font-bold tracking-[0.18em] uppercase text-[var(--color-primary)]">
+            For You
+          </p>
+          <h2 className="font-display mt-3 text-[var(--color-ink)] text-[var(--step-fluid-h2)] font-extrabold">
+            이런 분을 위해 만들었습니다
+          </h2>
+          <p className="mt-4 text-[var(--color-ink-soft)] text-lg keep-all">
             &ldquo;AI 써보고 싶은데, 어디서부터 시작해야 할지 모르겠어요&rdquo;
           </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        </Reveal>
+
+        <div className="mt-12 grid md:grid-cols-3 gap-5">
           {[
             {
-              emoji: "🤔",
+              num: "01",
               title: "AI 써보고 싶은데...",
               desc: "ChatGPT 한번 써봤는데, 업무에 어떻게 연결해야 할지 모르는 분",
             },
             {
-              emoji: "💻",
+              num: "02",
               title: "코딩은 전혀 모르지만",
               desc: "엑셀 정도는 다루는, 새로운 도구에 열린 마음을 가진 분",
             },
             {
-              emoji: "⏰",
+              num: "03",
               title: "업무 효율을 높이고 싶은",
               desc: "반복 업무를 줄이고 핵심 업무에 집중하고 싶은 분",
             },
           ].map((item, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="text-4xl mb-4">{item.emoji}</div>
-              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-slate-500 leading-relaxed">{item.desc}</p>
-            </div>
+            <Reveal key={item.num} delay={i * 90}>
+              <article className="group relative h-full rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] p-7 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-lg)] hover:-translate-y-1 transition-all duration-300">
+                <span className="font-display text-5xl font-extrabold text-[var(--color-primary-soft)] group-hover:text-[var(--color-primary)]/30 transition-colors tabular-nums">
+                  {item.num}
+                </span>
+                <h3 className="mt-4 text-lg font-bold text-[var(--color-ink)]">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-[var(--color-ink-soft)] leading-relaxed keep-all">
+                  {item.desc}
+                </p>
+              </article>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Features */}
-      <section className="bg-slate-50 border-y border-slate-100">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            AI업무학교에서 배우는 것들
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-                <div className="text-3xl mb-3">{f.icon}</div>
-                <h3 className="font-semibold mb-2">{f.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
+      {/* ============ FEATURES — BENTO GRID ============ */}
+      <section className="relative bg-[var(--color-bg-elevated)] border-y border-[var(--color-border)]">
+        <div className="bg-dotgrid absolute inset-0 opacity-70" aria-hidden />
+        <div className="relative max-w-6xl mx-auto px-6 py-24">
+          <Reveal>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <div>
+                <p className="text-sm font-bold tracking-[0.18em] uppercase text-[var(--color-primary)]">
+                  Curriculum Highlights
+                </p>
+                <h2 className="font-display mt-3 text-[var(--color-ink)] text-[var(--step-fluid-h2)] font-extrabold">
+                  AI업무학교에서 배우는 것들
+                </h2>
               </div>
+              <Link
+                href="/curriculum"
+                className="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-primary-dark)] hover:gap-2.5 transition-all"
+              >
+                전체 커리큘럼
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </Reveal>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 auto-rows-[minmax(0,1fr)] gap-4">
+            {features.map((f, i) => {
+              const isHero = i === 0;
+              return (
+                <Reveal
+                  key={f.title}
+                  delay={i * 70}
+                  className={bentoSpans[i]}
+                >
+                  <article
+                    className={`group relative h-full overflow-hidden rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1 ${
+                      isHero
+                        ? "bg-mesh-dark bg-grain text-[var(--color-dark-text)] border-transparent shadow-[var(--shadow-lg)]"
+                        : "bg-[var(--color-card)] border-[var(--color-border)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-[var(--color-primary)]/40"
+                    }`}
+                  >
+                    {isHero && (
+                      <div className="bg-dotgrid-dark absolute inset-0 opacity-50" aria-hidden />
+                    )}
+                    <div className="relative flex h-full flex-col">
+                      {/* index badge — consistent, restrained (replaces emoji clutter) */}
+                      <span
+                        className={`inline-grid place-items-center w-10 h-10 rounded-xl text-sm font-extrabold tabular-nums ${
+                          isHero
+                            ? "bg-white/10 text-[var(--color-dark-text)] ring-1 ring-white/15"
+                            : "bg-[var(--color-primary-soft)] text-[var(--color-primary-dark)]"
+                        }`}
+                        aria-hidden
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+
+                      <h3
+                        className={`mt-5 font-bold ${
+                          isHero
+                            ? "text-2xl md:text-[1.7rem] font-display"
+                            : "text-lg"
+                        }`}
+                      >
+                        {f.title}
+                      </h3>
+                      <p
+                        className={`mt-2 leading-relaxed keep-all ${
+                          isHero
+                            ? "text-[var(--color-dark-text-soft)] text-base max-w-sm"
+                            : "text-sm text-[var(--color-ink-soft)]"
+                        }`}
+                      >
+                        {f.desc}
+                      </p>
+
+                      {isHero && (
+                        <div className="mt-auto pt-8 flex items-center gap-2 text-sm font-semibold text-[var(--color-dark-text)]">
+                          <span className="h-px w-10 bg-[var(--color-accent)]" />
+                          모든 과정의 출발점
+                        </div>
+                      )}
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ CURRICULUM PREVIEW — editorial list ============ */}
+      <section className="max-w-6xl mx-auto px-6 py-24">
+        <Reveal>
+          <div className="text-center">
+            <p className="text-sm font-bold tracking-[0.18em] uppercase text-[var(--color-primary)]">
+              Full Roadmap
+            </p>
+            <h2 className="font-display mt-3 text-[var(--color-ink)] text-[var(--step-fluid-h2)] font-extrabold">
+              6과 커리큘럼
+            </h2>
+            <p className="mt-4 text-[var(--color-ink-soft)] text-lg keep-all max-w-2xl mx-auto">
+              AI를 처음 만나는 순간부터, 나만의 자동화 워크플로우를 완성하는 날까지
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-14 grid md:grid-cols-2 gap-x-12 gap-y-2">
+          {courses.map((course, i) => (
+            <Reveal key={course.phase} delay={(i % 2) * 90}>
+              <article
+                className="group relative grid grid-cols-[auto_1fr] gap-x-5 py-7 border-t border-[var(--color-border)] transition-colors hover:border-[var(--color-primary)]/40"
+                style={{ ["--c" as string]: course.accent }}
+              >
+                {/* big index */}
+                <div className="pt-1">
+                  <span className="font-display text-2xl font-extrabold text-[var(--color-ink-faint)] group-hover:text-[var(--c)] transition-colors tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <div>
+                  <div className="flex items-baseline gap-3 flex-wrap">
+                    <h3 className="text-xl font-bold text-[var(--color-ink)]">
+                      {course.title}
+                    </h3>
+                    <span
+                      className="text-xs font-bold px-2.5 py-1 rounded-full"
+                      style={{
+                        color: course.accent,
+                        backgroundColor: `${course.accent}1a`,
+                      }}
+                    >
+                      {course.phase}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm font-medium text-[var(--color-ink-faint)]">
+                    {course.subtitle}
+                  </p>
+
+                  {/* lessons — wrap as quiet chips so the list breathes */}
+                  <ul className="mt-4 flex flex-col gap-1.5">
+                    {course.lessons.map((lesson, j) => (
+                      <li
+                        key={j}
+                        className="flex items-start gap-2.5 text-sm text-[var(--color-ink-soft)] leading-relaxed keep-all"
+                      >
+                        <span
+                          className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full"
+                          style={{ backgroundColor: course.accent }}
+                          aria-hidden
+                        />
+                        {lesson}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* hover accent rail */}
+                <span
+                  className="absolute left-0 top-0 h-[2px] w-0 group-hover:w-full transition-all duration-500"
+                  style={{ backgroundColor: course.accent }}
+                  aria-hidden
+                />
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <div className="mt-14 text-center">
+            <Link
+              href="/curriculum"
+              className="btn-glow inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[var(--color-primary-deep)] text-white font-semibold shadow-[var(--shadow-md)]"
+            >
+              전체 커리큘럼 자세히 보기
+              <span aria-hidden className="text-[var(--color-accent)]">→</span>
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ============ FAQ ============ */}
+      <section className="bg-[var(--color-bg-elevated)] border-y border-[var(--color-border)]">
+        <div className="max-w-3xl mx-auto px-6 py-24">
+          <Reveal>
+            <div className="text-center mb-12">
+              <p className="text-sm font-bold tracking-[0.18em] uppercase text-[var(--color-primary)]">
+                FAQ
+              </p>
+              <h2 className="font-display mt-3 text-[var(--color-ink)] text-[var(--step-fluid-h2)] font-extrabold">
+                자주 묻는 질문
+              </h2>
+            </div>
+          </Reveal>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <Reveal key={i} delay={i * 50}>
+                <details className="group rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] shadow-[var(--shadow-sm)] open:shadow-[var(--shadow-md)] open:border-[var(--color-primary)]/30 transition-all">
+                  <summary className="flex items-center justify-between cursor-pointer p-6 text-lg font-bold text-[var(--color-ink)] [&::-webkit-details-marker]:hidden list-none">
+                    <span className="keep-all pr-4">{faq.question}</span>
+                    <span
+                      className="grid place-items-center shrink-0 w-7 h-7 rounded-full bg-[var(--color-primary-soft)] text-[var(--color-primary-dark)] text-xl leading-none transition-transform duration-300 group-open:rotate-45"
+                      aria-hidden
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <div className="px-6 pb-6 text-[var(--color-ink-soft)] leading-relaxed keep-all">
+                    {faq.answer}
+                  </div>
+                </details>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Curriculum Preview */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">6과 커리큘럼</h2>
-          <p className="text-slate-500 text-lg">
-            AI를 처음 만나는 순간부터, 나만의 자동화 워크플로우를 완성하는 날까지
-          </p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course, i) => (
-            <div
-              key={i}
-              className="group bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all overflow-hidden"
-            >
-              <div className={`h-2 bg-gradient-to-r ${course.color}`} />
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-2xl">{course.emoji}</span>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                    {course.phase}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold mb-1">{course.title}</h3>
-                <p className="text-sm text-slate-400 mb-4">{course.subtitle}</p>
-                <ul className="space-y-2">
-                  {course.lessons.map((lesson, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-slate-600">
-                      <span className="text-teal-400 mt-0.5 shrink-0">&#9658;</span>
-                      {lesson}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      {/* ============ CTA — dark ink section ============ */}
+      <section className="relative overflow-hidden bg-mesh-dark bg-grain text-[var(--color-dark-text)]">
+        <div className="bg-dotgrid-dark absolute inset-0 opacity-50" aria-hidden />
+        <div
+          className="absolute -bottom-32 left-1/2 -translate-x-1/2 h-96 w-[40rem] rounded-full opacity-50 blur-[110px] animate-float-slow"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(232,132,58,0.28), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative max-w-4xl mx-auto px-6 py-24 text-center">
+          <Reveal>
+            <h2 className="font-display text-[clamp(2.1rem,1.3rem+3vw,3.4rem)] font-extrabold leading-tight keep-all">
+              지금 시작해보세요
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="mt-5 text-[var(--color-dark-text-soft)] text-lg leading-relaxed keep-all max-w-xl mx-auto">
+              코딩을 몰라도 됩니다. 개발 경험이 없어도 됩니다.
+              AI업무학교가 처음부터 끝까지 함께합니다.
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <div className="mt-10">
+              <Link
+                href="/lessons"
+                className="btn-glow inline-flex items-center gap-2 px-10 py-4 rounded-xl bg-white text-[var(--color-primary-deep)] font-bold text-lg shadow-[var(--shadow-lg)]"
+              >
+                첫 번째 강의 시작
+                <span aria-hidden className="text-[var(--color-accent)]">→</span>
+              </Link>
             </div>
-          ))}
-        </div>
-        <div className="text-center mt-10">
-          <Link
-            href="/curriculum"
-            className="inline-block px-8 py-3.5 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700 transition-colors"
-          >
-            전체 커리큘럼 자세히 보기
-          </Link>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="max-w-3xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-bold text-center mb-12">자주 묻는 질문</h2>
-        <div className="space-y-4">
-          {faqs.map((faq, i) => (
-            <details
-              key={i}
-              className="group bg-white rounded-2xl border border-slate-100 shadow-sm"
-            >
-              <summary className="flex items-center justify-between cursor-pointer p-6 text-lg font-semibold text-slate-800 [&::-webkit-details-marker]:hidden list-none">
-                {faq.question}
-                <span className="text-teal-400 transition-transform group-open:rotate-45 shrink-0 ml-4 text-xl">
-                  +
-                </span>
-              </summary>
-              <div className="px-6 pb-6 text-slate-600 leading-relaxed">{faq.answer}</div>
-            </details>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-gradient-to-r from-teal-600 to-emerald-600 text-white">
-        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
-          <h2 className="text-3xl font-bold mb-4">지금 시작해보세요</h2>
-          <p className="text-teal-100 text-lg mb-8 leading-relaxed">
-            코딩을 몰라도 됩니다. 개발 경험이 없어도 됩니다.
-            <br />
-            AI업무학교가 처음부터 끝까지 함께합니다.
-          </p>
-          <Link
-            href="/lessons"
-            className="inline-block px-10 py-4 bg-white text-teal-700 font-bold rounded-xl hover:bg-teal-50 transition-colors shadow-lg text-lg"
-          >
-            첫 번째 강의 시작
-          </Link>
+          </Reveal>
         </div>
       </section>
     </div>

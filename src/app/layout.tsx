@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
+import SiteNav from "@/components/SiteNav";
 import "./globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
@@ -141,35 +141,39 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-          <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <Link href="/" className="text-xl font-bold text-teal-600">
-              AI업무학교
-            </Link>
-            <div className="flex items-center gap-6 text-sm font-medium text-slate-600">
-              <Link href="/curriculum" className="hover:text-teal-600 transition-colors">커리큘럼</Link>
-              <Link href="/lessons" className="hover:text-teal-600 transition-colors">강의 목록</Link>
-              <Link href="/about" className="hover:text-teal-600 transition-colors">소개</Link>
-              <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors flex items-center gap-1">
-                클로드 코드 심화 →
-              </a>
-            </div>
-          </div>
-        </nav>
+        <SiteNav />
         <main>{children}</main>
         <Analytics />
-        <footer className="border-t border-slate-200 mt-20">
-          <div className="max-w-6xl mx-auto px-6 py-10 text-center text-sm text-slate-500">
-            <p className="font-medium text-slate-600">한동노무법인 | 대표 공인노무사 박실로</p>
-            <p className="mt-1">문과 출신도 AI로 일하는 시대</p>
-            <div className="flex justify-center gap-4 mt-3">
-              <a href="https://silronomu.com/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">홈페이지</a>
-              <span className="text-slate-300">|</span>
-              <a href="https://ai-school.silronomu.com" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">AI업무학교</a>
-              <span className="text-slate-300">|</span>
-              <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">클로드 코드 강의</a>
-              <span className="text-slate-300">|</span>
-              <a href="https://www.threads.com/@silrobag?hl=ko" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600 transition-colors">Threads</a>
+        <footer className="relative overflow-hidden bg-mesh-dark bg-grain text-[var(--color-dark-text)] mt-24">
+          <div className="bg-dotgrid-dark absolute inset-0 opacity-50" aria-hidden />
+          <div className="relative max-w-6xl mx-auto px-6 py-16">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
+              <div className="max-w-md">
+                <div className="flex items-center gap-2.5 mb-4">
+                  <span className="grid place-items-center w-9 h-9 rounded-lg bg-[var(--color-primary)] text-white text-base font-extrabold">
+                    AI
+                  </span>
+                  <span className="text-lg font-extrabold tracking-tight">업무학교</span>
+                </div>
+                <p className="font-display text-2xl font-bold leading-snug keep-all">
+                  문과 출신도 AI로 일하는 시대
+                </p>
+                <p className="mt-3 text-sm text-[var(--color-dark-text-soft)] leading-relaxed">
+                  한동노무법인 · 대표 공인노무사 박실로
+                </p>
+              </div>
+
+              <nav className="grid grid-cols-2 gap-x-12 gap-y-3 text-sm" aria-label="사이트 링크">
+                <a href="https://silronomu.com/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">홈페이지</a>
+                <a href="https://ai-school.silronomu.com" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">AI업무학교</a>
+                <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">클로드 코드 강의</a>
+                <a href="https://www.threads.com/@silrobag?hl=ko" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">Threads</a>
+              </nav>
+            </div>
+
+            <div className="mt-12 pt-6 border-t border-[var(--color-dark-border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-[var(--color-dark-text-soft)]">
+              <p>© {new Date().getFullYear()} 한동노무법인. All rights reserved.</p>
+              <p>프롬프트엔지니어링부터 에이전트엔지니어링까지</p>
             </div>
           </div>
         </footer>
