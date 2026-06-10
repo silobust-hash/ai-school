@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronom
 export const metadata: Metadata = {
   title: "커리큘럼 | AI업무학교",
   description:
-    "6과 35개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 완전 정복 로드맵.",
+    "6과 37개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 완전 정복 로드맵.",
   alternates: { canonical: "/curriculum" },
 };
 
@@ -104,6 +104,8 @@ const courses = [
       { id: "6-6", title: "모바일 에이전트: 코덱스 앱과 어디서나 AI" },
       { id: "6-7", title: "오픈소스 오케스트레이션 생태계 — 내 손으로 AI 팀 꾸리기" },
       { id: "6-8", title: "마켓플레이스로 내 AI 도구 관리하기 — 클론·풀·푸시 쉽게 이해" },
+      { id: "6-9", title: "Claude Fable 5 — Mythos급 최강 모델의 등장" },
+      { id: "6-10", title: "루프엔지니어링 — 프롬프트를 짜는 사람에서 루프를 설계하는 사람으로" },
     ],
   },
 ];
@@ -149,7 +151,7 @@ export default function CurriculumPage() {
       {/* Header */}
       <div className="text-center mb-16">
         <div className="inline-block px-4 py-1.5 bg-teal-50 text-teal-600 rounded-full text-sm font-semibold mb-4">
-          6과 35개 강의
+          6과 37개 강의
         </div>
         <h1 className="text-4xl font-bold mb-4">6과 커리큘럼</h1>
         <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">

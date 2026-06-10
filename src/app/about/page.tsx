@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+const PERSON_ID = "https://silronomu.com/#person";
 
 export const metadata: Metadata = {
   title: "소개 | AI업무학교",
@@ -10,12 +11,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-// Person is defined once in the root layout (#person). This page references it
-// as a ProfilePage to avoid a duplicate Person node in the site graph.
+// Reference the canonical Park Sillo Person node instead of creating a local duplicate.
 const profilePageJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-  mainEntity: { "@id": `${SITE_URL}/#person` },
+  url: `${SITE_URL}/about`,
+  mainEntity: { "@id": PERSON_ID },
 };
 
 export default function AboutPage() {
@@ -111,12 +112,12 @@ export default function AboutPage() {
                       <h3 className="font-bold text-[var(--color-ink)]">AI업무학교</h3>
                     </div>
                     <p className="text-[var(--color-ink-soft)] text-sm leading-relaxed keep-all">
-                      AI 기초부터 고급까지 6과 35개 강의. 프롬프트엔지니어링,
+                      AI 기초부터 고급까지 6과 37개 강의. 프롬프트엔지니어링,
                       컨텍스트엔지니어링, 바이브코딩, 에이전트엔지니어링.
                     </p>
                   </div>
                   <span className="text-xs font-semibold text-[var(--color-primary-dark)] bg-[var(--color-primary-soft)] px-3 py-1.5 rounded-full shrink-0">
-                    6과 · 35강
+                    6과 · 37강
                   </span>
                 </div>
               </div>

@@ -3,11 +3,12 @@ import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+const PERSON_ID = "https://silronomu.com/#person";
 
 export const metadata: Metadata = {
   title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
   description:
-    "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 19년차 노무사가 6과 35개 강의로 가르칩니다.",
+    "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 19년차 노무사가 6과 37개 강의로 가르칩니다.",
   alternates: { canonical: "/" },
 };
 
@@ -28,7 +29,7 @@ const courseJsonLd = {
   },
   instructor: {
     "@type": "Person",
-    "@id": `${SITE_URL}/#person`,
+    "@id": PERSON_ID,
     name: "박실로",
     jobTitle: "공인노무사",
   },
@@ -362,7 +363,7 @@ export default function Home() {
             <dl className="mt-16 md:mt-20 grid grid-cols-3 max-w-2xl divide-x divide-[var(--color-border)]">
               {[
                 { n: "6과", l: "체계적 커리큘럼" },
-                { n: "35강", l: "단계별 실전 강의" },
+                { n: "37강", l: "단계별 실전 강의" },
                 { n: "0원", l: "누구나 무료 수강" },
               ].map((s) => (
                 <div key={s.l} className="px-5 first:pl-0">

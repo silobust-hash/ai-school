@@ -68,6 +68,8 @@ const allLessons = [
       { id: "6-6", title: "모바일 에이전트: 코덱스 앱과 어디서나 AI" },
       { id: "6-7", title: "오픈소스 오케스트레이션 생태계 — 내 손으로 AI 팀 꾸리기" },
       { id: "6-8", title: "마켓플레이스로 내 AI 도구 관리하기 — 클론·풀·푸시 쉽게 이해" },
+      { id: "6-9", title: "Claude Fable 5 — Mythos급 최강 모델의 등장" },
+      { id: "6-10", title: "루프엔지니어링 — 프롬프트를 짜는 사람에서 루프를 설계하는 사람으로" },
     ],
   },
 ];
@@ -115,7 +117,7 @@ export default function LessonsPage() {
       </div>
 
       <div className="mt-16 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-2xl p-8 border border-teal-100 text-center">
-        <h3 className="text-lg font-bold mb-2">전체 6과, 35개 강의</h3>
+        <h3 className="text-lg font-bold mb-2">전체 6과, 37개 강의</h3>
         <p className="text-slate-500 text-sm leading-relaxed">
           1과부터 순서대로 따라가시면 됩니다.
           <br />
