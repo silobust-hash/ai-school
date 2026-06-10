@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import LessonReactions from "./LessonReactions";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+const PERSON_ID = "https://silronomu.com/#person";
+const ORG_ID = "https://silronomu.com/#organization";
 const SITE_LAUNCH_DATE = "2026-04-02";
 
 export const revalidate = 60; // Revalidate every 60 seconds for ISR
@@ -96,8 +98,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
     articleSection: lesson.phase,
     datePublished,
     dateModified,
-    author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: "박실로", jobTitle: "공인노무사" },
-    publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "한동노무법인" },
+    author: { "@type": "Person", "@id": PERSON_ID, name: "박실로", jobTitle: "공인노무사" },
+    publisher: { "@type": "Organization", "@id": ORG_ID, name: "한동노무법인" },
     isPartOf: {
       "@type": "Course",
       "@id": `${SITE_URL}/#course`,

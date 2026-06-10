@@ -10,6 +10,8 @@ const AI_CRAWLERS = [
   "ChatGPT-User",
   "OAI-SearchBot",
   "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
   "anthropic-ai",
   "Claude-Web",
   "PerplexityBot",
