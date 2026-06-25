@@ -3,6 +3,7 @@ import { getLessonFromBlob } from "@/lib/storage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import LessonReactions from "./LessonReactions";
+import LessonPresentation from "@/components/LessonPresentation";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
 const PERSON_ID = "https://silronomu.com/#person";
@@ -181,7 +182,10 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
       </div>
 
       <h1 className="text-3xl font-bold mb-4 leading-tight">{lesson.title}</h1>
-      <p className="text-lg text-slate-500 mb-10 leading-relaxed">{lesson.summary}</p>
+      <p className="text-lg text-slate-500 mb-6 leading-relaxed">{lesson.summary}</p>
+      <div className="mb-10">
+        <LessonPresentation lesson={lesson} accent="#14b8a6" />
+      </div>
 
       <div className="prose prose-slate max-w-none">
         {lesson.sections.map((section: { heading: string; content: string; code?: string; tip?: string }, i: number) => (
