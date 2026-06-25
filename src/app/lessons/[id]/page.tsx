@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import LessonReactions from "./LessonReactions";
 import LessonPresentation from "@/components/LessonPresentation";
+import LessonGate from "@/components/LessonGate";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
 const PERSON_ID = "https://silronomu.com/#person";
@@ -183,6 +184,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
 
       <h1 className="text-3xl font-bold mb-4 leading-tight">{lesson.title}</h1>
       <p className="text-lg text-slate-500 mb-6 leading-relaxed">{lesson.summary}</p>
+
+      <LessonGate accent="#14b8a6">
       <div className="mb-10">
         <LessonPresentation lesson={lesson} accent="#14b8a6" />
       </div>
@@ -266,6 +269,7 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
           </Link>
         ) : <div />}
       </div>
+      </LessonGate>
     </div>
   );
 }
