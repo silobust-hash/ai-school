@@ -112,12 +112,12 @@ export default function AboutPage() {
                       <h3 className="font-bold text-[var(--color-ink)]">AI업무학교</h3>
                     </div>
                     <p className="text-[var(--color-ink-soft)] text-sm leading-relaxed keep-all">
-                      AI 기초부터 고급까지 6과 37개 강의. 프롬프트엔지니어링,
+                      AI 기초부터 고급까지 6과 39개 강의. 프롬프트엔지니어링,
                       컨텍스트엔지니어링, 바이브코딩, 에이전트엔지니어링.
                     </p>
                   </div>
                   <span className="text-xs font-semibold text-[var(--color-primary-dark)] bg-[var(--color-primary-soft)] px-3 py-1.5 rounded-full shrink-0">
-                    6과 · 37강
+                    6과 · 39강
                   </span>
                 </div>
               </div>

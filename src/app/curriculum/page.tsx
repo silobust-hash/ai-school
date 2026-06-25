@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronom
 export const metadata: Metadata = {
   title: "커리큘럼 | AI업무학교",
   description:
-    "6과 37개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 완전 정복 로드맵.",
+    "6과 39개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 완전 정복 로드맵.",
   alternates: { canonical: "/curriculum" },
 };
 
@@ -96,7 +96,7 @@ const courses = [
     gradient: "from-indigo-400 to-blue-600",
     badgeColor: "bg-indigo-100 text-indigo-700",
     lessons: [
-      { id: "6-1", title: "프롬프트에서 하네스까지: 3년의 진화" },
+      { id: "6-1", title: "프롬프트에서 루프까지: 5단 진화" },
       { id: "6-2", title: "2026 최신 모델 지도: Opus 4.8 · GPT-5.5 · Gemini 3.1" },
       { id: "6-3", title: "하네스 엔지니어링 실전: 에이전트 환경 설계하기" },
       { id: "6-4", title: "다이나믹 워크플로우와 울트라코드: 자율 다단계 실행" },
@@ -106,6 +106,8 @@ const courses = [
       { id: "6-8", title: "마켓플레이스로 내 AI 도구 관리하기 — 클론·풀·푸시 쉽게 이해" },
       { id: "6-9", title: "Claude Fable 5 — Mythos급 최강 모델의 등장" },
       { id: "6-10", title: "루프엔지니어링 — 프롬프트를 짜는 사람에서 루프를 설계하는 사람으로" },
+      { id: "6-11", title: "에이전트 엔지니어링 — AI에게 일을 통째로 맡기기" },
+      { id: "6-12", title: "2026 최신 AI 기능 총정리 — 직장인이 꼭 알아야 할 것들" },
     ],
   },
 ];
@@ -151,7 +153,7 @@ export default function CurriculumPage() {
       {/* Header */}
       <div className="text-center mb-16">
         <div className="inline-block px-4 py-1.5 bg-teal-50 text-teal-600 rounded-full text-sm font-semibold mb-4">
-          6과 37개 강의
+          6과 39개 강의
         </div>
         <h1 className="text-4xl font-bold mb-4">6과 커리큘럼</h1>
         <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">
