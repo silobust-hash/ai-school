@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // 강의안(강의 상세 본문) 접근 게이트.
 // 접근 코드 = 오늘 날짜 YYMMDD (예: 2026-06-25 → "260625"). 매일 자동으로 바뀐다.
-// 통과하면 그날 동안(sessionStorage) 재입력 없이 열람. 커리큘럼·목록·홈은 게이트 밖이라 공개.
+// 통과는 그 페이지를 보는 동안만 유효(저장 안 함) — 떠나거나 새로고침하면 다시 묻는다. 커리큘럼·목록·홈은 게이트 밖이라 공개.
 
 function todayCode(): string {
   const d = new Date();
@@ -23,27 +23,12 @@ export default function LessonGate({
   accent?: string;
 }) {
   const [authed, setAuthed] = useState(false);
-  const [ready, setReady] = useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    try {
-      if (sessionStorage.getItem("lessonAccessCode") === todayCode()) {
-        setAuthed(true);
-      }
-    } catch {
-      // sessionStorage 불가 환경은 매번 입력
-    }
-    setReady(true);
-  }, []);
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (value.trim() === todayCode()) {
-      try {
-        sessionStorage.setItem("lessonAccessCode", todayCode());
-      } catch {}
       setError(false);
       setAuthed(true);
     } else {
@@ -51,8 +36,7 @@ export default function LessonGate({
     }
   }
 
-  // 하이드레이션 깜빡임 방지: 클라이언트 확인 전에는 아무것도 렌더하지 않음
-  if (!ready) return null;
+  // 저장하지 않는다 — 페이지를 떠나거나 새로고침하면 다시 코드를 묻는다.
   if (authed) return <>{children}</>;
 
   return (
@@ -90,7 +74,6 @@ export default function LessonGate({
             inputMode="numeric"
             autoFocus
             maxLength={6}
-            placeholder="예: 260625"
             aria-label="접근 코드"
             style={{
               width: "100%",
