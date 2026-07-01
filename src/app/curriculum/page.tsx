@@ -174,7 +174,7 @@ export default function CurriculumPage() {
         </div>
         <h1 className="text-4xl font-bold mb-4">6과 커리큘럼</h1>
         <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">
-          프롬프트엔지니어링부터 에이전트엔지니어링까지,
+          프롬프트부터 에이전트 설계까지,
           <br />
           기초부터 고급까지
         </p>
