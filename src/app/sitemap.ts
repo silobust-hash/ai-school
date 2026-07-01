@@ -5,8 +5,8 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronom
 
 // Meaningful freshness anchors instead of build-time `new Date()`.
 const SITE_LAUNCH_DATE = "2026-04-02";
-// Most recent content update (6과 40강 — 에이전트·최신기능·마인드셋·인사이트 보강).
-const LAST_CONTENT_UPDATE = "2026-06-25";
+// Most recent content update (실행 키트·수강 흐름 보강).
+const LAST_CONTENT_UPDATE = "2026-07-01";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lessonEntries = Object.keys(lessons).map((id) => {

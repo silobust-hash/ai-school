@@ -8,7 +8,7 @@ const PERSON_ID = "https://silronomu.com/#person";
 export const metadata: Metadata = {
   title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
   description:
-    "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 19년차 노무사가 6과 40개 강의로 가르칩니다.",
+    "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 매 강의마다 실행 프롬프트와 검수 기준을 남기는 AI 업무 교육입니다.",
   alternates: { canonical: "/" },
 };
 
@@ -18,7 +18,7 @@ const courseJsonLd = {
   "@id": `${SITE_URL}/#course`,
   name: "AI업무학교: 문과 출신도 AI로 일하는 시대",
   description:
-    "프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 전체 로드맵",
+    "프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 전체 로드맵과 실습 결과물 중심 교육",
   courseCode: "AISCHOOL",
   isAccessibleForFree: true,
   provider: {
@@ -246,6 +246,24 @@ const features = [
   },
 ];
 
+const practiceFlow = [
+  {
+    step: "01",
+    title: "개념을 업무 언어로 번역",
+    desc: "프롬프트, 컨텍스트, API 같은 말을 내 업무 사례로 다시 설명합니다.",
+  },
+  {
+    step: "02",
+    title: "AI에게 맡길 단위로 쪼개기",
+    desc: "보고서, 상담 메모, 자료 정리처럼 바로 맡길 수 있는 작은 작업으로 바꿉니다.",
+  },
+  {
+    step: "03",
+    title: "복붙 가능한 프롬프트 확보",
+    desc: "강의마다 업무에 바로 붙여넣을 수 있는 요청문과 검수 기준을 남깁니다.",
+  },
+];
+
 // Bento layout sizing — varied tile spans for an asymmetric grid.
 // Index order matches `features`; copy is untouched.
 const bentoSpans = [
@@ -264,13 +282,11 @@ export default function Home() {
       <script
         type="application/ld+json"
         // JSON-LD structured data for SEO — static content, no user input
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
       />
       <script
         type="application/ld+json"
         // JSON-LD structured data for SEO — static content, no user input
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
@@ -427,6 +443,49 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* ============ PRACTICE FLOW ============ */}
+      <section className="max-w-6xl mx-auto px-6 pb-24">
+        <Reveal>
+          <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-8 md:p-10 shadow-[var(--shadow-sm)]">
+            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.4fr] lg:items-start">
+              <div>
+                <p className="text-sm font-bold tracking-[0.18em] uppercase text-[var(--color-primary)]">
+                  Practice Loop
+                </p>
+                <h2 className="font-display mt-3 text-3xl font-extrabold text-[var(--color-ink)] md:text-4xl">
+                  듣고 끝나지 않게,
+                  <br />
+                  매 강의마다 작은 결과물을 남깁니다
+                </h2>
+                <p className="mt-4 text-[var(--color-ink-soft)] leading-relaxed keep-all">
+                  비개발자에게 필요한 건 이론 암기가 아니라, 오늘 업무에 붙일 수 있는
+                  실행 단위입니다. 각 강의는 복습 프롬프트와 검수 기준까지 이어집니다.
+                </p>
+              </div>
+
+              <div className="grid gap-3">
+                {practiceFlow.map((item) => (
+                  <article
+                    key={item.step}
+                    className="grid grid-cols-[auto_1fr] gap-4 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-5"
+                  >
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--color-primary-soft)] text-sm font-extrabold text-[var(--color-primary-dark)]">
+                      {item.step}
+                    </span>
+                    <div>
+                      <h3 className="font-bold text-[var(--color-ink)]">{item.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-[var(--color-ink-soft)] keep-all">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* ============ FEATURES — BENTO GRID ============ */}

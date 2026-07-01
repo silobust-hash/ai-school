@@ -164,7 +164,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           // JSON-LD structured data graph for SEO — static content, no user input
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd) }}
         />
       </head>

@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronom
 export const metadata: Metadata = {
   title: "커리큘럼 | AI업무학교",
   description:
-    "6과 40개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 완전 정복 로드맵.",
+    "6과 40개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 복습 프롬프트와 검수 기준이 남는 비개발자 AI 활용 로드맵.",
   alternates: { canonical: "/curriculum" },
 };
 
@@ -115,6 +115,24 @@ const courses = [
 
 const allCurriculumLessons = courses.flatMap((course) => course.lessons);
 
+const outcomeRoadmap = [
+  {
+    label: "1단계",
+    title: "AI에게 제대로 지시하기",
+    desc: "역할, 맥락, 출력형식을 갖춘 프롬프트를 직접 만듭니다.",
+  },
+  {
+    label: "2단계",
+    title: "긴 자료를 맥락으로 넣기",
+    desc: "문서 전체를 요약이 아니라 판단 가능한 자료로 다루는 법을 익힙니다.",
+  },
+  {
+    label: "3단계",
+    title: "내 업무 자동화로 연결하기",
+    desc: "웹사이트, 반복 문서, 에이전트 워크플로우까지 작은 결과물로 완성합니다.",
+  },
+];
+
 const itemListJsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -143,12 +161,10 @@ export default function CurriculumPage() {
       {/* JSON-LD: curriculum ItemList + breadcrumb (static content, no user input) */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Header */}
@@ -162,6 +178,16 @@ export default function CurriculumPage() {
           <br />
           기초부터 고급까지
         </p>
+      </div>
+
+      <div className="mb-14 grid gap-4 md:grid-cols-3">
+        {outcomeRoadmap.map((item) => (
+          <article key={item.label} className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
+            <span className="text-xs font-bold text-teal-600">{item.label}</span>
+            <h2 className="mt-2 text-base font-bold text-slate-900">{item.title}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-500">{item.desc}</p>
+          </article>
+        ))}
       </div>
 
       {/* Course Sections */}

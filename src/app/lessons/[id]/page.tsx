@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import LessonReactions from "./LessonReactions";
 import LessonPresentation from "@/components/LessonPresentation";
 import LessonGate from "@/components/LessonGate";
+import LessonActionKit from "@/components/LessonActionKit";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
 const PERSON_ID = "https://silronomu.com/#person";
@@ -149,23 +150,19 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
       {/* JSON-LD: Article structured data (server-generated, trusted content) */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(learningResourceJsonLd) }}
       />
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
@@ -189,6 +186,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
       <div className="mb-10">
         <LessonPresentation lesson={lesson} accent="#14b8a6" />
       </div>
+
+      <LessonActionKit lesson={lesson} />
 
       <div className="prose prose-slate max-w-none">
         {lesson.sections.map((section: { heading: string; content: string; code?: string; tip?: string }, i: number) => (
