@@ -115,11 +115,14 @@ test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리�
 });
 
 test("llms.txt·robots.txt·sitemap.xml은 공개 경로와 강의 수를 일치시킨다", async () => {
-  const [llmsResponse, robotsResponse, sitemapResponse] = await Promise.all([
+  const [faviconResponse, llmsResponse, robotsResponse, sitemapResponse] = await Promise.all([
+    fetch(`${baseUrl}/favicon.ico`),
     fetch(`${baseUrl}/llms.txt`),
     fetch(`${baseUrl}/robots.txt`),
     fetch(`${baseUrl}/sitemap.xml`),
   ]);
+  assert.equal(faviconResponse.status, 200);
+  assert.equal(faviconResponse.headers.get("content-type"), "image/png");
   assert.equal(llmsResponse.status, 200);
   assert.equal(robotsResponse.status, 200);
   assert.equal(sitemapResponse.status, 200);
