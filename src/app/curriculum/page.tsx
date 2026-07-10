@@ -1,13 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+import { COURSE_ID, SITE_URL, WEBSITE_ID } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "커리큘럼 | AI업무학교",
+  title: "커리큘럼",
   description:
     "6과 40개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 복습 프롬프트와 검수 기준이 남는 비개발자 AI 활용 로드맵.",
   alternates: { canonical: "/curriculum" },
+  openGraph: {
+    type: "website",
+    title: "커리큘럼 | AI업무학교",
+    description:
+      "6과 40개 강의로 구성된 비개발자 AI 활용 로드맵. 프롬프트엔지니어링부터 에이전트엔지니어링까지 학습합니다.",
+    url: `${SITE_URL}/curriculum`,
+    siteName: "AI업무학교",
+  },
 };
 
 const courses = [
@@ -136,6 +143,9 @@ const outcomeRoadmap = [
 const itemListJsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
+  "@id": `${SITE_URL}/curriculum#item-list`,
+  isPartOf: { "@id": WEBSITE_ID },
+  about: { "@id": COURSE_ID },
   itemListOrder: "https://schema.org/ItemListOrderAscending",
   numberOfItems: allCurriculumLessons.length,
   itemListElement: allCurriculumLessons.map((lesson, idx) => ({

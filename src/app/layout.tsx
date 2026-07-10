@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import SiteNav from "@/components/SiteNav";
+import {
+  AI_SCHOOL_ORGANIZATION_ID,
+  COURSE_ID,
+  HANDONG_ORGANIZATION_ID,
+  PERSON_ID,
+  PERSON_SAME_AS,
+  SITE_URL,
+  WEBSITE_ID,
+} from "@/lib/site";
 import "./globals.css";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
-const PERSON_ID = "https://silronomu.com/#person";
-const ORG_ID = "https://silronomu.com/#organization";
 
 export const metadata: Metadata = {
   verification: {
@@ -24,12 +29,9 @@ export const metadata: Metadata = {
   description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 문과 출신 19년차 노무사가 6과 40개 강의로 AI 업무 활용법을 가르칩니다.",
   keywords: ["AI 강의", "AI 교육", "프롬프트엔지니어링", "컨텍스트엔지니어링", "바이브코딩", "비개발자 AI", "AI 업무 자동화", "AI업무학교", "클로드 코드"],
   authors: [{ name: "박실로", url: "https://silronomu.com" }],
-  creator: "박실로 (공인노무사)",
-  publisher: "한동노무법인",
+  creator: "박실로 (공인노무사·AI 교육자)",
+  publisher: "AI업무학교",
   metadataBase: new URL(SITE_URL),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "ko_KR",
@@ -58,7 +60,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Unified knowsAbout / sameAs definitions reused across the site graph.
 const KNOWS_ABOUT = [
   "노동법",
   "근로기준법",
@@ -71,34 +72,24 @@ const KNOWS_ABOUT = [
   "비개발자 AI 활용",
 ];
 
-const SAME_AS = [
-  "https://silronomu.com/",
-  "https://blog.silronomu.com/",
-  "https://sanjae.silronomu.com/",
-  "https://edu.silronomu.com/",
-  "https://ai-school.silronomu.com/",
-  "https://xn--hc0b21e4rq52a9zgfzlxub.com/",
-  "https://xn--hc0b21et01ao2a.com/",
-  "https://xn--hc0bn7fv7j9tf6rl.net/",
-  "https://blog.naver.com/5215678",
-  "https://silronomusa.blogspot.com/",
-  "https://www.facebook.com/share/17SYegaFj5/",
-  "https://www.instagram.com/silrobag/",
-  "https://www.threads.net/@silrobag",
-  "https://x.com/silrobag",
-  "https://youtube.com/channel/UCAkNJ16PNf2cNfhXsVbh-gg",
-  "https://www.linkedin.com/in/실로-박-385a1a104/",
-];
-
-const organizationJsonLd = {
+const aiSchoolOrganizationJsonLd = {
   "@type": "EducationalOrganization",
-  "@id": `${SITE_URL}/#org`,
-  name: "한동노무법인",
-  url: "https://silronomu.com",
+  "@id": AI_SCHOOL_ORGANIZATION_ID,
+  name: "AI업무학교",
+  alternateName: "AI Work School",
+  url: SITE_URL,
   logo: `${SITE_URL}/og.png`,
-  sameAs: SAME_AS,
+  description: "비개발자를 위한 AI 업무 활용 교육 사이트",
   founder: { "@id": PERSON_ID },
-  parentOrganization: { "@id": ORG_ID },
+  parentOrganization: { "@id": HANDONG_ORGANIZATION_ID },
+};
+
+const handongOrganizationJsonLd = {
+  "@type": "Organization",
+  "@id": HANDONG_ORGANIZATION_ID,
+  name: "한동노무법인",
+  url: "https://silronomu.com/",
+  employee: { "@id": PERSON_ID },
   telephone: "+82-62-521-5678",
   address: {
     "@type": "PostalAddress",
@@ -122,9 +113,10 @@ const personJsonLd = {
   "@type": "Person",
   "@id": PERSON_ID,
   name: "박실로",
-  alternateName: ["Park Silro", "실로노무사"],
-  jobTitle: "공인노무사",
-  worksFor: { "@id": ORG_ID },
+  alternateName: ["박실로 노무사", "Park Silro", "실로노무사"],
+  jobTitle: ["공인노무사", "AI 교육자"],
+  worksFor: { "@id": HANDONG_ORGANIZATION_ID },
+  affiliation: { "@id": AI_SCHOOL_ORGANIZATION_ID },
   knowsAbout: KNOWS_ABOUT,
   description: "19년차 공인노무사이자 AI 활용 교육자. 비개발자 전문직을 위한 AI 교육을 진행합니다.",
   url: "https://silronomu.com",
@@ -134,23 +126,33 @@ const personJsonLd = {
     recognizedBy: { "@type": "GovernmentOrganization", name: "고용노동부" },
     identifier: { "@type": "PropertyValue", name: "공인노무사 직무개시등록번호", value: "제1243호" },
   },
-  sameAs: SAME_AS,
+  sameAs: PERSON_SAME_AS,
+  subjectOf: {
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/about#profile-page`,
+    url: `${SITE_URL}/about`,
+  },
 };
 
 const websiteJsonLd = {
   "@type": "WebSite",
-  "@id": `${SITE_URL}/#website`,
+  "@id": WEBSITE_ID,
   url: SITE_URL,
   name: "AI업무학교",
   description: "문과 출신도 AI로 일하는 시대. 프롬프트엔지니어링부터 에이전트엔지니어링까지.",
-  inLanguage: "ko",
-  publisher: { "@id": `${SITE_URL}/#org` },
-  about: { "@id": PERSON_ID },
+  inLanguage: "ko-KR",
+  publisher: { "@id": AI_SCHOOL_ORGANIZATION_ID },
+  about: [{ "@id": PERSON_ID }, { "@id": COURSE_ID }],
 };
 
 const siteGraphJsonLd = {
   "@context": "https://schema.org",
-  "@graph": [organizationJsonLd, websiteJsonLd, personJsonLd],
+  "@graph": [
+    aiSchoolOrganizationJsonLd,
+    handongOrganizationJsonLd,
+    websiteJsonLd,
+    personJsonLd,
+  ],
 };
 
 export default function RootLayout({

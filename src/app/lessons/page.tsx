@@ -1,3 +1,28 @@
+import type { Metadata } from "next";
+import { COURSE_ID, SITE_URL, WEBSITE_ID } from "@/lib/site";
+
+const LESSONS_URL = `${SITE_URL}/lessons`;
+const DESCRIPTION =
+  "AI업무학교 6과 40개 강의 목록. 프롬프트엔지니어링부터 하네스·에이전트엔지니어링까지 비개발자를 위한 AI 업무 활용 강의를 순서대로 학습합니다.";
+
+export const metadata: Metadata = {
+  title: "강의 목록",
+  description: DESCRIPTION,
+  alternates: { canonical: "/lessons" },
+  openGraph: {
+    type: "website",
+    title: "강의 목록 | AI업무학교",
+    description: DESCRIPTION,
+    url: LESSONS_URL,
+    siteName: "AI업무학교",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "강의 목록 | AI업무학교",
+    description: DESCRIPTION,
+  },
+};
+
 const allLessons = [
   {
     course: 1,
@@ -77,12 +102,56 @@ const allLessons = [
   },
 ];
 
+const lessonItems = allLessons.flatMap((group) => group.lessons);
+
+const lessonsJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": `${LESSONS_URL}#webpage`,
+      url: LESSONS_URL,
+      name: "AI업무학교 강의 목록",
+      description: DESCRIPTION,
+      inLanguage: "ko-KR",
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": COURSE_ID },
+      mainEntity: { "@id": `${LESSONS_URL}#item-list` },
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${LESSONS_URL}#item-list`,
+      name: "AI업무학교 6과 40개 강의",
+      numberOfItems: lessonItems.length,
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      itemListElement: lessonItems.map((lesson, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: lesson.title,
+        url: `${LESSONS_URL}/${lesson.id}`,
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${LESSONS_URL}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "홈", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "강의 목록", item: LESSONS_URL },
+      ],
+    },
+  ],
+};
+
 export default function LessonsPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(lessonsJsonLd) }}
+      />
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">강의 목록</h1>
-        <p className="text-slate-500 text-lg">
+        <p className="text-slate-500 text-lg break-words">
           순서대로 따라가세요. 각 강의는 독립적이지만, 앞 단계를 먼저 보시면 더 잘 이해됩니다.
         </p>
       </div>
@@ -101,15 +170,15 @@ export default function LessonsPage() {
                 <a
                   key={lesson.id}
                   href={`/lessons/${lesson.id}`}
-                  className="flex items-center gap-4 p-4 rounded-xl border transition-all bg-white border-slate-200 hover:border-teal-300 hover:shadow-sm"
+                  className="flex min-w-0 items-center gap-4 p-4 rounded-xl border transition-all bg-white border-slate-200 hover:border-teal-300 hover:shadow-sm"
                 >
                   <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 bg-teal-100 text-teal-600">
                     {lesson.id}
                   </div>
-                  <div className="flex-1">
-                    <span className="font-medium text-slate-700">{lesson.title}</span>
+                  <div className="min-w-0 flex-1">
+                    <span className="block break-words font-medium text-slate-700">{lesson.title}</span>
                   </div>
-                  <span className="text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
+                  <span className="hidden shrink-0 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-600 sm:inline-flex">
                     수강 가능
                   </span>
                 </a>

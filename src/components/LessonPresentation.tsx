@@ -279,7 +279,7 @@ function SlideView({ slide, accent }: { slide: Slide; accent: string }) {
             {slide.phase}
           </div>
         )}
-        <h1
+        <h2
           style={{
             fontSize: "clamp(2rem, 5.2vw, 4.2rem)",
             lineHeight: 1.12,
@@ -289,7 +289,7 @@ function SlideView({ slide, accent }: { slide: Slide; accent: string }) {
           }}
         >
           {slide.title}
-        </h1>
+        </h2>
         {slide.summary && (
           <p
             style={{

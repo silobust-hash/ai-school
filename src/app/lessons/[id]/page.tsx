@@ -6,10 +6,14 @@ import LessonReactions from "./LessonReactions";
 import LessonPresentation from "@/components/LessonPresentation";
 import LessonGate from "@/components/LessonGate";
 import LessonActionKit from "@/components/LessonActionKit";
+import type { Metadata } from "next";
+import {
+  AI_SCHOOL_ORGANIZATION_ID,
+  COURSE_ID,
+  PERSON_ID,
+  SITE_URL,
+} from "@/lib/site";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
-const PERSON_ID = "https://silronomu.com/#person";
-const ORG_ID = "https://silronomu.com/#organization";
 const SITE_LAUNCH_DATE = "2026-04-02";
 
 export const revalidate = 60; // Revalidate every 60 seconds for ISR
@@ -18,7 +22,7 @@ export function generateStaticParams() {
   return Object.keys(lessons).map((id) => ({ id }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
 
   let lesson: Record<string, unknown> | null = null;
@@ -32,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const staticLesson = lessons[id];
     if (!staticLesson) return { title: "강의를 찾을 수 없습니다" };
     return {
-      title: `${staticLesson.title} | AI업무학교`,
+      title: staticLesson.title,
       description: staticLesson.summary,
       alternates: { canonical: `/lessons/${id}` },
       openGraph: {
@@ -52,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const title = lesson.title as string;
   const summary = (lesson.summary as string) || undefined;
   return {
-    title: `${title} | AI업무학교`,
+    title,
     description: summary,
     alternates: { canonical: `/lessons/${id}` },
     openGraph: {
@@ -91,35 +95,52 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
 
   const datePublished = (lesson.datePublished as string) || SITE_LAUNCH_DATE;
   const dateModified = (lesson.dateModified as string) || datePublished;
+  const lessonUrl = `${SITE_URL}/lessons/${id}`;
 
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${lessonUrl}#article`,
+    url: lessonUrl,
     headline: lesson.title,
     description: lesson.summary,
-    mainEntityOfPage: `${SITE_URL}/lessons/${id}`,
+    mainEntityOfPage: lessonUrl,
+    image: `${SITE_URL}/og.png`,
     articleSection: lesson.phase,
     datePublished,
     dateModified,
-    author: { "@type": "Person", "@id": PERSON_ID, name: "박실로", jobTitle: "공인노무사" },
-    publisher: { "@type": "Organization", "@id": ORG_ID, name: "한동노무법인" },
+    author: {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: "박실로",
+      jobTitle: ["공인노무사", "AI 교육자"],
+    },
+    publisher: {
+      "@type": "EducationalOrganization",
+      "@id": AI_SCHOOL_ORGANIZATION_ID,
+      name: "AI업무학교",
+    },
     isPartOf: {
       "@type": "Course",
-      "@id": `${SITE_URL}/#course`,
+      "@id": COURSE_ID,
       name: "AI업무학교",
     },
     educationalLevel: "Beginner",
-    inLanguage: "ko",
+    inLanguage: "ko-KR",
   };
 
   const learningResourceJsonLd = {
     "@context": "https://schema.org",
     "@type": "LearningResource",
+    "@id": `${lessonUrl}#learning-resource`,
+    url: lessonUrl,
     name: lesson.title,
     description: lesson.summary,
     educationalLevel: "Beginner",
-    inLanguage: "ko",
-    isPartOf: { "@id": `${SITE_URL}/#course` },
+    inLanguage: "ko-KR",
+    isPartOf: { "@id": COURSE_ID },
+    author: { "@id": PERSON_ID },
+    provider: { "@id": AI_SCHOOL_ORGANIZATION_ID },
     teaches: lesson.keyTakeaways,
     isAccessibleForFree: true,
     learningResourceType: "lesson",
@@ -130,8 +151,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "홈", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "커리큘럼", item: `${SITE_URL}/curriculum` },
-      { "@type": "ListItem", position: 3, name: lesson.title, item: `${SITE_URL}/lessons/${id}` },
+      { "@type": "ListItem", position: 2, name: "강의 목록", item: `${SITE_URL}/lessons` },
+      { "@type": "ListItem", position: 3, name: lesson.title, item: lessonUrl },
     ],
   };
 

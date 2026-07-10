@@ -1,21 +1,30 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
-const PERSON_ID = "https://silronomu.com/#person";
+import { PERSON_ID, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "소개 | AI업무학교",
+  title: "소개",
   description:
     "박실로 노무사 소개. 19년차 공인노무사이자 AI 활용 교육자. 비개발자 전문직을 위한 AI 교육을 진행합니다.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    type: "profile",
+    title: "박실로 소개 | AI업무학교",
+    description:
+      "19년차 공인노무사이자 AI 교육자 박실로가 비개발자 전문직을 위한 AI 교육을 진행합니다.",
+    url: `${SITE_URL}/about`,
+    siteName: "AI업무학교",
+  },
 };
 
 // Reference the canonical Park Sillo Person node instead of creating a local duplicate.
 const profilePageJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
+  "@id": `${SITE_URL}/about#profile-page`,
   url: `${SITE_URL}/about`,
+  name: "박실로 공인노무사·AI 교육자 소개",
+  inLanguage: "ko-KR",
   mainEntity: { "@id": PERSON_ID },
 };
 

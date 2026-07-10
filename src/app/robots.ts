@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
+import { SITE_URL } from "@/lib/site";
 
 const DISALLOW = ["/admin/", "/api/admin/"];
 
@@ -12,12 +11,10 @@ const AI_CRAWLERS = [
   "ClaudeBot",
   "Claude-SearchBot",
   "Claude-User",
-  "anthropic-ai",
-  "Claude-Web",
   "PerplexityBot",
+  "Perplexity-User",
   "Google-Extended",
   "CCBot",
-  "Bingbot",
 ];
 
 export default function robots(): MetadataRoute.Robots {
@@ -30,6 +27,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: DISALLOW,
       })),
     ],
-    sitemap: `${SITE_URL.replace(/\/$/, "")}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

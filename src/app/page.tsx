@@ -1,9 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import {
+  AI_SCHOOL_ORGANIZATION_ID,
+  COURSE_ID,
+  PERSON_ID,
+  SITE_URL,
+} from "@/lib/site";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://ai-school.silronomu.com";
-const PERSON_ID = "https://silronomu.com/#person";
 
 export const metadata: Metadata = {
   title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
@@ -15,27 +19,26 @@ export const metadata: Metadata = {
 const courseJsonLd = {
   "@context": "https://schema.org",
   "@type": "Course",
-  "@id": `${SITE_URL}/#course`,
+  "@id": COURSE_ID,
   name: "AI업무학교: 문과 출신도 AI로 일하는 시대",
   description:
     "프롬프트엔지니어링부터 에이전트엔지니어링까지, 비개발자를 위한 AI 활용 전체 로드맵과 실습 결과물 중심 교육",
   courseCode: "AISCHOOL",
   isAccessibleForFree: true,
   provider: {
-    "@type": "Organization",
-    "@id": `${SITE_URL}/#org`,
-    name: "한동노무법인",
-    url: "https://silronomu.com",
+    "@type": "EducationalOrganization",
+    "@id": AI_SCHOOL_ORGANIZATION_ID,
+    name: "AI업무학교",
+    url: SITE_URL,
   },
   instructor: {
     "@type": "Person",
     "@id": PERSON_ID,
     name: "박실로",
-    jobTitle: "공인노무사",
+    jobTitle: ["공인노무사", "AI 교육자"],
   },
   educationalLevel: "Beginner",
-  inLanguage: "ko",
-  numberOfCredits: 6,
+  inLanguage: "ko-KR",
   about: [
     "프롬프트엔지니어링",
     "컨텍스트엔지니어링",
@@ -319,29 +322,28 @@ export default function Home() {
 
               <Reveal delay={80}>
                 <h1 className="font-display mt-7 text-[var(--color-ink)] text-[clamp(2.75rem,1.4rem+6.4vw,5.75rem)] font-extrabold">
-                  코딩 몰라도
-                  <br />
-                  괜찮아요.
-                </h1>
-              </Reveal>
-
-              <Reveal delay={160}>
-                <h1 className="font-display mt-1 text-[clamp(2.75rem,1.4rem+6.4vw,5.75rem)] font-extrabold">
-                  <span className="relative inline-block">
-                    <span className="relative z-10 bg-gradient-to-r from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[#15b8a6] bg-clip-text text-transparent">
-                      AI로 일하는 법
-                    </span>
-                    {/* ember underline */}
-                    <span
-                      className="absolute left-0 -bottom-1 h-[0.18em] w-full rounded-full opacity-90"
-                      style={{
-                        background:
-                          "linear-gradient(90deg, var(--color-accent), transparent)",
-                      }}
-                      aria-hidden
-                    />
+                  <span className="block">
+                    코딩 몰라도
+                    <br />
+                    괜찮아요.
                   </span>
-                  <span className="text-[var(--color-ink)]">을 배우세요.</span>
+                  <span className="mt-1 block">
+                    <span className="relative inline-block">
+                      <span className="relative z-10 bg-gradient-to-r from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[#15b8a6] bg-clip-text text-transparent">
+                        AI로 일하는 법
+                      </span>
+                      {/* ember underline */}
+                      <span
+                        className="absolute left-0 -bottom-1 h-[0.18em] w-full rounded-full opacity-90"
+                        style={{
+                          background:
+                            "linear-gradient(90deg, var(--color-accent), transparent)",
+                        }}
+                        aria-hidden
+                      />
+                    </span>
+                    <span className="text-[var(--color-ink)]">을 배우세요.</span>
+                  </span>
                 </h1>
               </Reveal>
             </div>
