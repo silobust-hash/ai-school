@@ -3,7 +3,7 @@ import { COURSE_ID, SITE_URL, WEBSITE_ID } from "@/lib/site";
 
 const LESSONS_URL = `${SITE_URL}/lessons`;
 const DESCRIPTION =
-  "AI업무학교 6과 40개 강의 목록. 프롬프트엔지니어링부터 하네스·에이전트엔지니어링까지 비개발자를 위한 AI 업무 활용 강의를 순서대로 학습합니다.";
+  "AI업무학교 6과 41개 강의 목록. 프롬프트엔지니어링부터 하네스·에이전트엔지니어링까지 비개발자를 위한 AI 업무 활용 강의를 순서대로 학습합니다.";
 
 export const metadata: Metadata = {
   title: "강의 목록",
@@ -98,6 +98,7 @@ const allLessons = [
       { id: "6-11", title: "에이전트 엔지니어링 — AI에게 일을 통째로 맡기기" },
       { id: "6-12", title: "2026 최신 AI 기능 총정리 — 직장인이 꼭 알아야 할 것들" },
       { id: "6-13", title: "얼리어답터의 무기 — AI 시대 마인드셋과 생존전략" },
+      { id: "6-14", title: "만류귀종 — 돌고 돌아 다시 페르소나" },
     ],
   },
 ];
@@ -121,7 +122,7 @@ const lessonsJsonLd = {
     {
       "@type": "ItemList",
       "@id": `${LESSONS_URL}#item-list`,
-      name: "AI업무학교 6과 40개 강의",
+      name: "AI업무학교 6과 41개 강의",
       numberOfItems: lessonItems.length,
       itemListOrder: "https://schema.org/ItemListOrderAscending",
       itemListElement: lessonItems.map((lesson, index) => ({
@@ -189,7 +190,7 @@ export default function LessonsPage() {
       </div>
 
       <div className="mt-16 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-2xl p-8 border border-teal-100 text-center">
-        <h3 className="text-lg font-bold mb-2">전체 6과, 40개 강의</h3>
+        <h3 className="text-lg font-bold mb-2">전체 6과, 41개 강의</h3>
         <p className="text-slate-500 text-sm leading-relaxed">
           1과부터 순서대로 따라가시면 됩니다.
           <br />

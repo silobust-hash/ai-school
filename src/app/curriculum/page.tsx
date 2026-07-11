@@ -5,13 +5,13 @@ import { COURSE_ID, SITE_URL, WEBSITE_ID } from "@/lib/site";
 export const metadata: Metadata = {
   title: "커리큘럼",
   description:
-    "6과 40개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 복습 프롬프트와 검수 기준이 남는 비개발자 AI 활용 로드맵.",
+    "6과 41개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 복습 프롬프트와 검수 기준이 남는 비개발자 AI 활용 로드맵.",
   alternates: { canonical: "/curriculum" },
   openGraph: {
     type: "website",
     title: "커리큘럼 | AI업무학교",
     description:
-      "6과 40개 강의로 구성된 비개발자 AI 활용 로드맵. 프롬프트엔지니어링부터 에이전트엔지니어링까지 학습합니다.",
+      "6과 41개 강의로 구성된 비개발자 AI 활용 로드맵. 프롬프트엔지니어링부터 에이전트엔지니어링까지 학습합니다.",
     url: `${SITE_URL}/curriculum`,
     siteName: "AI업무학교",
   },
@@ -116,6 +116,7 @@ const courses = [
       { id: "6-11", title: "에이전트 엔지니어링 — AI에게 일을 통째로 맡기기" },
       { id: "6-12", title: "2026 최신 AI 기능 총정리 — 직장인이 꼭 알아야 할 것들" },
       { id: "6-13", title: "얼리어답터의 무기 — AI 시대 마인드셋과 생존전략" },
+      { id: "6-14", title: "만류귀종 — 돌고 돌아 다시 페르소나" },
     ],
   },
 ];
@@ -180,7 +181,7 @@ export default function CurriculumPage() {
       {/* Header */}
       <div className="text-center mb-16">
         <div className="inline-block px-4 py-1.5 bg-teal-50 text-teal-600 rounded-full text-sm font-semibold mb-4">
-          6과 40개 강의
+          6과 41개 강의
         </div>
         <h1 className="text-4xl font-bold mb-4">6과 커리큘럼</h1>
         <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">

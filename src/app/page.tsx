@@ -381,7 +381,7 @@ export default function Home() {
             <dl className="mt-16 md:mt-20 grid grid-cols-3 max-w-2xl divide-x divide-[var(--color-border)]">
               {[
                 { n: "6과", l: "체계적 커리큘럼" },
-                { n: "40강", l: "단계별 실전 강의" },
+                { n: "41강", l: "단계별 실전 강의" },
                 { n: "0원", l: "누구나 무료 수강" },
               ].map((s) => (
                 <div key={s.l} className="px-5 first:pl-0">
