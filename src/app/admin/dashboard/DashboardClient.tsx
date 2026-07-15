@@ -19,12 +19,18 @@ interface DashboardClientProps {
   groupedLessons: PhaseGroup[];
   totalLessons: number;
   totalOverrides: number;
+  accessCode: string;
+  accessCodeDateCode: string;
+  accessCodeExpiresAt: string;
 }
 
 export default function DashboardClient({
   groupedLessons,
   totalLessons,
   totalOverrides,
+  accessCode,
+  accessCodeDateCode,
+  accessCodeExpiresAt,
 }: DashboardClientProps) {
   const searchParams = useSearchParams();
   const saved = searchParams.get("saved");
@@ -45,7 +51,7 @@ export default function DashboardClient({
       )}
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-10">
         <div className="bg-white rounded-xl border border-slate-200 p-5">
           <div className="text-2xl font-bold text-slate-800">{totalLessons}</div>
           <div className="text-sm text-slate-500">전체 강의</div>
@@ -59,6 +65,14 @@ export default function DashboardClient({
             {totalLessons - totalOverrides}
           </div>
           <div className="text-sm text-slate-500">기본 데이터 사용</div>
+        </div>
+        <div className="bg-slate-950 text-white rounded-xl border border-slate-900 p-5">
+          <div className="text-xs font-bold text-teal-300">오늘 강의 접근 코드</div>
+          <div className="text-2xl font-mono tracking-[0.25em] mt-2 mb-1">{accessCode}</div>
+          <div className="text-xs text-slate-300">기준일: {accessCodeDateCode}</div>
+          <div className="text-xs text-slate-400 mt-1">
+            서울 기준 자정 만료 ({accessCodeExpiresAt})
+          </div>
         </div>
       </div>
 

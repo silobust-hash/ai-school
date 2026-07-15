@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const NAV_LINKS = [
   { href: "/curriculum", label: "커리큘럼" },
   { href: "/lessons", label: "강의 목록" },
+  { href: "/level-test", label: "수준진단" },
   { href: "/about", label: "소개" },
 ];
 
@@ -38,7 +39,7 @@ export default function SiteNav() {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/"
-            className="group flex items-center gap-2.5"
+            className="group inline-flex min-h-11 items-center gap-2.5"
             onClick={() => setOpen(false)}
           >
             <span className="grid place-items-center w-8 h-8 rounded-lg bg-[var(--color-primary)] text-white text-[15px] font-extrabold shadow-sm transition-transform group-hover:-rotate-6">
@@ -55,7 +56,7 @@ export default function SiteNav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3.5 py-2 rounded-lg text-sm font-semibold text-[var(--color-ink-soft)] hover:text-[var(--color-primary-dark)] hover:bg-[var(--color-primary-soft)]/60 transition-colors"
+                className="px-3.5 py-2 min-h-[44px] rounded-lg text-sm font-semibold text-[var(--color-ink-soft)] hover:text-[var(--color-primary-dark)] hover:bg-[var(--color-primary-soft)]/60 transition-colors flex items-center"
               >
                 {link.label}
               </Link>
@@ -64,7 +65,7 @@ export default function SiteNav() {
               href="https://edu.silronomu.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[var(--color-primary-deep)] hover:bg-[var(--color-primary-dark)] transition-colors"
+              className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-lg text-sm font-semibold text-white bg-[var(--color-primary-deep)] hover:bg-[var(--color-primary-dark)] transition-colors"
             >
               클로드 코드 심화
               <span aria-hidden className="text-[var(--color-accent)]">→</span>
@@ -77,7 +78,7 @@ export default function SiteNav() {
             aria-label="메뉴 열기"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="md:hidden grid place-items-center w-10 h-10 rounded-lg text-[var(--color-ink)] hover:bg-[var(--color-primary-soft)]/60 transition-colors"
+            className="md:hidden grid place-items-center w-11 h-11 min-h-[44px] rounded-lg text-[var(--color-ink)] hover:bg-[var(--color-primary-soft)]/60 transition-colors"
           >
             <span className="relative block w-5 h-[14px]">
               <span
@@ -112,7 +113,7 @@ export default function SiteNav() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="px-3 py-2.5 rounded-lg text-[15px] font-semibold text-[var(--color-ink-soft)] hover:bg-[var(--color-primary-soft)]/60 transition-colors"
+              className="px-3 py-2.5 min-h-[44px] rounded-lg text-[15px] font-semibold text-[var(--color-ink-soft)] hover:bg-[var(--color-primary-soft)]/60 transition-colors flex items-center"
             >
               {link.label}
             </Link>
@@ -122,7 +123,7 @@ export default function SiteNav() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="mt-1 inline-flex items-center gap-1.5 px-3 py-2.5 rounded-lg text-[15px] font-semibold text-white bg-[var(--color-primary-deep)]"
+            className="mt-1 inline-flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-[15px] font-semibold text-white bg-[var(--color-primary-deep)]"
           >
             클로드 코드 심화
             <span aria-hidden className="text-[var(--color-accent)]">→</span>

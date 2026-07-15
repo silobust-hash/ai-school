@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import SiteNav from "@/components/SiteNav";
+import { lessons } from "@/data/lessons";
 import {
   AI_SCHOOL_ORGANIZATION_ID,
   COURSE_ID,
@@ -11,6 +12,9 @@ import {
   WEBSITE_ID,
 } from "@/lib/site";
 import "./globals.css";
+import { toSafeJsonLd } from "@/lib/jsonld";
+
+const lessonCount = Object.keys(lessons).length;
 
 export const metadata: Metadata = {
   verification: {
@@ -26,7 +30,7 @@ export const metadata: Metadata = {
     default: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
     template: "%s | AI업무학교",
   },
-  description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 문과 출신 19년차 노무사가 6과 42개 강의로 AI 업무 활용법을 가르칩니다.",
+  description: `비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 문과 출신 19년차 노무사가 6과 ${lessonCount}개 강의로 AI 업무 활용법을 가르칩니다.`,
   keywords: ["AI 강의", "AI 교육", "프롬프트엔지니어링", "컨텍스트엔지니어링", "바이브코딩", "비개발자 AI", "AI 업무 자동화", "AI업무학교", "클로드 코드"],
   authors: [{ name: "박실로", url: "https://silronomu.com" }],
   creator: "박실로 (공인노무사·AI 교육자)",
@@ -38,13 +42,13 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "AI업무학교",
     title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
-    description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 6과 42개 강의.",
+  description: `비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 6과 ${lessonCount}개 강의.`,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "AI업무학교 — 문과 출신도 AI로 일하는 시대" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI업무학교 | 문과 출신도 AI로 일하는 시대",
-    description: "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 6과 42개 강의.",
+    description: `비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 6과 ${lessonCount}강.`,
     images: ["/og.png"],
   },
   robots: {
@@ -166,7 +170,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           // JSON-LD structured data graph for SEO — static content, no user input
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraphJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: toSafeJsonLd(siteGraphJsonLd) }}
         />
       </head>
       <body className="antialiased">
@@ -193,10 +197,10 @@ export default function RootLayout({
               </div>
 
               <nav className="grid grid-cols-2 gap-x-12 gap-y-3 text-sm" aria-label="사이트 링크">
-                <a href="https://silronomu.com/" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">홈페이지</a>
-                <a href="https://ai-school.silronomu.com" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">AI업무학교</a>
-                <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">클로드 코드 강의</a>
-                <a href="https://www.threads.com/@silrobag?hl=ko" target="_blank" rel="noopener noreferrer" className="text-[var(--color-dark-text-soft)] hover:text-white transition-colors">Threads</a>
+                <a href="https://silronomu.com/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">홈페이지</a>
+                <a href="https://ai-school.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">AI업무학교</a>
+                <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">클로드 코드 강의</a>
+                <a href="https://www.threads.com/@silrobag?hl=ko" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">Threads</a>
               </nav>
             </div>
 

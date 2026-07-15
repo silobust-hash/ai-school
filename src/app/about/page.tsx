@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import { lessons } from "@/data/lessons";
 import { PERSON_ID, SITE_URL } from "@/lib/site";
+import { toSafeJsonLd } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "소개",
@@ -27,9 +29,10 @@ const profilePageJsonLd = {
   inLanguage: "ko-KR",
   mainEntity: { "@id": PERSON_ID },
 };
+const lessonCount = Object.keys(lessons).length;
 
 export default function AboutPage() {
-  const jsonLdString = JSON.stringify(profilePageJsonLd);
+  const jsonLdString = toSafeJsonLd(profilePageJsonLd);
   return (
     <div className="bg-[var(--color-bg)]">
       <script
@@ -121,12 +124,12 @@ export default function AboutPage() {
                       <h3 className="font-bold text-[var(--color-ink)]">AI업무학교</h3>
                     </div>
                     <p className="text-[var(--color-ink-soft)] text-sm leading-relaxed keep-all">
-                      AI 기초부터 고급까지 6과 42개 강의. 프롬프트엔지니어링,
+                      AI 기초부터 고급까지 6과 {lessonCount}개 강의. 프롬프트엔지니어링,
                       컨텍스트엔지니어링, 바이브코딩, 에이전트엔지니어링.
                     </p>
                   </div>
                   <span className="text-xs font-semibold text-[var(--color-primary-dark)] bg-[var(--color-primary-soft)] px-3 py-1.5 rounded-full shrink-0">
-                    6과 · 42강
+                    6과 · {lessonCount}강
                   </span>
                 </div>
               </div>
@@ -142,7 +145,7 @@ export default function AboutPage() {
                       <h3 className="font-bold text-[var(--color-ink)]">클로드 코드 강의</h3>
                     </div>
                     <p className="text-[var(--color-ink-soft)] text-sm leading-relaxed keep-all">
-                      Claude Code 심화 12단계 52개 강의.
+                      Claude Code 심화 16단계 73개 강의.
                       AI업무학교를 마친 후 자연스럽게 연결됩니다.
                     </p>
                     <a
@@ -155,7 +158,7 @@ export default function AboutPage() {
                     </a>
                   </div>
                   <span className="text-xs font-semibold text-[var(--color-ink-soft)] bg-[var(--color-border)] px-3 py-1.5 rounded-full shrink-0">
-                    12단계 · 52강
+                    16단계 · 73강
                   </span>
                 </div>
               </div>
@@ -184,7 +187,7 @@ export default function AboutPage() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-[var(--color-border-strong)] text-[var(--color-ink-soft)] text-sm font-semibold hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] hover:bg-[var(--color-primary-soft)]/50 transition-all"
+                    className="inline-flex min-h-11 items-center gap-1.5 px-5 py-2.5 rounded-xl border border-[var(--color-border-strong)] text-[var(--color-ink-soft)] text-sm font-semibold hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] hover:bg-[var(--color-primary-soft)]/50 transition-all"
                   >
                     {link.label}
                     <span className="text-[var(--color-ink-faint)] text-xs" aria-hidden>→</span>

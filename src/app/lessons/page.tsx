@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
 import { COURSE_ID, SITE_URL, WEBSITE_ID } from "@/lib/site";
+import { lessons } from "@/data/lessons";
+import { toSafeJsonLd } from "@/lib/jsonld";
+import LessonProgressPanel from "@/components/LessonProgressPanel";
 
 const LESSONS_URL = `${SITE_URL}/lessons`;
+const totalLessons = Object.keys(lessons).length;
 const DESCRIPTION =
-  "AI업무학교 6과 42개 강의 목록. 프롬프트엔지니어링부터 하네스·에이전트엔지니어링까지 비개발자를 위한 AI 업무 활용 강의를 순서대로 학습합니다.";
+  `AI업무학교 6과 ${totalLessons}개 강의 목록. 프롬프트엔지니어링부터 하네스·에이전트엔지니어링까지 비개발자를 위한 AI 업무 활용 강의를 순서대로 학습합니다.`;
+const lessonCatalog = Object.keys(lessons)
+  .sort((a, b) => a.localeCompare(b))
+  .map((id) => ({
+    id,
+    title: lessons[id].title,
+  }));
 
 export const metadata: Metadata = {
   title: "강의 목록",
@@ -123,7 +133,7 @@ const lessonsJsonLd = {
     {
       "@type": "ItemList",
       "@id": `${LESSONS_URL}#item-list`,
-      name: "AI업무학교 6과 42개 강의",
+      name: `AI업무학교 6과 ${totalLessons}개 강의`,
       numberOfItems: lessonItems.length,
       itemListOrder: "https://schema.org/ItemListOrderAscending",
       itemListElement: lessonItems.map((lesson, index) => ({
@@ -149,7 +159,7 @@ export default function LessonsPage() {
     <div className="max-w-4xl mx-auto px-6 py-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(lessonsJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: toSafeJsonLd(lessonsJsonLd) }}
       />
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">강의 목록</h1>
@@ -157,6 +167,8 @@ export default function LessonsPage() {
           순서대로 따라가세요. 각 강의는 독립적이지만, 앞 단계를 먼저 보시면 더 잘 이해됩니다.
         </p>
       </div>
+
+      <LessonProgressPanel lessonCatalog={lessonCatalog} totalLessons={totalLessons} />
 
       <div className="space-y-10">
         {allLessons.map((group) => (
@@ -191,7 +203,7 @@ export default function LessonsPage() {
       </div>
 
       <div className="mt-16 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-2xl p-8 border border-teal-100 text-center">
-        <h3 className="text-lg font-bold mb-2">전체 6과, 42개 강의</h3>
+        <h3 className="text-lg font-bold mb-2">전체 6과, {totalLessons}개 강의</h3>
         <p className="text-slate-500 text-sm leading-relaxed">
           1과부터 순서대로 따라가시면 됩니다.
           <br />

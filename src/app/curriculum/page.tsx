@@ -1,21 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { COURSE_ID, SITE_URL, WEBSITE_ID } from "@/lib/site";
-
-export const metadata: Metadata = {
-  title: "커리큘럼",
-  description:
-    "6과 42개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 복습 프롬프트와 검수 기준이 남는 비개발자 AI 활용 로드맵.",
-  alternates: { canonical: "/curriculum" },
-  openGraph: {
-    type: "website",
-    title: "커리큘럼 | AI업무학교",
-    description:
-      "6과 42개 강의로 구성된 비개발자 AI 활용 로드맵. 프롬프트엔지니어링부터 에이전트엔지니어링까지 학습합니다.",
-    url: `${SITE_URL}/curriculum`,
-    siteName: "AI업무학교",
-  },
-};
+import { lessons } from "@/data/lessons";
+import { toSafeJsonLd } from "@/lib/jsonld";
 
 const courses = [
   {
@@ -123,6 +110,21 @@ const courses = [
 ];
 
 const allCurriculumLessons = courses.flatMap((course) => course.lessons);
+const allLessonCount = Object.keys(lessons).length;
+
+export const metadata: Metadata = {
+  title: "커리큘럼",
+  description:
+    `6과 ${allCurriculumLessons.length}개 강의로 구성된 AI업무학교 전체 커리큘럼. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 복습 프롬프트와 검수 기준이 남는 비개발자 AI 활용 로드맵.`,
+  alternates: { canonical: "/curriculum" },
+  openGraph: {
+    type: "website",
+    title: "커리큘럼 | AI업무학교",
+    description: `6과 ${allCurriculumLessons.length}개 강의로 구성된 비개발자 AI 활용 로드맵. 프롬프트엔지니어링부터 에이전트엔지니어링까지 학습합니다.`,
+    url: `${SITE_URL}/curriculum`,
+    siteName: "AI업무학교",
+  },
+};
 
 const outcomeRoadmap = [
   {
@@ -173,16 +175,16 @@ export default function CurriculumPage() {
       {/* JSON-LD: curriculum ItemList + breadcrumb (static content, no user input) */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: toSafeJsonLd(itemListJsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: toSafeJsonLd(breadcrumbJsonLd) }}
       />
       {/* Header */}
       <div className="text-center mb-16">
         <div className="inline-block px-4 py-1.5 bg-teal-50 text-teal-600 rounded-full text-sm font-semibold mb-4">
-          6과 42개 강의
+          {`6과 ${allLessonCount}강`}
         </div>
         <h1 className="text-4xl font-bold mb-4">6과 커리큘럼</h1>
         <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">
@@ -266,7 +268,7 @@ export default function CurriculumPage() {
         <p className="text-slate-300 leading-relaxed mb-8">
           클로드 코드 심화 과정으로 이어가세요.
           <br />
-          12단계 52개 강의로 Claude Code를 완전 정복합니다.
+          16단계 73개 강의로 Claude Code를 완전 정복합니다.
         </p>
         <a
           href="https://edu.silronomu.com"
@@ -276,6 +278,12 @@ export default function CurriculumPage() {
         >
           클로드 코드 심화 과정 보기 &rarr;
         </a>
+        <Link
+          href="/level-test"
+          className="inline-block mt-4 px-8 py-3.5 bg-white text-slate-900 font-semibold rounded-xl hover:bg-slate-100 transition-colors shadow-lg"
+        >
+          수준진단으로 강의 시작 경로 추천 받기 &rarr;
+        </Link>
       </div>
     </div>
   );

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import { lessons } from "@/data/lessons";
 import {
   AI_SCHOOL_ORGANIZATION_ID,
   COURSE_ID,
   PERSON_ID,
   SITE_URL,
 } from "@/lib/site";
+import { toSafeJsonLd } from "@/lib/jsonld";
 
 
 export const metadata: Metadata = {
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
     "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 매 강의마다 실행 프롬프트와 검수 기준을 남기는 AI 업무 교육입니다.",
   alternates: { canonical: "/" },
 };
+const lessonCount = Object.keys(lessons).length;
 
 const courseJsonLd = {
   "@context": "https://schema.org",
@@ -286,12 +289,12 @@ export default function Home() {
       <script
         type="application/ld+json"
         // JSON-LD structured data for SEO — static content, no user input
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: toSafeJsonLd(courseJsonLd) }}
       />
       <script
         type="application/ld+json"
         // JSON-LD structured data for SEO — static content, no user input
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: toSafeJsonLd(faqJsonLd) }}
       />
 
       {/* ============ HERO — asymmetric, type-forward ============ */}
@@ -367,6 +370,13 @@ export default function Home() {
                     <span aria-hidden className="text-[var(--color-accent)]">→</span>
                   </Link>
                   <Link
+                    href="/level-test"
+                    className="inline-flex items-center px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold border border-emerald-500 hover:bg-emerald-700 transition-colors"
+                  >
+                    수준진단 바로가기
+                    <span aria-hidden className="ml-2 text-[var(--color-accent)]">→</span>
+                  </Link>
+                  <Link
                     href="/lessons"
                     className="inline-flex items-center px-7 py-3.5 rounded-xl bg-[var(--color-bg-elevated)] text-[var(--color-ink)] font-semibold border border-[var(--color-border-strong)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors"
                   >
@@ -382,7 +392,7 @@ export default function Home() {
             <dl className="mt-16 md:mt-20 grid grid-cols-3 max-w-2xl divide-x divide-[var(--color-border)]">
               {[
                 { n: "6과", l: "체계적 커리큘럼" },
-                { n: "42강", l: "단계별 실전 강의" },
+                { n: `${lessonCount}강`, l: "단계별 실전 강의" },
                 { n: "0원", l: "누구나 무료 수강" },
               ].map((s) => (
                 <div key={s.l} className="px-5 first:pl-0">
@@ -738,6 +748,13 @@ export default function Home() {
                 className="btn-glow inline-flex items-center gap-2 px-10 py-4 rounded-xl bg-white text-[var(--color-primary-deep)] font-bold text-lg shadow-[var(--shadow-lg)]"
               >
                 첫 번째 강의 시작
+                <span aria-hidden className="text-[var(--color-accent)]">→</span>
+              </Link>
+              <Link
+                href="/level-test"
+                className="inline-flex items-center gap-2 mt-4 md:mt-0 px-10 py-4 rounded-xl bg-transparent text-white border border-white/50 font-semibold text-lg hover:bg-white/10 transition-colors"
+              >
+                내 학습 유형 진단받기
                 <span aria-hidden className="text-[var(--color-accent)]">→</span>
               </Link>
             </div>

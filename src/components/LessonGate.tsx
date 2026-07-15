@@ -1,19 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-
-// 강의안(강의 상세 본문) 접근 게이트.
-// 접근 코드 = 오늘 날짜 YYMMDD (예: 2026-06-25 → "260625"). 매일 자동으로 바뀐다.
-// 통과는 그 페이지를 보는 동안만 유효(저장 안 함) — 떠나거나 새로고침하면 다시 묻는다. 커리큘럼·목록·홈은 게이트 밖이라 공개.
-
-function todayCode(): string {
-  const d = new Date();
-  const yy = String(d.getFullYear()).slice(2);
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const dd = String(d.getDate()).padStart(2, "0");
-  return `${yy}${mm}${dd}`;
-}
+import Link from "next/link";
 
 export default function LessonGate({
   children,
@@ -25,18 +13,40 @@ export default function LessonGate({
   const [authed, setAuthed] = useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (value.trim() === todayCode()) {
-      setError(false);
+    setLoading(true);
+    setError(false);
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/lesson/access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: value }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(true);
+        setMessage(data.error || "코드가 올바르지 않습니다.");
+        return;
+      }
+
       setAuthed(true);
-    } else {
+      setMessage("코드가 확인되어 강의안 열람이 허용됩니다.");
+      window.location.reload();
+    } catch {
       setError(true);
+      setMessage("요청에 실패했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setLoading(false);
     }
   }
 
-  // 저장하지 않는다 — 페이지를 떠나거나 새로고침하면 다시 코드를 묻는다.
   if (authed) return <>{children}</>;
 
   return (
@@ -67,36 +77,59 @@ export default function LessonGate({
         <form onSubmit={onSubmit}>
           <input
             value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
+            onChange={(event) => {
+              setValue(event.target.value.replace(/\D/g, "").slice(0, 6));
               setError(false);
+              setMessage("");
             }}
             inputMode="numeric"
+            pattern="[0-9]{6}"
+            minLength={6}
+            required
             autoFocus
             maxLength={6}
-            aria-label="접근 코드"
+            aria-label="수강생 접근 코드"
+            aria-invalid={error || undefined}
+            aria-describedby="lesson-access-help lesson-access-status"
             style={{
               width: "100%",
               boxSizing: "border-box",
               fontSize: 22,
               letterSpacing: 6,
               textAlign: "center",
-              padding: "12px 14px",
+              padding: "14px 14px",
               border: `2px solid ${error ? "#ef4444" : "#cbd5e1"}`,
               borderRadius: 12,
               outline: "none",
               marginBottom: 12,
             }}
           />
-          {error && (
-            <p style={{ color: "#ef4444", fontSize: 13, margin: "0 0 12px" }}>
-              접근 코드가 올바르지 않습니다. 강사에게 오늘의 코드를 확인하세요.
-            </p>
-          )}
+          <p id="lesson-access-help" className="sr-only">
+            강의 접근 코드는 강사가 안내한 6자리 숫자 코드입니다.
+          </p>
+          <div id="lesson-access-live-region" role="status" aria-live="polite" className="sr-only">
+            {message}
+          </div>
+          <p
+            id="lesson-access-status"
+            role="status"
+            aria-live="polite"
+            style={{
+              color: error ? "#ef4444" : "#16a34a",
+              fontSize: 13,
+              margin: "0 0 12px",
+              minHeight: 20,
+              visibility: message ? "visible" : "hidden",
+            }}
+          >
+            {message}
+          </p>
           <button
             type="submit"
+            disabled={loading}
             style={{
               width: "100%",
+              minHeight: 44,
               background: accent,
               color: "#fff",
               border: "none",
@@ -107,7 +140,7 @@ export default function LessonGate({
               cursor: "pointer",
             }}
           >
-            강의안 열기
+            {loading ? "확인 중..." : "강의안 열기"}
           </button>
         </form>
         <p style={{ fontSize: 12, color: "#94a3b8", margin: "18px 0 0" }}>

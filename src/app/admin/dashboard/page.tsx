@@ -2,18 +2,19 @@ import { isAuthenticated } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { lessons } from "@/data/lessons";
 import { listBlobOverrides } from "@/lib/storage";
+import { getTodayAccessCode } from "@/lib/lesson-access";
 import DashboardClient from "./DashboardClient";
 
 export const dynamic = "force-dynamic";
 
-// Course grouping matching the lessons page structure
-const courseGroups = [
-  { phase: 1, phaseTitle: "AI 입문 & 프롬프트엔지니어링", prefix: "1-" },
-  { phase: 2, phaseTitle: "컨텍스트엔지니어링", prefix: "2-" },
-  { phase: 3, phaseTitle: "하네스엔지니어링 & 바이브코딩", prefix: "3-" },
-  { phase: 4, phaseTitle: "에이전트엔지니어링", prefix: "4-" },
-  { phase: 5, phaseTitle: "개발 기초 교양", prefix: "5-" },
-];
+const PHASE_TITLES: Record<number, string> = {
+  1: "AI 입문 & 프롬프트엔지니어링",
+  2: "컨텍스트엔지니어링",
+  3: "하네스엔지니어링 & 바이브코딩",
+  4: "에이전트엔지니어링",
+  5: "개발 기초 교양",
+  6: "2026, AI 엔지니어링의 현재",
+};
 
 export default async function DashboardPage() {
   const authed = await isAuthenticated();
@@ -28,34 +29,47 @@ export default async function DashboardPage() {
 
   const overrideSet = new Set(overrides);
 
-  const groupedLessons = courseGroups.map((group) => {
-    const groupLessons = Object.entries(lessons)
-      .filter(([id]) => id.startsWith(group.prefix))
-      .sort(([a], [b]) => {
-        const numA = parseInt(a.split("-")[1]);
-        const numB = parseInt(b.split("-")[1]);
-        return numA - numB;
-      })
-      .map(([id, lesson]) => ({
+  const groupedLessons = Object.entries(lessons)
+    .reduce<Record<number, { id: string; title: string; hasOverride: boolean }[]>>((acc, [id, lesson]) => {
+      const phase = Number.parseInt(String((lesson as { phase: string }).phase).replace("과", ""));
+      if (!acc[phase]) acc[phase] = [];
+      acc[phase].push({
         id,
         title: (lesson as { title: string }).title,
         hasOverride: overrideSet.has(id),
-      }));
+      });
+      return acc;
+    }, {});
 
-    return {
-      ...group,
-      lessons: groupLessons,
-    };
-  }).filter((group) => group.lessons.length > 0);
+  const groupedLessonList = Object.keys(groupedLessons)
+    .map((phase) => Number.parseInt(phase, 10))
+    .sort((a, b) => a - b)
+    .map((phase) => {
+      const lessonsInPhase = groupedLessons[phase].sort((a, b) => {
+        const aOrder = Number.parseInt(a.id.split("-")[1], 10);
+        const bOrder = Number.parseInt(b.id.split("-")[1], 10);
+        return aOrder - bOrder;
+      });
+
+      return {
+        phase,
+        phaseTitle: PHASE_TITLES[phase] || `${phase}과`,
+        lessons: lessonsInPhase,
+      };
+    });
 
   const totalLessons = Object.keys(lessons).length;
   const totalOverrides = overrides.length;
+  const todayAccess = getTodayAccessCode();
 
   return (
     <DashboardClient
-      groupedLessons={groupedLessons}
+      groupedLessons={groupedLessonList}
       totalLessons={totalLessons}
       totalOverrides={totalOverrides}
+      accessCode={todayAccess.code}
+      accessCodeDateCode={todayAccess.dateCode}
+      accessCodeExpiresAt={todayAccess.expiresAt}
     />
   );
 }

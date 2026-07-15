@@ -20,6 +20,11 @@ interface LessonData {
   next: string | null;
   sections: Section[];
   keyTakeaways: string[];
+  datePublished?: string;
+  dateModified?: string;
+  faq?: Array<{ question: string; answer: string }>;
+  insights?: Array<{ heading: string; content: string; source: string }>;
+  relatedLinks?: Array<{ label: string; url: string }>;
 }
 
 interface LessonEditorProps {
@@ -99,7 +104,6 @@ export default function LessonEditor({
     setSaving(true);
 
     try {
-      // Clean up sections - remove empty optional fields
       const cleanedSections = sections.map((s) => {
         const cleaned: Section = {
           heading: s.heading,
@@ -117,8 +121,13 @@ export default function LessonEditor({
         summary,
         prev: initialData.prev,
         next: initialData.next,
+        datePublished: initialData.datePublished,
+        dateModified: initialData.dateModified,
         sections: cleanedSections,
         keyTakeaways: keyTakeaways.filter((t) => t.trim()),
+        faq: initialData.faq,
+        insights: initialData.insights,
+        relatedLinks: initialData.relatedLinks,
       };
 
       const res = await fetch(`/api/admin/lessons/${id}`, {
@@ -157,7 +166,6 @@ export default function LessonEditor({
         throw new Error("초기화에 실패했습니다.");
       }
 
-      // Reload to get static data
       router.refresh();
       setSuccessMsg("정적 데이터로 초기화되었습니다. 페이지를 새로고침합니다.");
       setTimeout(() => window.location.reload(), 1000);
@@ -170,7 +178,6 @@ export default function LessonEditor({
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">
-      {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <div className="flex items-center gap-3 mb-2">
@@ -207,28 +214,23 @@ export default function LessonEditor({
           >
             미리보기
           </a>
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={saving}
+            className="text-xs text-white bg-teal-600 hover:bg-teal-700 px-4 py-1.5 rounded-lg transition-colors"
+          >
+            {saving ? "저장 중..." : "저장"}
+          </button>
         </div>
       </div>
 
-      {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
-          {error}
-        </div>
-      )}
+      {error && <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">{error}</div>}
+      {successMsg && <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-sm text-emerald-700">{successMsg}</div>}
 
-      {successMsg && (
-        <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-sm text-emerald-700">
-          {successMsg}
-        </div>
-      )}
-
-      {/* Form */}
       <div className="space-y-8">
-        {/* Title */}
         <div className="bg-white rounded-xl border border-slate-200 p-6">
-          <label className="block text-sm font-medium text-slate-700 mb-2">
-            제목
-          </label>
+          <label className="block text-sm font-medium text-slate-700 mb-2">제목</label>
           <input
             type="text"
             value={title}
@@ -238,11 +240,8 @@ export default function LessonEditor({
           />
         </div>
 
-        {/* Summary */}
         <div className="bg-white rounded-xl border border-slate-200 p-6">
-          <label className="block text-sm font-medium text-slate-700 mb-2">
-            요약
-          </label>
+          <label className="block text-sm font-medium text-slate-700 mb-2">요약</label>
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
@@ -252,7 +251,6 @@ export default function LessonEditor({
           />
         </div>
 
-        {/* Sections */}
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold text-slate-800">섹션</h2>
@@ -267,14 +265,9 @@ export default function LessonEditor({
 
           <div className="space-y-6">
             {sections.map((section, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl border border-slate-200 p-6"
-              >
+              <div key={index} className="bg-white rounded-xl border border-slate-200 p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium text-slate-500">
-                    섹션 {index + 1}
-                  </span>
+                  <span className="text-sm font-medium text-slate-500">섹션 {index + 1}</span>
                   <div className="flex gap-1">
                     <button
                       type="button"
@@ -308,29 +301,21 @@ export default function LessonEditor({
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">
-                      제목 (heading)
-                    </label>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">제목 (heading)</label>
                     <input
                       type="text"
                       value={section.heading}
-                      onChange={(e) =>
-                        updateSection(index, "heading", e.target.value)
-                      }
+                      onChange={(e) => updateSection(index, "heading", e.target.value)}
                       className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       placeholder="섹션 제목"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">
-                      내용 (content)
-                    </label>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">내용 (content)</label>
                     <textarea
                       value={section.content}
-                      onChange={(e) =>
-                        updateSection(index, "content", e.target.value)
-                      }
+                      onChange={(e) => updateSection(index, "content", e.target.value)}
                       rows={8}
                       className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-y font-mono"
                       placeholder="섹션 내용"
@@ -338,14 +323,10 @@ export default function LessonEditor({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">
-                      코드 (선택)
-                    </label>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">코드 (선택)</label>
                     <textarea
                       value={section.code || ""}
-                      onChange={(e) =>
-                        updateSection(index, "code", e.target.value)
-                      }
+                      onChange={(e) => updateSection(index, "code", e.target.value)}
                       rows={4}
                       className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-y font-mono bg-slate-50"
                       placeholder="코드 블록 (선택사항)"
@@ -353,17 +334,13 @@ export default function LessonEditor({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">
-                      팁 (선택)
-                    </label>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">팁 (선택)</label>
                     <textarea
                       value={section.tip || ""}
-                      onChange={(e) =>
-                        updateSection(index, "tip", e.target.value)
-                      }
+                      onChange={(e) => updateSection(index, "tip", e.target.value)}
                       rows={2}
                       className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-y"
-                      placeholder="팁 (선택사항)"
+                      placeholder="팁"
                     />
                   </div>
                 </div>
@@ -372,8 +349,7 @@ export default function LessonEditor({
           </div>
         </div>
 
-        {/* Key Takeaways */}
-        <div>
+        <div className="bg-white rounded-xl border border-slate-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-bold text-slate-800">핵심 정리</h2>
             <button
@@ -381,70 +357,45 @@ export default function LessonEditor({
               onClick={addTakeaway}
               className="text-sm text-teal-600 hover:text-teal-700 px-4 py-2 rounded-lg border border-teal-200 hover:border-teal-300 transition-colors"
             >
-              + 항목 추가
+              + 추가
             </button>
           </div>
-
-          <div className="bg-white rounded-xl border border-slate-200 p-6 space-y-3">
-            {keyTakeaways.length === 0 && (
-              <p className="text-sm text-slate-400">
-                핵심 정리 항목이 없습니다. 위 버튼으로 추가하세요.
-              </p>
-            )}
-            {keyTakeaways.map((takeaway, index) => (
-              <div key={index} className="flex gap-2">
-                <span className="text-sm text-teal-500 mt-2.5 shrink-0">
-                  {index + 1}.
-                </span>
-                <input
-                  type="text"
-                  value={takeaway}
-                  onChange={(e) => updateTakeaway(index, e.target.value)}
-                  className="flex-1 px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="핵심 정리 항목"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeTakeaway(index)}
-                  className="text-xs text-red-400 hover:text-red-600 px-3 py-1 rounded-lg border border-red-200 shrink-0"
-                >
-                  삭제
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex items-center justify-between pt-6 border-t border-slate-200">
-          <div className="flex gap-2">
-            {source === "blob" && (
+          {keyTakeaways.map((takeaway, index) => (
+            <div key={index} className="flex items-center gap-2 mb-2">
+              <input
+                value={takeaway}
+                onChange={(e) => updateTakeaway(index, e.target.value)}
+                className="flex-1 px-4 py-3 border border-slate-300 rounded-lg text-sm"
+                placeholder="핵심 정리 포인트"
+              />
               <button
                 type="button"
-                onClick={handleReset}
-                disabled={resetting}
-                className="text-sm text-amber-600 hover:text-amber-700 px-4 py-2.5 rounded-lg border border-amber-200 hover:border-amber-300 disabled:opacity-50 transition-colors"
+                onClick={() => removeTakeaway(index)}
+                className="text-xs text-red-400 hover:text-red-600 px-2 py-1 rounded border border-red-200"
               >
-                {resetting ? "초기화 중..." : "정적 데이터로 초기화"}
+                삭제
               </button>
-            )}
-          </div>
-          <div className="flex gap-3">
-            <Link
-              href="/admin/dashboard"
-              className="text-sm text-slate-600 hover:text-slate-800 px-6 py-2.5 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors"
-            >
-              취소
-            </Link>
-            <button
-              type="button"
-              onClick={handleSave}
-              disabled={saving}
-              className="text-sm text-white bg-teal-600 hover:bg-teal-700 px-8 py-2.5 rounded-lg disabled:opacity-50 transition-colors font-medium"
-            >
-              {saving ? "저장 중..." : "저장"}
-            </button>
-          </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={saving}
+            className="text-sm text-white bg-teal-600 hover:bg-teal-700 px-6 py-2.5 rounded-xl transition-colors disabled:opacity-60"
+          >
+            {saving ? "저장 중..." : "저장"}
+          </button>
+          <button
+            type="button"
+            onClick={handleReset}
+            disabled={resetting}
+            className="text-sm text-white bg-slate-600 hover:bg-slate-700 px-6 py-2.5 rounded-xl transition-colors disabled:opacity-60"
+          >
+            {resetting ? "초기화 중..." : "수정 내용 초기화"}
+          </button>
         </div>
       </div>
     </div>
