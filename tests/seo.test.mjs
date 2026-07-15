@@ -133,11 +133,11 @@ test("llms.txt·robots.txt·sitemap.xml은 공개 경로와 강의 수를 일치
     sitemapResponse.text(),
   ]);
   assert.match(llms, new RegExp(`\\[강의 목록\\]\\(${baseUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/lessons\\)`));
-  assert.equal(extractAll(llms, /^- \[\d+-\d+\./gm).length, 41);
+  assert.equal(extractAll(llms, /^- \[\d+-\d+\./gm).length, 42);
   assert.match(robots, /User-Agent: OAI-SearchBot/i);
   assert.match(robots, /User-Agent: Perplexity-User/i);
   assert.doesNotMatch(robots, /anthropic-ai|Claude-Web/i);
   assert.match(robots, new RegExp(`Sitemap: ${baseUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/sitemap\\.xml`));
-  assert.equal(extractAll(sitemap, /<loc>([^<]+)<\/loc>/g).length, 45);
+  assert.equal(extractAll(sitemap, /<loc>([^<]+)<\/loc>/g).length, 46);
   assert.match(sitemap, new RegExp(`<loc>${baseUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/lessons</loc>`));
 });

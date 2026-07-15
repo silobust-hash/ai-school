@@ -200,13 +200,14 @@ const courses = [
     accent: "#4f6bd8",
     lessons: [
       "프롬프트에서 하네스까지 — 3년의 진화",
-      "2026 최신 모델 지도 — Opus·GPT·Gemini",
+      "2026 최신 모델·제품 지도 — Fable 5와 GPT-5.6",
       "하네스 엔지니어링 실전 — 에이전트 환경 설계",
       "다이나믹 워크플로우와 자율 다단계 실행",
       "제2의 두뇌 — 옵시디언 + CLI 지식관리",
       "모바일 에이전트 — 어디서나 AI",
       "오픈소스 오케스트레이션 — AI 팀 꾸리기",
       "마켓플레이스로 내 AI 도구 관리하기",
+      "Chat·Work·Codex·Sites 구분하기",
     ],
   },
 ];
@@ -381,7 +382,7 @@ export default function Home() {
             <dl className="mt-16 md:mt-20 grid grid-cols-3 max-w-2xl divide-x divide-[var(--color-border)]">
               {[
                 { n: "6과", l: "체계적 커리큘럼" },
-                { n: "41강", l: "단계별 실전 강의" },
+                { n: "42강", l: "단계별 실전 강의" },
                 { n: "0원", l: "누구나 무료 수강" },
               ].map((s) => (
                 <div key={s.l} className="px-5 first:pl-0">

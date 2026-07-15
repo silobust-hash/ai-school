@@ -3,7 +3,7 @@ import { COURSE_ID, SITE_URL, WEBSITE_ID } from "@/lib/site";
 
 const LESSONS_URL = `${SITE_URL}/lessons`;
 const DESCRIPTION =
-  "AI업무학교 6과 41개 강의 목록. 프롬프트엔지니어링부터 하네스·에이전트엔지니어링까지 비개발자를 위한 AI 업무 활용 강의를 순서대로 학습합니다.";
+  "AI업무학교 6과 42개 강의 목록. 프롬프트엔지니어링부터 하네스·에이전트엔지니어링까지 비개발자를 위한 AI 업무 활용 강의를 순서대로 학습합니다.";
 
 export const metadata: Metadata = {
   title: "강의 목록",
@@ -86,19 +86,20 @@ const allLessons = [
     courseTitle: "2026, AI 엔지니어링의 현재",
     lessons: [
       { id: "6-1", title: "프롬프트에서 루프까지: 5단 진화" },
-      { id: "6-2", title: "2026 최신 모델 지도: Opus 4.8 · GPT-5.5 · Gemini 3.1" },
+      { id: "6-2", title: "2026 최신 모델·제품 지도: Fable 5 · GPT-5.6" },
       { id: "6-3", title: "하네스 엔지니어링 실전: 에이전트 환경 설계하기" },
       { id: "6-4", title: "다이나믹 워크플로우와 울트라코드: 자율 다단계 실행" },
       { id: "6-5", title: "제2의 두뇌: 옵시디언 + CLI 시대의 지식관리" },
       { id: "6-6", title: "모바일 에이전트: 코덱스 앱과 어디서나 AI" },
       { id: "6-7", title: "오픈소스 오케스트레이션 생태계 — 내 손으로 AI 팀 꾸리기" },
       { id: "6-8", title: "마켓플레이스로 내 AI 도구 관리하기 — 클론·풀·푸시 쉽게 이해" },
-      { id: "6-9", title: "Claude Fable 5 — Mythos급 최강 모델의 등장" },
+      { id: "6-9", title: "Claude Fable 5 — 장기작업 최상위 모델의 등장" },
       { id: "6-10", title: "루프엔지니어링 — 프롬프트를 짜는 사람에서 루프를 설계하는 사람으로" },
       { id: "6-11", title: "에이전트 엔지니어링 — AI에게 일을 통째로 맡기기" },
       { id: "6-12", title: "2026 최신 AI 기능 총정리 — 직장인이 꼭 알아야 할 것들" },
       { id: "6-13", title: "얼리어답터의 무기 — AI 시대 마인드셋과 생존전략" },
       { id: "6-14", title: "만류귀종 — 돌고 돌아 다시 페르소나" },
+      { id: "6-15", title: "Chat·Work·Codex·Sites, 어디에서 무엇을 할까?" },
     ],
   },
 ];
@@ -122,7 +123,7 @@ const lessonsJsonLd = {
     {
       "@type": "ItemList",
       "@id": `${LESSONS_URL}#item-list`,
-      name: "AI업무학교 6과 41개 강의",
+      name: "AI업무학교 6과 42개 강의",
       numberOfItems: lessonItems.length,
       itemListOrder: "https://schema.org/ItemListOrderAscending",
       itemListElement: lessonItems.map((lesson, index) => ({
@@ -190,7 +191,7 @@ export default function LessonsPage() {
       </div>
 
       <div className="mt-16 bg-gradient-to-r from-teal-50 to-emerald-50 rounded-2xl p-8 border border-teal-100 text-center">
-        <h3 className="text-lg font-bold mb-2">전체 6과, 41개 강의</h3>
+        <h3 className="text-lg font-bold mb-2">전체 6과, 42개 강의</h3>
         <p className="text-slate-500 text-sm leading-relaxed">
           1과부터 순서대로 따라가시면 됩니다.
           <br />
