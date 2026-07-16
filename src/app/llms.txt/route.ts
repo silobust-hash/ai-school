@@ -33,7 +33,7 @@ export function GET(): Response {
 - [강사 소개](${SITE_URL}/about): 박실로 공인노무사·AI 교육자 프로필
 
 ## 강사와 운영 주체
-- [박실로 공식 홈페이지](https://silronomu.com/): 19년차 공인노무사, 한동노무법인 대표, AI 교육자
+- [박실로 공식 홈페이지](https://silronomu.com/): 공인노무사, 한동노무법인 대표, AI 실무 교육 콘텐츠 운영
 - [박실로 Threads](https://www.threads.com/@silrobag): AI 활용과 업무 혁신 관련 공개 글
 - [한동노무법인](https://silronomu.com/): AI업무학교 운영 법인
 

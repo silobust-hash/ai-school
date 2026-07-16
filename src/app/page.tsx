@@ -14,7 +14,7 @@ import { toSafeJsonLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
   description:
-    "비개발자를 위한 AI 활용 완전 정복. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 매 강의마다 실행 프롬프트와 검수 기준을 남기는 AI 업무 교육입니다.",
+    "비개발자를 위한 AI 업무 활용 과정. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 실행 프롬프트와 검수 기준을 함께 익힙니다.",
   alternates: { canonical: "/" },
 };
 const lessonCount = Object.keys(lessons).length;
@@ -73,7 +73,7 @@ const faqJsonLd = {
       name: "AI업무학교는 비개발자도 들을 수 있나요?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "네, 코딩 경험이 전혀 없는 분을 위해 설계되었습니다. 엑셀 정도 다룰 줄 안다면 충분하며, 19년차 노무사가 비개발자 눈높이에서 처음부터 차근차근 설명합니다.",
+        text: "네, 코딩 경험이 전혀 없는 분을 위해 설계되었습니다. 엑셀 정도 다룰 줄 안다면 충분하며, 노무 실무에 AI를 직접 적용하며 정리한 내용을 비개발자 눈높이에서 차근차근 설명합니다.",
       },
     },
     {
@@ -136,13 +136,13 @@ const courses = [
   {
     phase: "2과",
     title: "컨텍스트엔지니어링",
-    subtitle: "100만 토큰 시대의 AI 활용법",
+    subtitle: "모델·제품별 한도를 이해하는 AI 활용법",
     emoji: "📚",
     color: "from-sky-400 to-blue-500",
     accent: "#2e8bc0",
     lessons: [
       "컨텍스트란? — AI의 기억과 이해 구조",
-      "100만 토큰 시대 — 문서 전체를 AI에 넣기",
+      "장문 컨텍스트 — 필요한 문서를 선별해 넣기",
       "CLAUDE.md로 나만의 AI 비서 세팅하기",
       "시스템 프롬프트와 페르소나 설계",
       "멀티턴 대화 전략 — 긴 작업을 AI와 함께하기",
@@ -224,7 +224,7 @@ const features = [
   {
     icon: "📚",
     title: "컨텍스트엔지니어링",
-    desc: "100만 토큰 시대, AI에게 올바른 맥락을 제공하는 방법.",
+    desc: "용량보다 중요한 정보 선별·구조화·검증 방법을 배웁니다.",
   },
   {
     icon: "🚀",
@@ -325,7 +325,7 @@ export default function Home() {
               </Reveal>
 
               <Reveal delay={80}>
-                <h1 className="font-display mt-7 text-[var(--color-ink)] text-[clamp(2.75rem,1.4rem+6.4vw,5.75rem)] font-extrabold">
+                <h1 className="font-display mt-7 max-w-full text-[var(--color-ink)] text-[clamp(2.5rem,1.4rem+6.4vw,5.75rem)] font-extrabold">
                   <span className="block">
                     코딩 몰라도
                     <br />
@@ -346,7 +346,7 @@ export default function Home() {
                         aria-hidden
                       />
                     </span>
-                    <span className="text-[var(--color-ink)]">을 배우세요.</span>
+                    <span className="block text-[var(--color-ink)] sm:inline">을 배우세요.</span>
                   </span>
                 </h1>
               </Reveal>
@@ -355,30 +355,30 @@ export default function Home() {
             {/* Right — supporting copy + CTAs */}
             <div className="lg:col-span-4">
               <Reveal delay={240}>
-                <p className="text-[var(--color-ink-soft)] text-lg leading-relaxed keep-all">
-                  19년차 노무사가 직접 만든 AI 활용 교육 과정.
+                <p className="max-w-full break-keep text-base leading-relaxed text-[var(--color-ink-soft)] sm:text-lg">
+                  현업에서 직접 써보고 다듬은 AI 활용 교육 과정.
                   프롬프트엔지니어링부터 에이전트엔지니어링까지, 기초부터 고급까지.
                 </p>
               </Reveal>
               <Reveal delay={320}>
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-8 grid w-full grid-cols-1 gap-3 sm:flex sm:flex-wrap">
                   <Link
                     href="/curriculum"
-                    className="btn-glow inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[var(--color-primary-deep)] text-white font-semibold shadow-[var(--shadow-md)]"
+                    className="btn-glow inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[var(--color-primary-deep)] text-white font-semibold shadow-[var(--shadow-md)] sm:w-auto"
                   >
                     커리큘럼 보기
                     <span aria-hidden className="text-[var(--color-accent)]">→</span>
                   </Link>
                   <Link
                     href="/level-test"
-                    className="inline-flex items-center px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold border border-emerald-500 hover:bg-emerald-700 transition-colors"
+                    className="inline-flex w-full items-center justify-center px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold border border-emerald-500 hover:bg-emerald-700 transition-colors sm:w-auto"
                   >
                     수준진단 바로가기
                     <span aria-hidden className="ml-2 text-[var(--color-accent)]">→</span>
                   </Link>
                   <Link
                     href="/lessons"
-                    className="inline-flex items-center px-7 py-3.5 rounded-xl bg-[var(--color-bg-elevated)] text-[var(--color-ink)] font-semibold border border-[var(--color-border-strong)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors"
+                    className="inline-flex w-full items-center justify-center px-7 py-3.5 rounded-xl bg-[var(--color-bg-elevated)] text-[var(--color-ink)] font-semibold border border-[var(--color-border-strong)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors sm:w-auto"
                   >
                     바로 시작하기
                   </Link>

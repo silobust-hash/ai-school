@@ -7,13 +7,13 @@ import { toSafeJsonLd } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "소개",
   description:
-    "박실로 노무사 소개. 19년차 공인노무사이자 AI 활용 교육자. 비개발자 전문직을 위한 AI 교육을 진행합니다.",
+    "박실로 노무사 소개. 노무 실무에 AI를 직접 적용하며 비개발자 전문직을 위한 교육 콘텐츠를 정리합니다.",
   alternates: { canonical: "/about" },
   openGraph: {
     type: "profile",
     title: "박실로 소개 | AI업무학교",
     description:
-      "19년차 공인노무사이자 AI 교육자 박실로가 비개발자 전문직을 위한 AI 교육을 진행합니다.",
+      "박실로 공인노무사가 현업에서 직접 써보고 다듬은 AI 활용법을 비개발자 눈높이로 나눕니다.",
     url: `${SITE_URL}/about`,
     siteName: "AI업무학교",
   },
@@ -79,7 +79,7 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-5 pl-11">
               {[
-                "19년간 노동법 전문가로 일하면서, AI가 전문직의 업무 방식을 근본적으로 바꾸고 있다는 것을 체감했습니다.",
+                "노동법 실무를 오래 해오며, AI가 전문직의 업무 방식을 바꾸고 있다는 것을 직접 체감했습니다.",
                 "직접 Claude Code로 업무 도구를 만들고, 플러그인을 개발하고, 웹앱을 배포하면서 배운 것들을 정리했습니다.",
                 "비개발자로서 AI를 배운 경험이야말로, 같은 입장의 분들에게 가장 공감가는 교육이 될 수 있다고 믿습니다.",
               ].map((text, i) => (
