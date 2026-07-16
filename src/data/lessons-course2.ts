@@ -5,6 +5,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
     id: "2-1",
     phase: "2과",
     datePublished: "2026-04-02",
+    dateModified: "2026-07-16",
     title: "컨텍스트가 전부다",
     summary: "같은 질문에도 다른 답이 나오는 이유, 컨텍스트 윈도우 개념을 쉽게 이해합니다",
     prev: "1-6",
@@ -18,8 +19,8 @@ export const lessonsCourse2: Record<string, Lesson> = {
       {
         heading: "컨텍스트 윈도우란 무엇인가요?",
         content:
-          "AI는 한 번에 처리할 수 있는 정보의 양에 한계가 있습니다. 이 한계를 '컨텍스트 윈도우'라고 부릅니다. 마치 책상 위에 올려놓을 수 있는 종이의 양과 같습니다. 책상이 클수록 더 많은 문서를 동시에 참고할 수 있습니다.\n\n단위는 '토큰(token)'입니다. 한국어 기준으로 1토큰은 대략 0.5~1자 정도입니다. 최신 Claude는 약 100만 토큰을 지원하는데, 이는 한국어 약 50만 자, 즉 중편 소설 한 권 분량에 해당합니다.\n\n컨텍스트 윈도우가 클수록 더 긴 문서를 한 번에 분석하고, 더 길고 복잡한 작업을 맥락을 잃지 않고 처리할 수 있습니다.",
-        tip: "대화가 길어지면 앞부분의 맥락을 AI가 잊는 현상이 생길 수 있습니다. 중요한 정보는 대화 초반에 명확히 정리해 두는 것이 좋습니다.",
+          "AI는 한 번에 처리할 수 있는 정보의 양에 한계가 있습니다. 이 한계를 '컨텍스트 윈도우'라고 부릅니다. 마치 책상 위에 올려놓을 수 있는 종이의 양과 같습니다. 책상이 클수록 더 많은 문서를 동시에 펼쳐둘 수 있습니다.\n\n단위는 '토큰(token)'입니다. 2026년 7월 16일 기준 Claude Fable 5·Opus 4.8·Sonnet 5와 OpenAI GPT-5.6 API 모델처럼 약 100만 토큰을 지원하는 모델이 있습니다. 다만 일반 채팅 화면, Codex, 요금제, 파일 업로드 기능에서는 실제 사용할 수 있는 한도가 다를 수 있습니다. '모델이 1M을 지원한다'와 '내가 쓰는 화면에서 1M을 그대로 쓸 수 있다'는 같은 말이 아닙니다.\n\n컨텍스트가 크면 긴 문서를 다루기 쉬워지지만, 용량이 크다고 모든 내용을 같은 정확도로 기억하거나 판단하는 것은 아닙니다. 필요한 자료를 선별하고, 문서 이름과 질문 구조를 분명히 하는 일이 여전히 중요합니다.",
+        tip: "토큰을 한국어 글자 수나 A4 쪽수로 고정 환산하지 마세요. 언어, 표·코드·이미지, 파일 형식, 모델의 토크나이저에 따라 실제 사용량이 크게 달라집니다.",
       },
       {
         heading: "컨텍스트를 잘 쌓는 3가지 방법",
@@ -29,7 +30,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
     ],
     keyTakeaways: [
       "컨텍스트는 AI가 참고하는 모든 정보이며, 컨텍스트의 질이 답변의 질을 결정합니다.",
-      "컨텍스트 윈도우는 AI가 한 번에 처리하는 정보 양의 한계이며, 최신 Claude는 약 100만 토큰을 지원합니다.",
+      "컨텍스트 윈도우는 AI가 한 번에 처리하는 정보 양의 한계이며, 실제 한도는 모델·제품·요금제·사용 화면에 따라 다릅니다.",
       "역할 설명, 문서 첨부, 이전 대화 요약으로 컨텍스트를 풍부하게 만드세요.",
     ],
     faq: [
@@ -41,23 +42,29 @@ export const lessonsCourse2: Record<string, Lesson> = {
       {
         question: "Claude와 ChatGPT의 컨텍스트 윈도우 차이가 있나요?",
         answer:
-          "2026년 기준 Claude는 최대 100만 토큰, ChatGPT-4o는 약 12만 8천 토큰을 지원합니다. 긴 계약서, 대용량 보고서, 긴 코드베이스 분석에는 Claude가 훨씬 유리합니다.",
+          "있지만 회사 이름만으로 비교하면 틀리기 쉽습니다. 2026년 7월 16일 기준 Claude의 Fable 5·Opus 4.8·Sonnet 5와 OpenAI의 GPT-5.6 API 모델은 모두 1M급 컨텍스트를 제공합니다. 반면 일반 ChatGPT 대화, Claude.ai, Codex와 각 요금제의 실제 한도는 다를 수 있으므로 현재 제품 화면과 공식 모델 문서를 함께 확인해야 합니다.",
       },
+    ],
+    relatedLinks: [
+      { label: "Anthropic 현재 모델 비교", url: "https://platform.claude.com/docs/en/about-claude/models/overview" },
+      { label: "OpenAI GPT-5.6 모델", url: "https://developers.openai.com/api/docs/models" },
+      { label: "GPT-5.6의 ChatGPT 제공 범위", url: "https://help.openai.com/en/articles/20001354" },
     ],
   },
   "2-2": {
     id: "2-2",
     phase: "2과",
     datePublished: "2026-04-02",
+    dateModified: "2026-07-16",
     title: "긴 문서 다루기",
-    summary: "100만 토큰 컨텍스트를 활용해 대용량 문서를 분석하고 요약하는 방법을 배웁니다",
+    summary: "장문 컨텍스트의 실제 한도를 확인하고 대용량 문서를 선별·분할·검증하는 방법을 배웁니다",
     prev: "2-1",
     next: "2-3",
     sections: [
       {
-        heading: "100만 토큰이 얼마나 큰가요?",
+        heading: "100만 토큰은 언제 쓸 수 있나요?",
         content:
-          "100만 토큰은 실로 엄청난 양입니다. 한국어 기준으로 계산하면 A4 약 1,500장 분량의 문서를 한 번에 올려놓고 AI와 대화할 수 있습니다.\n\n실무 예시로 비교해보면: 보통 업무 계약서 1건이 5~20페이지, 연간 보고서가 50~100페이지, 노동 관련 취업규칙이 20~40페이지 수준입니다. 이 모든 문서를 한꺼번에 업로드하고 '이 중에서 연차 관련 조항들을 모두 찾아 비교해줘'와 같은 복합 질문도 가능합니다.",
+          "100만 토큰은 매우 큰 작업 공간이지만 모든 AI 화면에서 그대로 제공되는 공통 규격은 아닙니다. Claude Fable 5·Opus 4.8·Sonnet 5와 GPT-5.6 API처럼 1M급을 지원하는 모델이 있는 반면, 일반 채팅과 코딩 제품은 플랜이나 실행 환경에 따라 한도가 더 작을 수 있습니다.\n\n또한 1M을 지원한다고 해서 자료를 무조건 전부 넣는 것이 좋은 방법은 아닙니다. 핵심 계약서, 현행 규정, 비교 대상 문서처럼 질문에 필요한 자료를 먼저 고르고, 문서별 이름과 기준일을 붙여야 결과를 검증하기 쉽습니다. 정확한 토큰 수는 서비스의 토큰 계산 기능이나 업로드 안내에서 확인하세요.",
       },
       {
         heading: "대용량 문서 분석 실전 기법",
@@ -73,7 +80,7 @@ export const lessonsCourse2: Record<string, Lesson> = {
       },
     ],
     keyTakeaways: [
-      "100만 토큰은 A4 약 1,500장 분량으로, 대부분의 업무 문서를 한꺼번에 처리할 수 있습니다.",
+      "1M급 컨텍스트는 일부 최신 모델이 지원하지만 실제 사용 한도는 제품·플랜·기능별로 다릅니다.",
       "문서 분석 시 전체 구조 파악 → 세부 분석 요청의 2단계 접근법이 효과적입니다.",
       "NotebookLM처럼 특정 문서 기반 AI를 만들면 할루시네이션을 크게 줄일 수 있습니다.",
     ],
@@ -88,6 +95,11 @@ export const lessonsCourse2: Record<string, Lesson> = {
         answer:
           "회사 정책을 반드시 확인하세요. 많은 기업이 외부 AI 서비스에 기밀 데이터 업로드를 금지하고 있습니다. 기밀 정보는 익명 처리 후 올리거나, 사내 AI 솔루션을 활용하는 것이 안전합니다.",
       },
+    ],
+    relatedLinks: [
+      { label: "Anthropic 장문 컨텍스트 모델 사양", url: "https://platform.claude.com/docs/en/about-claude/models/overview" },
+      { label: "OpenAI GPT-5.6 Sol 사양", url: "https://developers.openai.com/api/docs/models/gpt-5.6-sol" },
+      { label: "Google Gemini 장문 컨텍스트 안내", url: "https://ai.google.dev/gemini-api/docs/long-context" },
     ],
   },
   "2-3": {
