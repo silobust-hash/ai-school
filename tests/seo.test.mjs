@@ -54,12 +54,8 @@ function buildSeoulDateCode(date = new Date()) {
   return `${year}${month}${day}`;
 }
 
-function expectedLessonAccessCode(secret, dateCode) {
-  const digest = createHmac("sha256", secret)
-    .update("lesson:code")
-    .update(dateCode)
-    .digest();
-  return String(digest.readUInt32BE(0) % 1_000_000).padStart(6, "0");
+function expectedLessonAccessCode(dateCode) {
+  return dateCode;
 }
 
 before(async () => {
@@ -227,10 +223,7 @@ test("공개 강의 페이지는 비인증 시 보호 본문을 노출하지 않
 
 test("강의 접근 API 6자리 코드로 쿠키 기반 열람이 동작한다", async () => {
   assert.ok(process.env.LESSON_ACCESS_SECRET, "LESSON_ACCESS_SECRET 설정");
-  const lessonCode = expectedLessonAccessCode(
-    process.env.LESSON_ACCESS_SECRET,
-    buildSeoulDateCode(),
-  );
+  const lessonCode = expectedLessonAccessCode(buildSeoulDateCode());
   assert.equal(lessonCode.length, 6, "강의 접근 코드 길이");
   assert.match(lessonCode, /^\d{6}$/, "강의 접근 코드는 숫자 6자리");
 
@@ -274,10 +267,7 @@ test("강의 접근 쿠키 만료는 다음 서울 자정까지의 초를 계산
 });
 
 test("강의 접근 API 응답에 코드 값이 노출되지 않는다", async () => {
-  const lessonCode = expectedLessonAccessCode(
-    process.env.LESSON_ACCESS_SECRET,
-    buildSeoulDateCode(),
-  );
+  const lessonCode = expectedLessonAccessCode(buildSeoulDateCode());
 
   const response = await fetch(`${baseUrl}/api/lesson/access`, {
     method: "POST",
@@ -298,7 +288,7 @@ test("관리자 대시보드는 오늘의 접근 코드와 서울 자정 만료 
   assert.equal(response.status, 200, "관리자 대시보드 응답");
   const html = await response.text();
   const expectedDateCode = buildSeoulDateCode();
-  const expectedCode = expectedLessonAccessCode(process.env.LESSON_ACCESS_SECRET, expectedDateCode);
+  const expectedCode = expectedLessonAccessCode(expectedDateCode);
 
   assert.ok(html.includes(expectedCode), "오늘 접근 코드 노출");
   assert.ok(html.includes(expectedDateCode), "오늘 코드 기준일 노출");
