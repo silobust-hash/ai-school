@@ -152,6 +152,11 @@ test("공개 HTML 페이지는 self-canonical과 단일 H1을 사용한다", asy
     assert.deepEqual(canonicals, [`${baseUrl}${path === "/" ? "" : path}`], `${path} canonical`);
     assert.equal(h1s.length, 1, `${path} H1 개수`);
     assert.equal(mainCount, 1, `${path} main 개수`);
+    assert.match(html, /aria-label="교육 채널 전환"/, `${path} 교육 채널 전환 내비게이션`);
+    assert.match(html, /두 채널 학습 경로/, `${path} 데스크톱 학습 경로 안내`);
+    assert.match(html, /현재 채널 · 입문·공통 기초/, `${path} 현재 채널 역할`);
+    assert.match(html, /Claude Code 실무 과정, 실무 심화 채널로 이동/, `${path} 연결 채널 접근성 이름`);
+    assert.match(html, /href="https:\/\/edu\.silronomu\.com"/, `${path} 연결 채널 URL`);
     assert.doesNotMatch(html, /\| AI업무학교 \| AI업무학교/);
   }
 
@@ -769,13 +774,17 @@ test("관리자 로그인 성공 응답에 no-store 적용", async () => {
   assert.equal(response.headers.get("cache-control"), "no-store", "관리자 로그인 성공 no-store");
 });
 
-test("헤더·footer·소개 버튼형 링크는 44px 최소 터치영역을 선언한다", async () => {
-  const [siteNavSource, layoutSource, aboutSource] = await Promise.all([
+test("전환 띠·헤더·footer·소개 버튼형 링크는 44px 최소 터치영역을 선언한다", async () => {
+  const [channelBarSource, siteNavSource, layoutSource, aboutSource] = await Promise.all([
+    readFile(new URL("../src/components/EducationChannelBar.tsx", import.meta.url), "utf8"),
     readFile(new URL("../src/components/SiteNav.tsx", import.meta.url), "utf8"),
     readFile(new URL("../src/app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../src/app/about/page.tsx", import.meta.url), "utf8"),
   ]);
 
+  assert.match(channelBarSource, /grid-cols-2 md:grid-cols-\[/, "모바일 2열·데스크톱 3열 구조");
+  assert.match(channelBarSource, /hidden min-h-\[60px\].*md:flex/, "안내 열은 모바일에서 숨김");
+  assert.match(channelBarSource, /group flex min-h-\[60px\]/, "교육 채널 이동 링크");
   assert.match(siteNavSource, /group inline-flex min-h-11 items-center/, "헤더 브랜드 링크");
   assert.equal(
     [...layoutSource.matchAll(/inline-flex min-h-11 items-center text-\[var\(--color-dark-text-soft\)\]/g)].length,

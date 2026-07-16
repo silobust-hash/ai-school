@@ -61,15 +61,6 @@ export default function SiteNav() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="https://edu.silronomu.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-lg text-sm font-semibold text-white bg-[var(--color-primary-deep)] hover:bg-[var(--color-primary-dark)] transition-colors"
-            >
-              클로드 코드 심화
-              <span aria-hidden className="text-[var(--color-accent)]">→</span>
-            </a>
           </div>
 
           {/* Mobile toggle */}
@@ -115,16 +106,6 @@ export default function SiteNav() {
               {link.label}
             </Link>
           ))}
-          <a
-            href="https://edu.silronomu.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="mt-1 inline-flex items-center gap-1.5 px-3 py-2.5 min-h-[44px] rounded-lg text-[15px] font-semibold text-white bg-[var(--color-primary-deep)]"
-          >
-            클로드 코드 심화
-            <span aria-hidden className="text-[var(--color-accent)]">→</span>
-          </a>
           </div>
         </div>
       )}
