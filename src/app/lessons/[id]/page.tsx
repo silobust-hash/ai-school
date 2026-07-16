@@ -44,7 +44,7 @@ const lessonJsonLdFromLesson = (lesson: Record<string, unknown>, canAccess: bool
       "@type": "Person",
       "@id": PERSON_ID,
       name: "박실로",
-      jobTitle: ["공인노무사", "AI 교육자"],
+      jobTitle: "공인노무사",
     },
     publisher: {
       "@type": "EducationalOrganization",

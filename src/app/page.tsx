@@ -12,7 +12,7 @@ import { toSafeJsonLd } from "@/lib/jsonld";
 
 
 export const metadata: Metadata = {
-  title: "AI업무학교 | 문과 출신도 AI로 일하는 시대, 기초부터 고급까지",
+  title: "AI업무학교 | 비개발자를 위한 AI 실무 교육",
   description:
     "비개발자를 위한 AI 업무 활용 과정. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 실행 프롬프트와 검수 기준을 함께 익힙니다.",
   alternates: { canonical: "/" },
@@ -38,7 +38,7 @@ const courseJsonLd = {
     "@type": "Person",
     "@id": PERSON_ID,
     name: "박실로",
-    jobTitle: ["공인노무사", "AI 교육자"],
+    jobTitle: "공인노무사",
   },
   educationalLevel: "Beginner",
   inLanguage: "ko-KR",
@@ -159,7 +159,7 @@ const courses = [
       "하네스엔지니어링이란? — AI 활용 환경 구성",
       "바이브코딩 기초 — 대화로 코드 만들기",
       "HTML/CSS 기초 — AI가 설명하니까 쉽습니다",
-      "Next.js로 웹사이트 뚝딱 만들기",
+      "Next.js 웹사이트 구성과 배포",
       "Vercel 배포 — 내가 만든 사이트를 세상에",
     ],
   },
@@ -175,7 +175,7 @@ const courses = [
       "MCP 서버로 업무 도구 연동하기",
       "Gmail, 캘린더, 노션과 AI 연결",
       "자동화 워크플로우 설계와 구축",
-      "에이전트 파이프라인 완성 — 반복 업무 끝",
+      "에이전트 파이프라인 설계 — 반복 업무 줄이기",
       "클로드 코드 심화 과정으로 연결",
     ],
   },
@@ -229,7 +229,7 @@ const features = [
   {
     icon: "🚀",
     title: "바이브코딩",
-    desc: "코딩 몰라도 OK. AI와 대화하면서 웹사이트를 만들고 배포합니다.",
+    desc: "코딩 경험이 없어도 AI와 대화하며 웹사이트 제작과 배포를 실습합니다.",
   },
   {
     icon: "🤖",
@@ -325,16 +325,16 @@ export default function Home() {
               </Reveal>
 
               <Reveal delay={80}>
-                <h1 className="font-display mt-7 max-w-full text-[var(--color-ink)] text-[clamp(2.5rem,1.4rem+6.4vw,5.75rem)] font-extrabold">
+                <h1 className="font-display mt-7 max-w-full text-[var(--color-ink)] text-[clamp(2.15rem,1.35rem+5.8vw,5.5rem)] font-extrabold">
                   <span className="block">
-                    코딩 몰라도
+                    코딩 경험이 없어도
                     <br />
-                    괜찮아요.
+                    시작할 수 있습니다.
                   </span>
                   <span className="mt-1 block">
                     <span className="relative inline-block">
                       <span className="relative z-10 bg-gradient-to-r from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[#15b8a6] bg-clip-text text-transparent">
-                        AI로 일하는 법
+                        AI를 업무에 연결하는 법
                       </span>
                       {/* ember underline */}
                       <span
@@ -346,7 +346,7 @@ export default function Home() {
                         aria-hidden
                       />
                     </span>
-                    <span className="block text-[var(--color-ink)] sm:inline">을 배우세요.</span>
+                    <span className="block text-[var(--color-ink)] sm:inline">을 배웁니다.</span>
                   </span>
                 </h1>
               </Reveal>
@@ -357,30 +357,23 @@ export default function Home() {
               <Reveal delay={240}>
                 <p className="max-w-full break-keep text-base leading-relaxed text-[var(--color-ink-soft)] sm:text-lg">
                   현업에서 직접 써보고 다듬은 AI 활용 교육 과정.
-                  프롬프트엔지니어링부터 에이전트엔지니어링까지, 기초부터 고급까지.
+                  프롬프트 설계의 기초부터 업무 자동화 실습까지 단계별로 다룹니다.
                 </p>
               </Reveal>
               <Reveal delay={320}>
                 <div className="mt-8 grid w-full grid-cols-1 gap-3 sm:flex sm:flex-wrap">
                   <Link
-                    href="/curriculum"
+                    href="/level-test"
                     className="btn-glow inline-flex w-full items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-[var(--color-primary-deep)] text-white font-semibold shadow-[var(--shadow-md)] sm:w-auto"
                   >
-                    커리큘럼 보기
+                    수준진단 시작
                     <span aria-hidden className="text-[var(--color-accent)]">→</span>
                   </Link>
                   <Link
-                    href="/level-test"
-                    className="inline-flex w-full items-center justify-center px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold border border-emerald-500 hover:bg-emerald-700 transition-colors sm:w-auto"
-                  >
-                    수준진단 바로가기
-                    <span aria-hidden className="ml-2 text-[var(--color-accent)]">→</span>
-                  </Link>
-                  <Link
-                    href="/lessons"
+                    href="/curriculum"
                     className="inline-flex w-full items-center justify-center px-7 py-3.5 rounded-xl bg-[var(--color-bg-elevated)] text-[var(--color-ink)] font-semibold border border-[var(--color-border-strong)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors sm:w-auto"
                   >
-                    바로 시작하기
+                    커리큘럼 보기
                   </Link>
                 </div>
               </Reveal>
@@ -737,8 +730,8 @@ export default function Home() {
           </Reveal>
           <Reveal delay={100}>
             <p className="mt-5 text-[var(--color-dark-text-soft)] text-lg leading-relaxed keep-all max-w-xl mx-auto">
-              코딩을 몰라도 됩니다. 개발 경험이 없어도 됩니다.
-              AI업무학교가 처음부터 끝까지 함께합니다.
+              개발 경험이 없어도 시작할 수 있습니다.
+              수준진단을 통해 지금 필요한 강의부터 차근차근 실습해보세요.
             </p>
           </Reveal>
           <Reveal delay={200}>

@@ -191,7 +191,7 @@ export default function CurriculumPage() {
         <p className="text-slate-500 text-lg leading-relaxed max-w-2xl mx-auto">
           프롬프트부터 에이전트 설계까지,
           <br />
-          기초부터 고급까지
+          기초부터 실무 적용까지
         </p>
       </div>
 

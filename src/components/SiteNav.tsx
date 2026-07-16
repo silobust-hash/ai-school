@@ -102,12 +102,9 @@ export default function SiteNav() {
       </div>
 
       {/* Mobile menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 bg-[var(--color-bg)]/95 backdrop-blur-xl border-b border-[var(--color-border)] ${
-          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 py-3 flex flex-col gap-1">
+      {open && (
+        <div className="md:hidden bg-[var(--color-bg)] border-b border-[var(--color-border)] shadow-[var(--shadow-sm)]">
+          <div className="max-w-6xl mx-auto px-6 py-3 flex flex-col gap-1">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -128,8 +125,9 @@ export default function SiteNav() {
             클로드 코드 심화
             <span aria-hidden className="text-[var(--color-accent)]">→</span>
           </a>
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }

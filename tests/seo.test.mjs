@@ -175,7 +175,7 @@ test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리�
   assert.ok(graph.some((node) => node["@type"] === "Organization" && node.name === "한동노무법인"));
   const person = graph.find((node) => node["@type"] === "Person" && node.name === "박실로");
   assert.ok(person);
-  assert.deepEqual(person.jobTitle, ["공인노무사", "AI 교육자"]);
+  assert.equal(person.jobTitle, "공인노무사");
   assert.ok(person.sameAs.every((url) => !/threads\.net|x\.com|facebook\.com\/share\//.test(url)));
   assert.ok(graph.some((node) => node["@type"] === "CollectionPage"));
 });
