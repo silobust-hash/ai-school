@@ -86,6 +86,7 @@ const lessonTitlesById: Record<string, string> = {
   "6-5": "루프 기반 AI 운영",
   "6-11": "에이전트 운영 체계",
   "6-15": "통합 설계 실습",
+  "6-16": "코덱스는 채팅창이 아니라 실행형 업무 운영체계다",
 };
 
 export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
@@ -330,6 +331,7 @@ const SAFE_ESSENTIAL_LESSON_URLS = [
   "/lessons/1-1",
   "/lessons/1-5",
   "/lessons/2-1",
+  "/lessons/6-16",
 ];
 
 const LEVEL_BOUNDARIES = [
@@ -345,7 +347,7 @@ export const LEVEL_TYPES: Record<LevelTypeKey, LevelType> = {
     title: "입문형",
     description:
       "AI 개념과 기본 프롬프트 운영에 집중하면 빠르게 성과를 만들 수 있습니다. 1~3과를 중심으로 기초를 다집니다.",
-    nextSteps: ["/lessons/1-1", "/lessons/1-3", "/lessons/1-5", "/lessons/2-1", "/lessons/2-3"],
+    nextSteps: ["/lessons/1-1", "/lessons/1-3", "/lessons/1-5", "/lessons/2-1", "/lessons/6-16"],
     crossLinks: [
       { label: "AI업무학교 1~3과 보러가기", url: "/curriculum", tone: "기초 구성 확인" },
       { label: "실무 기반 확장 강의 시작", url: "/lessons/4-4", tone: "심화 안내" },
@@ -356,7 +358,7 @@ export const LEVEL_TYPES: Record<LevelTypeKey, LevelType> = {
     title: "실무준비형",
     description:
       "4~6과로 실무 적용이 시작됩니다. 동시에 edu 2~4단계(기초-중급 설계)로 넘어갈 준비가 가능합니다.",
-    nextSteps: ["/lessons/3-2", "/lessons/3-4", "/lessons/4-2", "/lessons/4-4", "/lessons/5-1"],
+    nextSteps: ["/lessons/3-2", "/lessons/3-4", "/lessons/4-2", "/lessons/4-4", "/lessons/6-16"],
     crossLinks: [
       { label: "실무 기반 강의 시작", url: "/lessons/4-2", tone: "심화 진입" },
       { label: "AI업무학교 4~6과 둘러보기", url: "/curriculum", tone: "다음 단계로 이동" },
@@ -368,7 +370,7 @@ export const LEVEL_TYPES: Record<LevelTypeKey, LevelType> = {
     title: "자동화실행형",
     description:
       "자동화 실행력을 빠르게 실전 적용할 수 있는 단계입니다. edu 5~12단계의 운영형 커리큘럼으로 깊이를 확장하세요.",
-    nextSteps: ["/lessons/4-4", "/lessons/5-3", "/lessons/5-5", "/lessons/6-1", "/lessons/6-2"],
+    nextSteps: ["/lessons/4-4", "/lessons/5-3", "/lessons/6-1", "/lessons/6-2", "/lessons/6-16"],
     crossLinks: [
       { label: "실무 자동화 프로젝트 보기", url: "/lessons/6-1", tone: "워크플로우 확장" },
       { label: "AI업무학교 6과 전체 보기", url: "/curriculum", tone: "연결 루트 확인" },
@@ -380,7 +382,7 @@ export const LEVEL_TYPES: Record<LevelTypeKey, LevelType> = {
     title: "설계·운영형",
     description:
       "설계·운영 기반이 이미 안정된 단계입니다. edu 13~16단계로 확장해 에이전트 운영 체계를 완성해보세요.",
-    nextSteps: ["/lessons/6-2", "/lessons/6-4", "/lessons/6-5", "/lessons/6-11", "/lessons/6-15"],
+    nextSteps: ["/lessons/6-2", "/lessons/6-4", "/lessons/6-11", "/lessons/6-15", "/lessons/6-16"],
     crossLinks: [
       { label: "설계·운영 고급 루틴 확인", url: "/lessons/6-11", tone: "심화 경로" },
       { label: "AI업무학교 커리큘럼 복습", url: "/curriculum", tone: "고급 단계 연계" },
