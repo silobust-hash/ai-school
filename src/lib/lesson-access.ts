@@ -147,6 +147,8 @@ export function sanitizeLessonForPublic(lesson: Record<string, unknown>) {
     phase: lesson.phase,
     title: lesson.title,
     summary: lesson.summary,
+    datePublished: lesson.datePublished,
+    dateModified: lesson.dateModified,
     prev: lesson.prev,
     next: lesson.next,
   };
