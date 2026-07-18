@@ -14,9 +14,9 @@ export const COURSE_ID = `${SITE_URL}/#course`;
 export const PERSON_SAME_AS = [
   "https://blog.naver.com/5215678",
   "https://silronomusa.blogspot.com/",
-  "https://www.facebook.com/profile.php?id=100063776575717",
+  "https://www.facebook.com/people/박실로/100063776575717/",
   "https://www.instagram.com/silrobag/",
   "https://www.threads.com/@silrobag",
-  "https://www.youtube.com/channel/UCAkNJ16PNf2cNfhXsVbh-gg",
+  "https://www.youtube.com/@코딩하는노무사",
   "https://www.linkedin.com/in/%EC%8B%A4%EB%A1%9C-%EB%B0%95-385a1a104",
 ];
