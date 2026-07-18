@@ -243,8 +243,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         <span className="text-xs text-slate-400 ml-2">{publicLesson.id}</span>
       </div>
 
-      <h1 className="text-3xl font-bold mb-4 leading-tight">{publicLesson.title}</h1>
-      <p className="text-lg text-slate-500 mb-6 leading-relaxed">{publicLesson.summary}</p>
+      <h1 className="text-3xl font-bold mb-4 leading-tight break-words [overflow-wrap:anywhere]">{publicLesson.title}</h1>
+      <p className="text-lg text-slate-500 mb-6 leading-relaxed break-words [overflow-wrap:anywhere]">{publicLesson.summary}</p>
 
       {canAccess ? (
         renderProtectedContent(lesson)
