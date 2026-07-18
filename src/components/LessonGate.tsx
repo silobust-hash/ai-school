@@ -55,6 +55,7 @@ export default function LessonGate({
         style={{
           width: "100%",
           maxWidth: 420,
+          boxSizing: "border-box",
           background: "#fff",
           border: "1px solid #e2e8f0",
           borderRadius: 18,
