@@ -128,7 +128,7 @@ function renderProtectedContent(lesson: Record<string, unknown>) {
             <h2 className="text-xl font-bold mb-3 text-slate-800">{section.heading}</h2>
             <div className="text-slate-600 leading-relaxed whitespace-pre-line mb-4">{section.content}</div>
             {section.code && (
-              <pre className="bg-slate-900 text-green-400 rounded-xl p-5 overflow-x-auto text-sm leading-relaxed mb-4">
+              <pre className="bg-slate-900 text-green-400 rounded-xl p-5 overflow-x-auto whitespace-pre-wrap break-words text-sm leading-relaxed mb-4 sm:whitespace-pre sm:break-normal">
                 <code>{section.code}</code>
               </pre>
             )}

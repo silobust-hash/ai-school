@@ -317,6 +317,8 @@ function SlideView({ slide, accent }: { slide: Slide; accent: string }) {
             borderRadius: 14,
             padding: "clamp(16px, 2.5vw, 32px)",
             overflowX: "auto",
+            whiteSpace: "pre-wrap",
+            overflowWrap: "anywhere",
             color: "#86efac",
             fontSize: "clamp(0.85rem, 1.5vw, 1.25rem)",
             lineHeight: 1.6,
