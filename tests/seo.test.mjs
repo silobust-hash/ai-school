@@ -154,8 +154,8 @@ test("공개 HTML 페이지는 self-canonical과 단일 H1을 사용한다", asy
     assert.equal(mainCount, 1, `${path} main 개수`);
     assert.match(html, /aria-label="교육 채널 전환"/, `${path} 교육 채널 전환 내비게이션`);
     assert.match(html, /두 채널 학습 경로/, `${path} 데스크톱 학습 경로 안내`);
-    assert.match(html, /현재 채널 · 입문·공통 기초/, `${path} 현재 채널 역할`);
-    assert.match(html, /Claude Code 실무 과정, 실무 심화 채널로 이동/, `${path} 연결 채널 접근성 이름`);
+    assert.match(html, /현재 채널 · 콘텐츠 설계/, `${path} 현재 채널 역할`);
+    assert.match(html, /Claude Code 실무 과정, 기술 구현과 측정 채널로 이동/, `${path} 연결 채널 접근성 이름`);
     assert.match(html, /href="https:\/\/edu\.silronomu\.com"/, `${path} 연결 채널 URL`);
     assert.doesNotMatch(html, /\| AI업무학교 \| AI업무학교/);
   }

@@ -125,7 +125,7 @@ export default function AboutPage() {
 
             <article className="rounded-lg border border-[var(--color-border-strong)] bg-[var(--color-card)] p-6">
               <p className="text-xs font-bold text-[var(--color-ink-soft)]">
-                실무 심화
+                기술 구현·측정
               </p>
               <h3 className="mt-2 text-lg font-bold text-[var(--color-ink)]">
                 Claude Code 실무 과정
