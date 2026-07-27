@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/site";
 // Meaningful freshness anchors instead of build-time `new Date()`.
 const SITE_LAUNCH_DATE = "2026-04-02";
 // Most recent site structure or content update.
-const LAST_CONTENT_UPDATE = "2026-07-15";
+const LAST_CONTENT_UPDATE = "2026-07-27";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lessonEntries = Object.keys(lessons).map((id) => {
