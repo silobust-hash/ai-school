@@ -34,6 +34,7 @@ export function GET(): Response {
 
 ## 강사와 운영 주체
 - [박실로 공식 홈페이지](https://silronomu.com/): 공인노무사, 한동노무법인 대표, AI 실무 교육 콘텐츠 운영
+- [AI노무사 박실로 기준](https://silronomu.com/hub/ai-nomusa.html): AI 노동문서 검증, 노무실무 자동화와 공인노무사 최종 책임 원칙
 - [박실로 Threads](https://www.threads.com/@silrobag): AI 활용과 업무 혁신 관련 공개 글
 - [한동노무법인](https://silronomu.com/): AI업무학교 운영 법인
 

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | AI업무학교",
   },
   description: `비개발자를 위한 AI 활용 교육. 프롬프트엔지니어링부터 에이전트엔지니어링까지, 현업에서 직접 써보고 다듬은 내용을 6과 ${lessonCount}개 강의로 정리했습니다.`,
-  keywords: ["AI 강의", "AI 교육", "프롬프트엔지니어링", "컨텍스트엔지니어링", "바이브코딩", "비개발자 AI", "AI 업무 자동화", "AI업무학교", "클로드 코드"],
+  keywords: ["AI 강의", "AI 교육", "프롬프트엔지니어링", "컨텍스트엔지니어링", "바이브코딩", "비개발자 AI", "AI 업무 자동화", "AI업무학교", "클로드 코드", "AI노무사", "AI 노동문서 검증", "노무사 AI 교육"],
   authors: [{ name: "박실로", url: "https://silronomu.com" }],
   creator: "박실로 공인노무사",
   publisher: "AI업무학교",
@@ -73,6 +73,9 @@ const KNOWS_ABOUT = [
   "컨텍스트엔지니어링",
   "바이브코딩",
   "비개발자 AI 활용",
+  "AI노무사",
+  "AI 노동문서 검증",
+  "전문직 AI 교육",
 ];
 
 const aiSchoolOrganizationJsonLd = {
@@ -116,12 +119,12 @@ const personJsonLd = {
   "@type": "Person",
   "@id": PERSON_ID,
   name: "박실로",
-  alternateName: ["박실로 노무사", "Park Silro", "실로노무사"],
+  alternateName: ["박실로 노무사", "AI노무사 박실로", "Park Silro", "실로노무사"],
   jobTitle: "공인노무사",
   worksFor: { "@id": HANDONG_ORGANIZATION_ID },
   affiliation: { "@id": AI_SCHOOL_ORGANIZATION_ID },
   knowsAbout: KNOWS_ABOUT,
-  description: "노무 실무에 AI를 직접 적용하며 비개발자를 위한 AI 실무 교육 콘텐츠를 운영하는 공인노무사입니다.",
+  description: "19년 노동실무를 바탕으로 AI 노동문서 검증과 노무실무 자동화를 연구하고, 비개발자를 위한 AI 실무 교육 콘텐츠를 운영하는 공인노무사입니다.",
   url: "https://silronomu.com",
   hasCredential: {
     "@type": "EducationalOccupationalCredential",
