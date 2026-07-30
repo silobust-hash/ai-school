@@ -7,6 +7,8 @@ import {
   AI_SCHOOL_ORGANIZATION_ID,
   COURSE_ID,
   HANDONG_ORGANIZATION_ID,
+  OFFICIAL_FIRM_MEMBERS_URL,
+  OFFICIAL_FIRM_URL,
   PERSON_ID,
   PERSON_SAME_AS,
   SITE_URL,
@@ -97,7 +99,7 @@ const handongOrganizationJsonLd = {
   "@type": "Organization",
   "@id": HANDONG_ORGANIZATION_ID,
   name: "한동노무법인",
-  url: "https://silronomu.com/",
+  url: OFFICIAL_FIRM_URL,
   employee: { "@id": PERSON_ID },
   telephone: "+82-62-521-5678",
   address: {
@@ -129,6 +131,19 @@ const personJsonLd = {
   knowsAbout: KNOWS_ABOUT,
   description: "19년 노동실무를 바탕으로 AI 노동문서 검증과 노무실무 자동화를 연구하고, 비개발자를 위한 AI 실무 교육 콘텐츠를 운영하는 공인노무사입니다.",
   url: "https://silronomu.com",
+  mainEntityOfPage: "https://silronomu.com/",
+  subjectOf: [
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE_URL}/about#profile-page`,
+      url: `${SITE_URL}/about`,
+    },
+    {
+      "@type": "WebPage",
+      url: OFFICIAL_FIRM_MEMBERS_URL,
+      name: "한동노무법인 구성원 · 박실로 노무사",
+    },
+  ],
   hasCredential: {
     "@type": "EducationalOccupationalCredential",
     credentialCategory: "공인노무사",
@@ -136,11 +151,6 @@ const personJsonLd = {
     identifier: { "@type": "PropertyValue", name: "공인노무사 직무개시등록번호", value: "제1243호" },
   },
   sameAs: PERSON_SAME_AS,
-  subjectOf: {
-    "@type": "ProfilePage",
-    "@id": `${SITE_URL}/about#profile-page`,
-    url: `${SITE_URL}/about`,
-  },
 };
 
 const websiteJsonLd = {
@@ -204,6 +214,7 @@ export default function RootLayout({
 
               <nav className="grid grid-cols-2 gap-x-12 gap-y-3 text-sm" aria-label="사이트 링크">
                 <a href="https://silronomu.com/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">홈페이지</a>
+                <a href={OFFICIAL_FIRM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">한동노무법인 공식 사이트</a>
                 <a href="https://ai-school.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">AI업무학교</a>
                 <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">클로드 코드 강의</a>
                 <a href="https://blog.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">노무 실무 블로그</a>

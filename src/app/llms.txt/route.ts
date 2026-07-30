@@ -1,5 +1,9 @@
 import { lessons } from "@/data/lessons";
-import { SITE_URL } from "@/lib/site";
+import {
+  OFFICIAL_FIRM_MEMBERS_URL,
+  OFFICIAL_FIRM_URL,
+  SITE_URL,
+} from "@/lib/site";
 
 // Stable lesson ordering: by course number, then by lesson number ("1-1" < "1-2" < "2-1").
 function lessonSort(a: string, b: string): number {
@@ -33,10 +37,11 @@ export function GET(): Response {
 - [교육 운영 안내](${SITE_URL}/about): 교육 방향, 운영 기준, 운영자 정보
 
 ## 강사와 운영 주체
-- [박실로 공식 홈페이지](https://silronomu.com/): 공인노무사, 한동노무법인 대표, AI 실무 교육 콘텐츠 운영
+- [박실로 공식 홈페이지](https://silronomu.com/): 공인노무사, AI 실무 교육 콘텐츠 운영
 - [AI노무사 박실로 기준](https://silronomu.com/hub/ai-nomusa.html): AI 노동문서 검증, 노무실무 자동화와 공인노무사 최종 책임 원칙
 - [박실로 Threads](https://www.threads.com/@silrobag): AI 활용과 업무 혁신 관련 공개 글
-- [한동노무법인](https://silronomu.com/): AI업무학교 운영 법인
+- [한동노무법인 공식 사이트](${OFFICIAL_FIRM_URL}/): AI업무학교의 공식 소속 법인
+- [한동노무법인 구성원 · 박실로 노무사](${OFFICIAL_FIRM_MEMBERS_URL}): 박실로 노무사의 법인 구성원 정보
 
 ## 강의 (6과 ${ids.length}강)
 ${lessonLines}

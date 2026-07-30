@@ -1,3 +1,5 @@
+import { OFFICIAL_FIRM_URL } from "@/lib/site";
+
 export default function EducationChannelBar() {
   return (
     <nav
@@ -5,11 +7,11 @@ export default function EducationChannelBar() {
       className="border-b border-white/15 bg-[var(--color-primary-deep)] text-white"
     >
       <a
-        href="https://silronomu.com/hub/ai-nomusa.html"
-        aria-label="AI노무사 박실로 문서검증 기준 보기"
+        href={OFFICIAL_FIRM_URL}
+        aria-label="한동노무법인 공식 사이트와 박실로 노무사 구성원 정보 보기"
         className="flex min-h-11 items-center justify-center gap-2 border-b border-white/15 bg-[#102b49] px-4 py-2 text-center text-xs font-bold text-white transition-colors hover:bg-[#17395d] focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-white sm:text-sm"
       >
-        <span>AI노무사 박실로 · AI 노동문서 검증과 노무실무 자동화 기준</span>
+        <span>한동노무법인 공식 사이트 · 박실로 노무사 구성원 정보</span>
         <span aria-hidden="true" className="shrink-0">→</span>
       </a>
       <div className="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-[12rem_minmax(0,1fr)_minmax(0,1fr)]">

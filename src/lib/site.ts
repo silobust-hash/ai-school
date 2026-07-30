@@ -1,11 +1,14 @@
 const DEFAULT_SITE_URL = "https://ai-school.silronomu.com";
 
+export const OFFICIAL_FIRM_URL = "https://xn--2q1bm94d.com";
+export const OFFICIAL_FIRM_MEMBERS_URL = `${OFFICIAL_FIRM_URL}/members`;
+
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
 ).replace(/\/+$/, "");
 
 export const PERSON_ID = "https://silronomu.com/#person";
-export const HANDONG_ORGANIZATION_ID = "https://silronomu.com/#organization";
+export const HANDONG_ORGANIZATION_ID = `${OFFICIAL_FIRM_URL}/#organization`;
 export const AI_SCHOOL_ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const COURSE_ID = `${SITE_URL}/#course`;

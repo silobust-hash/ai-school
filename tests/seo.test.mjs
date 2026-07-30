@@ -157,6 +157,8 @@ test("공개 HTML 페이지는 self-canonical과 단일 H1을 사용한다", asy
     assert.match(html, /현재 채널 · 콘텐츠 설계/, `${path} 현재 채널 역할`);
     assert.match(html, /Claude Code 실무 과정, 기술 구현과 측정 채널로 이동/, `${path} 연결 채널 접근성 이름`);
     assert.match(html, /href="https:\/\/edu\.silronomu\.com"/, `${path} 연결 채널 URL`);
+    assert.match(html, /한동노무법인 공식 사이트 · 박실로 노무사 구성원 정보/, `${path} 공식 법인 연결 안내`);
+    assert.match(html, /href="https:\/\/xn--2q1bm94d\.com"/, `${path} 공식 법인 연결 URL`);
     assert.doesNotMatch(html, /\| AI업무학교 \| AI업무학교/);
   }
 
@@ -177,10 +179,14 @@ test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리�
   const graph = blocks.flatMap((block) => block["@graph"] ?? [block]);
 
   assert.ok(graph.some((node) => node["@type"] === "EducationalOrganization" && node.name === "AI업무학교"));
-  assert.ok(graph.some((node) => node["@type"] === "Organization" && node.name === "한동노무법인"));
+  const firm = graph.find((node) => node["@type"] === "Organization" && node.name === "한동노무법인");
+  assert.ok(firm);
+  assert.equal(firm.url, "https://xn--2q1bm94d.com");
   const person = graph.find((node) => node["@type"] === "Person" && node.name === "박실로");
   assert.ok(person);
   assert.equal(person.jobTitle, "공인노무사");
+  assert.equal(person.worksFor?.["@id"], "https://xn--2q1bm94d.com/#organization");
+  assert.ok(person.subjectOf.some((node) => node.url === "https://xn--2q1bm94d.com/members"));
   assert.ok(person.sameAs.every((url) => !/threads\.net|x\.com|facebook\.com\/share\//.test(url)));
   assert.ok(graph.some((node) => node["@type"] === "CollectionPage"));
 });
@@ -788,8 +794,8 @@ test("전환 띠·헤더·footer·소개 버튼형 링크는 44px 최소 터치�
   assert.match(siteNavSource, /group inline-flex min-h-11 items-center/, "헤더 브랜드 링크");
   assert.equal(
     [...layoutSource.matchAll(/inline-flex min-h-11 items-center text-\[var\(--color-dark-text-soft\)\]/g)].length,
-    4,
-    "footer 내비게이션 링크 4개",
+    5,
+    "footer 내비게이션 링크 5개(공식 법인 포함)",
   );
   assert.match(aboutSource, /inline-flex min-h-11 items-center gap-1\.5 px-5 py-2\.5/, "소개 버튼형 링크");
 });

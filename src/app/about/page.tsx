@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { toSafeJsonLd } from "@/lib/jsonld";
-import { PERSON_ID, SITE_URL } from "@/lib/site";
+import {
+  OFFICIAL_FIRM_MEMBERS_URL,
+  OFFICIAL_FIRM_URL,
+  PERSON_ID,
+  SITE_URL,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "소개",
@@ -46,6 +51,8 @@ const principles = [
 ];
 
 const officialChannels = [
+  { label: "한동노무법인 공식 사이트", href: OFFICIAL_FIRM_URL },
+  { label: "박실로 노무사 · 한동노무법인 구성원", href: OFFICIAL_FIRM_MEMBERS_URL },
   { label: "박실로 노무사 홈페이지", href: "https://silronomu.com" },
   { label: "노무 실무 블로그", href: "https://blog.silronomu.com" },
 ];
@@ -149,7 +156,7 @@ export default function AboutPage() {
         <section className="mt-16 border-t border-[var(--color-border)] pt-12">
           <h2 className="text-2xl font-bold text-[var(--color-ink)]">공식 채널</h2>
           <p className="mt-3 text-sm leading-relaxed text-[var(--color-ink-soft)] keep-all">
-            운영자 정보와 노무 분야의 공개 글은 아래 채널에서 확인할 수 있습니다.
+            박실로 노무사의 공식 소속과 공개 교육·노무 콘텐츠는 아래 연결된 채널에서 확인할 수 있습니다.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             {officialChannels.map((link) => (
