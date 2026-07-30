@@ -24,7 +24,10 @@ export const metadata: Metadata = {
       "jDjQK62YKg_1xwI2u6s_g0vlKnPswsoAdYUf_jnPQk8",
     ],
     other: {
-      "naver-site-verification": "9ba643b70c9a976977e2e3f00918bbfebc1773d9",
+      "naver-site-verification": [
+        "9ba643b70c9a976977e2e3f00918bbfebc1773d9",
+        "dfc2c3fa4318f313887cd858d9a8a66c8ea50396",
+      ],
     },
   },
   title: {
