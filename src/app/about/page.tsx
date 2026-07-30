@@ -4,6 +4,8 @@ import {
   OFFICIAL_FIRM_MEMBERS_URL,
   OFFICIAL_FIRM_URL,
   PERSON_ID,
+  PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL,
+  PERSON_INDUSTRIAL_SAFETY_BLOG_URL,
   SITE_URL,
 } from "@/lib/site";
 
@@ -55,6 +57,7 @@ const officialChannels = [
   { label: "박실로 노무사 · 한동노무법인 구성원", href: OFFICIAL_FIRM_MEMBERS_URL },
   { label: "박실로 노무사 홈페이지", href: "https://silronomu.com" },
   { label: "노무 실무 블로그", href: "https://blog.silronomu.com" },
+  { label: PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL, href: PERSON_INDUSTRIAL_SAFETY_BLOG_URL },
 ];
 
 export default function AboutPage() {

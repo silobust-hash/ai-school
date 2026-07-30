@@ -10,6 +10,8 @@ import {
   OFFICIAL_FIRM_MEMBERS_URL,
   OFFICIAL_FIRM_URL,
   PERSON_ID,
+  PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL,
+  PERSON_INDUSTRIAL_SAFETY_BLOG_URL,
   PERSON_SAME_AS,
   SITE_URL,
   WEBSITE_ID,
@@ -143,6 +145,11 @@ const personJsonLd = {
       url: OFFICIAL_FIRM_MEMBERS_URL,
       name: "한동노무법인 구성원 · 박실로 노무사",
     },
+    {
+      "@type": "WebSite",
+      url: PERSON_INDUSTRIAL_SAFETY_BLOG_URL,
+      name: PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL,
+    },
   ],
   hasCredential: {
     "@type": "EducationalOccupationalCredential",
@@ -218,6 +225,7 @@ export default function RootLayout({
                 <a href="https://ai-school.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">AI업무학교</a>
                 <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">클로드 코드 강의</a>
                 <a href="https://blog.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">노무 실무 블로그</a>
+                <a href={PERSON_INDUSTRIAL_SAFETY_BLOG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">{PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL}</a>
               </nav>
             </div>
 

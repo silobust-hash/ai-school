@@ -2,6 +2,8 @@ import { lessons } from "@/data/lessons";
 import {
   OFFICIAL_FIRM_MEMBERS_URL,
   OFFICIAL_FIRM_URL,
+  PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL,
+  PERSON_INDUSTRIAL_SAFETY_BLOG_URL,
   SITE_URL,
 } from "@/lib/site";
 
@@ -42,6 +44,7 @@ export function GET(): Response {
 - [박실로 Threads](https://www.threads.com/@silrobag): AI 활용과 업무 혁신 관련 공개 글
 - [한동노무법인 공식 사이트](${OFFICIAL_FIRM_URL}/): AI업무학교의 공식 소속 법인
 - [한동노무법인 구성원 · 박실로 노무사](${OFFICIAL_FIRM_MEMBERS_URL}): 박실로 노무사의 법인 구성원 정보
+- [${PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL}](${PERSON_INDUSTRIAL_SAFETY_BLOG_URL}): 산재·산업안전 실무 콘텐츠
 
 ## 강의 (6과 ${ids.length}강)
 ${lessonLines}
