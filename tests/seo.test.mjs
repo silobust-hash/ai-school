@@ -41,6 +41,20 @@ function extractAll(html, pattern) {
   return [...html.matchAll(pattern)].map((match) => match[1]);
 }
 
+function findCanonicalPersonNodes(value, nodes = []) {
+  if (Array.isArray(value)) {
+    value.forEach((item) => findCanonicalPersonNodes(item, nodes));
+    return nodes;
+  }
+  if (!value || typeof value !== "object") return nodes;
+
+  if (value["@type"] === "Person" && value["@id"] === "https://silronomu.com/#person") {
+    nodes.push(value);
+  }
+  Object.values(value).forEach((item) => findCanonicalPersonNodes(item, nodes));
+  return nodes;
+}
+
 function buildSeoulDateCode(date = new Date()) {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Asia/Seoul",
@@ -193,6 +207,30 @@ test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리�
   assert.ok(!person.sameAs.includes("https://sanjae.silronomu.com/"));
   assert.ok(person.sameAs.every((url) => !/threads\.net|x\.com|facebook\.com\/share\//.test(url)));
   assert.ok(graph.some((node) => node["@type"] === "CollectionPage"));
+});
+
+test("공개 페이지는 canonical Person 정의를 하나만 두고 참조는 @id만 사용한다", async () => {
+  const [layoutSource, homeSource, lessonSource] = await Promise.all([
+    readFile(new URL("../src/app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/app/lessons/[id]/page.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal((layoutSource.match(/"@type": "Person"/g) ?? []).length, 1);
+  assert.match(homeSource, /instructor:\s*\{\s*"@id": PERSON_ID\s*\}/);
+  assert.match(lessonSource, /author:\s*\{\s*"@id": PERSON_ID\s*\}/);
+
+  for (const path of ["/", "/about", "/curriculum", "/lessons", "/lessons/1-1", "/level-test"]) {
+    const response = await fetch(`${baseUrl}${path}`);
+    assert.equal(response.status, 200, `${path} 응답 상태`);
+    const blocks = extractAll(
+      await response.text(),
+      /<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi,
+    ).map((block) => JSON.parse(block));
+    const people = findCanonicalPersonNodes(blocks);
+    assert.equal(people.length, 1, `${path} canonical Person 개수`);
+    assert.equal(people[0].name, "박실로", `${path} canonical Person 이름`);
+  }
 });
 
 test("llms.txt·robots.txt·sitemap.xml은 공개 경로와 강의 수를 일치시킨다", async () => {

@@ -40,12 +40,7 @@ const lessonJsonLdFromLesson = (lesson: Record<string, unknown>, canAccess: bool
     articleSection: lesson.phase,
     datePublished,
     dateModified,
-    author: {
-      "@type": "Person",
-      "@id": PERSON_ID,
-      name: "박실로",
-      jobTitle: "공인노무사",
-    },
+    author: { "@id": PERSON_ID },
     publisher: {
       "@type": "EducationalOrganization",
       "@id": AI_SCHOOL_ORGANIZATION_ID,

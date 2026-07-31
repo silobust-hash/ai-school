@@ -34,12 +34,7 @@ const courseJsonLd = {
     name: "AI업무학교",
     url: SITE_URL,
   },
-  instructor: {
-    "@type": "Person",
-    "@id": PERSON_ID,
-    name: "박실로",
-    jobTitle: "공인노무사",
-  },
+  instructor: { "@id": PERSON_ID },
   educationalLevel: "Beginner",
   inLanguage: "ko-KR",
   about: [
