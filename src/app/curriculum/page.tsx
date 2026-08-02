@@ -111,6 +111,7 @@ const courses = [
       { id: "6-18", title: "AI 실시간 통역, 외국인 노동상담에서 어디까지 맡길까?" },
       { id: "6-20", title: "화면 녹화로 반복 업무를 스킬로 바꾸기 — Record and Replay 실전" },
       { id: "6-21", title: "네이버 AI탭 시대, 전문직 콘텐츠는 어떻게 작성해야 하나" },
+      { id: "6-22", title: "AI를 기다리지 말고 지휘하기 — Orca IDE와 병렬 에이전트" },
     ],
   },
 ];
@@ -274,7 +275,7 @@ export default function CurriculumPage() {
         <p className="text-slate-300 leading-relaxed mb-8">
           클로드 코드 심화 과정으로 이어가세요.
           <br />
-          16단계 78개 강의로 Claude Code 업무 흐름을 체계적으로 익힙니다.
+          16단계 80개 강의로 Claude Code 업무 흐름을 체계적으로 익힙니다.
         </p>
         <a
           href="https://edu.silronomu.com"
