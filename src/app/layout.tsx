@@ -9,6 +9,8 @@ import {
   HANDONG_ORGANIZATION_ID,
   OFFICIAL_FIRM_MEMBERS_URL,
   OFFICIAL_FIRM_URL,
+  PERSON_DAANGN_LOCAL_PROFILE_LABEL,
+  PERSON_DAANGN_LOCAL_PROFILE_URL,
   PERSON_ID,
   PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL,
   PERSON_INDUSTRIAL_SAFETY_BLOG_URL,
@@ -226,6 +228,7 @@ export default function RootLayout({
                 <a href="https://edu.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">클로드 코드 강의</a>
                 <a href="https://blog.silronomu.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">노무 실무 블로그</a>
                 <a href={PERSON_INDUSTRIAL_SAFETY_BLOG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">{PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL}</a>
+                <a href={PERSON_DAANGN_LOCAL_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">{PERSON_DAANGN_LOCAL_PROFILE_LABEL}</a>
               </nav>
             </div>
 

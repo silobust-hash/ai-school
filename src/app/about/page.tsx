@@ -3,6 +3,9 @@ import { toSafeJsonLd } from "@/lib/jsonld";
 import {
   OFFICIAL_FIRM_MEMBERS_URL,
   OFFICIAL_FIRM_URL,
+  PERSON_DAANGN_LOCAL_PROFILE_LABEL,
+  PERSON_DAANGN_LOCAL_PROFILE_PURPOSE,
+  PERSON_DAANGN_LOCAL_PROFILE_URL,
   PERSON_ID,
   PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL,
   PERSON_INDUSTRIAL_SAFETY_BLOG_URL,
@@ -58,6 +61,11 @@ const officialChannels = [
   { label: "박실로 노무사 홈페이지", href: "https://silronomu.com" },
   { label: "노무 실무 블로그", href: "https://blog.silronomu.com" },
   { label: PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL, href: PERSON_INDUSTRIAL_SAFETY_BLOG_URL },
+  {
+    label: PERSON_DAANGN_LOCAL_PROFILE_LABEL,
+    href: PERSON_DAANGN_LOCAL_PROFILE_URL,
+    purpose: PERSON_DAANGN_LOCAL_PROFILE_PURPOSE,
+  },
 ];
 
 export default function AboutPage() {
@@ -159,7 +167,7 @@ export default function AboutPage() {
         <section className="mt-16 border-t border-[var(--color-border)] pt-12">
           <h2 className="text-2xl font-bold text-[var(--color-ink)]">공식 채널</h2>
           <p className="mt-3 text-sm leading-relaxed text-[var(--color-ink-soft)] keep-all">
-            박실로 노무사의 공식 소속과 공개 교육·노무 콘텐츠는 아래 연결된 채널에서 확인할 수 있습니다.
+            박실로 노무사의 공식 소속과 공개 교육·노무 콘텐츠, 광주 북구 지역 공개 프로필·문의는 아래 연결된 채널에서 확인할 수 있습니다.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             {officialChannels.map((link) => (
@@ -168,6 +176,7 @@ export default function AboutPage() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={link.purpose ? `${link.label}: ${link.purpose}` : undefined}
                 className="inline-flex min-h-11 items-center gap-1.5 px-5 py-2.5 rounded-lg border border-[var(--color-border-strong)] text-[var(--color-ink)] text-sm font-semibold hover:border-[var(--color-primary)] hover:text-[var(--color-primary-dark)] hover:bg-[var(--color-primary-soft)]/50 transition-colors"
               >
                 {link.label}

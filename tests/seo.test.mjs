@@ -175,6 +175,8 @@ test("공개 HTML 페이지는 self-canonical과 단일 H1을 사용한다", asy
     assert.match(html, /href="https:\/\/xn--2q1bm94d\.com"/, `${path} 공식 법인 연결 URL`);
     assert.match(html, /산재·산업안전 전문 블로그/, `${path} 산재·산업안전 블로그 안내`);
     assert.match(html, /href="https:\/\/sanjae\.silronomu\.com\/"/, `${path} 산재·산업안전 블로그 URL`);
+    assert.match(html, /당근 비즈프로필/, `${path} 당근 비즈프로필 안내`);
+    assert.match(html, /href="https:\/\/www\.daangn\.com\/kr\/local-profile\/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v\/"/, `${path} 당근 비즈프로필 URL`);
     assert.doesNotMatch(html, /\| AI업무학교 \| AI업무학교/);
   }
 
@@ -183,6 +185,10 @@ test("공개 HTML 페이지는 self-canonical과 단일 H1을 사용한다", asy
     "utf8",
   );
   assert.doesNotMatch(presentationSource, /<h1\b/);
+
+  const aboutSource = await readFile(new URL("../src/app/about/page.tsx", import.meta.url), "utf8");
+  assert.match(aboutSource, /PERSON_DAANGN_LOCAL_PROFILE_PURPOSE/);
+  assert.match(aboutSource, /광주 북구 지역 공개 프로필·문의/);
 });
 
 test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리한다", async () => {
@@ -204,6 +210,8 @@ test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리�
   assert.equal(person.worksFor?.["@id"], "https://xn--2q1bm94d.com/#organization");
   assert.ok(person.subjectOf.some((node) => node.url === "https://xn--2q1bm94d.com/members"));
   assert.ok(person.subjectOf.some((node) => node.url === "https://sanjae.silronomu.com/"));
+  assert.ok(person.sameAs.includes("https://www.daangn.com/kr/local-profile/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v/"));
+  assert.ok(!graph.some((node) => ["EducationalOrganization", "Organization"].includes(node["@type"]) && node.sameAs?.includes("https://www.daangn.com/kr/local-profile/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v/")));
   assert.ok(!person.sameAs.includes("https://sanjae.silronomu.com/"));
   assert.ok(person.sameAs.every((url) => !/threads\.net|x\.com|facebook\.com\/share\//.test(url)));
   assert.ok(graph.some((node) => node["@type"] === "CollectionPage"));
@@ -255,6 +263,7 @@ test("llms.txt·robots.txt·sitemap.xml은 공개 경로와 강의 수를 일치
 
   assert.match(llms, new RegExp(`\\[강의 목록\\]\\(${baseUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/lessons\\)`));
   assert.match(llms, /\[산재·산업안전 전문 블로그\]\(https:\/\/sanjae\.silronomu\.com\/\)/);
+  assert.match(llms, /\[당근 비즈프로필\]\(https:\/\/www\.daangn\.com\/kr\/local-profile\/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v\/\): 광주 북구 지역 공개 프로필·문의/);
   assert.ok(lessonCount > 0);
   assert.match(robots, /User-Agent: OAI-SearchBot/i);
   assert.match(robots, /User-Agent: Perplexity-User/i);
@@ -837,8 +846,8 @@ test("전환 띠·헤더·footer·소개 버튼형 링크는 44px 최소 터치�
   assert.match(siteNavSource, /group inline-flex min-h-11 items-center/, "헤더 브랜드 링크");
   assert.equal(
     [...layoutSource.matchAll(/inline-flex min-h-11 items-center text-\[var\(--color-dark-text-soft\)\]/g)].length,
-    6,
-    "footer 내비게이션 링크 6개(산재 전문 블로그·공식 법인 포함)",
+    7,
+    "footer 내비게이션 링크 7개(당근 비즈프로필·산재 전문 블로그·공식 법인 포함)",
   );
   assert.match(aboutSource, /inline-flex min-h-11 items-center gap-1\.5 px-5 py-2\.5/, "소개 버튼형 링크");
 });
