@@ -262,6 +262,12 @@ test("llms.txt·robots.txt·sitemap.xml은 공개 경로와 강의 수를 일치
   const lessonCount = lessonDataCountFromLlms(llms);
 
   assert.match(llms, new RegExp(`\\[강의 목록\\]\\(${baseUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}/lessons\\)`));
+  assert.ok(
+    llms.includes(
+      `[박실로 canonical Person ID](https://silronomu.com/#person): [AI업무학교](${baseUrl})와 [Claude Code 실무 과정](https://edu.silronomu.com)의 동일 강사·운영자 식별자`,
+    ),
+    "llms.txt canonical Person ID가 AI업무학교와 edu.silronomu.com을 동일 운영자에게 연결",
+  );
   assert.match(llms, /\[산재·산업안전 전문 블로그\]\(https:\/\/sanjae\.silronomu\.com\/\)/);
   assert.match(llms, /\[당근 비즈프로필\]\(https:\/\/www\.daangn\.com\/kr\/local-profile\/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v\/\): 광주 북구 지역 공개 프로필·문의/);
   assert.ok(lessonCount > 0);

@@ -2,6 +2,7 @@ import { lessons } from "@/data/lessons";
 import {
   OFFICIAL_FIRM_MEMBERS_URL,
   OFFICIAL_FIRM_URL,
+  PERSON_ID,
   PERSON_DAANGN_LOCAL_PROFILE_LABEL,
   PERSON_DAANGN_LOCAL_PROFILE_PURPOSE,
   PERSON_DAANGN_LOCAL_PROFILE_URL,
@@ -43,6 +44,7 @@ export function GET(): Response {
 
 ## 강사와 운영 주체
 - [박실로 공식 홈페이지](https://silronomu.com/): 공인노무사, AI 실무 교육 콘텐츠 운영
+- [박실로 canonical Person ID](${PERSON_ID}): [AI업무학교](${SITE_URL})와 [Claude Code 실무 과정](https://edu.silronomu.com)의 동일 강사·운영자 식별자
 - [AI노무사 박실로 기준](https://silronomu.com/hub/ai-nomusa.html): AI 노동문서 검증, 노무실무 자동화와 공인노무사 최종 책임 원칙
 - [박실로 Threads](https://www.threads.com/@silrobag): AI 활용과 업무 혁신 관련 공개 글
 - [한동노무법인 공식 사이트](${OFFICIAL_FIRM_URL}/): AI업무학교의 공식 소속 법인
