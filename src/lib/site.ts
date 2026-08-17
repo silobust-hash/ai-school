@@ -20,7 +20,9 @@ export const AI_SCHOOL_ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const COURSE_ID = `${SITE_URL}/#course`;
 
-// Profiles that identify the same person. Topic sites belong in subjectOf, not sameAs.
+// sameAs is limited to profiles that identify the same person. Independent sites use
+// an explicit schema relationship only when that relationship is supported; otherwise
+// they remain ordinary navigation and llms.txt links.
 export const PERSON_SAME_AS = [
   PERSON_DAANGN_LOCAL_PROFILE_URL,
   "https://blog.naver.com/5215678",
