@@ -8,6 +8,7 @@ import { after, before, test } from "node:test";
 let baseUrl = process.env.TEST_BASE_URL?.replace(/\/+$/, "");
 let devServer;
 let serverOutput = "";
+const safetyFooterAnchor = /<a\b[^>]*href="https:\/\/safety\.silronomu\.com\/"[^>]*>(?:(?!<\/a>)[\s\S])*?산업안전 실무 안내(?:(?!<\/a>)[\s\S])*?<\/a>/i;
 
 function getFreePort() {
   return new Promise((resolve, reject) => {
@@ -175,8 +176,7 @@ test("공개 HTML 페이지는 self-canonical과 단일 H1을 사용한다", asy
     assert.match(html, /href="https:\/\/xn--2q1bm94d\.com"/, `${path} 공식 법인 연결 URL`);
     assert.match(html, /산재·산업안전 전문 블로그/, `${path} 산재·산업안전 블로그 안내`);
     assert.match(html, /href="https:\/\/sanjae\.silronomu\.com\/"/, `${path} 산재·산업안전 블로그 URL`);
-    assert.match(html, /산업안전 실무 안내/, `${path} 산업안전 실무 안내`);
-    assert.match(html, /href="https:\/\/safety\.silronomu\.com\/"/, `${path} 산업안전 실무 안내 URL`);
+    assert.match(html, safetyFooterAnchor, `${path} 산업안전 실무 안내 단일 푸터 링크`);
     assert.match(html, /당근 비즈프로필/, `${path} 당근 비즈프로필 안내`);
     assert.match(html, /href="https:\/\/www\.daangn\.com\/kr\/local-profile\/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v\/"/, `${path} 당근 비즈프로필 URL`);
     assert.doesNotMatch(html, /\| AI업무학교 \| AI업무학교/);
@@ -191,6 +191,17 @@ test("공개 HTML 페이지는 self-canonical과 단일 H1을 사용한다", asy
   const aboutSource = await readFile(new URL("../src/app/about/page.tsx", import.meta.url), "utf8");
   assert.match(aboutSource, /PERSON_DAANGN_LOCAL_PROFILE_PURPOSE/);
   assert.match(aboutSource, /광주 북구 지역 공개 프로필·문의/);
+});
+
+test("산업안전 실무 안내의 URL과 라벨은 같은 anchor에 있어야 한다", () => {
+  assert.match(
+    '<a href="https://safety.silronomu.com/">산업안전 실무 안내</a>',
+    safetyFooterAnchor,
+  );
+  assert.doesNotMatch(
+    '<a href="https://safety.silronomu.com/">Safety</a><a>산업안전 실무 안내</a>',
+    safetyFooterAnchor,
+  );
 });
 
 test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리한다", async () => {
