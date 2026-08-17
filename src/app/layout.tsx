@@ -154,11 +154,6 @@ const personJsonLd = {
       url: PERSON_INDUSTRIAL_SAFETY_BLOG_URL,
       name: PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL,
     },
-    {
-      "@type": "WebSite",
-      url: PERSON_SAFETY_SITE_URL,
-      name: PERSON_SAFETY_SITE_LABEL,
-    },
   ],
   hasCredential: {
     "@type": "EducationalOccupationalCredential",

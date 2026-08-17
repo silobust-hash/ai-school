@@ -212,9 +212,11 @@ test("JSON-LD는 파싱 가능하며 사람·학교·법인 엔티티를 분리�
   assert.equal(person.worksFor?.["@id"], "https://xn--2q1bm94d.com/#organization");
   assert.ok(person.subjectOf.some((node) => node.url === "https://xn--2q1bm94d.com/members"));
   assert.ok(person.subjectOf.some((node) => node.url === "https://sanjae.silronomu.com/"));
+  assert.ok(!person.subjectOf.some((node) => node.url === "https://safety.silronomu.com/"));
   assert.ok(person.sameAs.includes("https://www.daangn.com/kr/local-profile/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v/"));
   assert.ok(!graph.some((node) => ["EducationalOrganization", "Organization"].includes(node["@type"]) && node.sameAs?.includes("https://www.daangn.com/kr/local-profile/%EB%B0%95%EC%8B%A4%EB%A1%9C-%EA%B3%B5%EC%9D%B8%EB%85%B8%EB%AC%B4%EC%82%AC-1djry21yd15v/")));
   assert.ok(!person.sameAs.includes("https://sanjae.silronomu.com/"));
+  assert.ok(!person.sameAs.includes("https://safety.silronomu.com/"));
   assert.ok(person.sameAs.every((url) => !/threads\.net|x\.com|facebook\.com\/share\//.test(url)));
   assert.ok(graph.some((node) => node["@type"] === "CollectionPage"));
 });
