@@ -17,6 +17,8 @@ import {
   PERSON_SAFETY_SITE_LABEL,
   PERSON_SAFETY_SITE_URL,
   PERSON_SAME_AS,
+  PERSON_SILROPANDA_LABEL,
+  PERSON_SILROPANDA_URL,
   SITE_URL,
   WEBSITE_ID,
 } from "@/lib/site";
@@ -232,6 +234,7 @@ export default function RootLayout({
                 <a href={PERSON_INDUSTRIAL_SAFETY_BLOG_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">{PERSON_INDUSTRIAL_SAFETY_BLOG_LABEL}</a>
                 <a href={PERSON_SAFETY_SITE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">{PERSON_SAFETY_SITE_LABEL}</a>
                 <a href={PERSON_DAANGN_LOCAL_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">{PERSON_DAANGN_LOCAL_PROFILE_LABEL}</a>
+                <a href={PERSON_SILROPANDA_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[var(--color-dark-text-soft)] hover:text-white transition-colors">{PERSON_SILROPANDA_LABEL}</a>
               </nav>
             </div>
 

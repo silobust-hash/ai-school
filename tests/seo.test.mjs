@@ -868,8 +868,8 @@ test("전환 띠·헤더·footer·소개 버튼형 링크는 44px 최소 터치�
   assert.match(siteNavSource, /group inline-flex min-h-11 items-center/, "헤더 브랜드 링크");
   assert.equal(
     [...layoutSource.matchAll(/inline-flex min-h-11 items-center text-\[var\(--color-dark-text-soft\)\]/g)].length,
-    8,
-    "footer 내비게이션 링크 8개(당근 비즈프로필·산재 전문 블로그·산업안전 실무 안내·공식 법인 포함)",
+    9,
+    "footer 내비게이션 링크 9개(당근 비즈프로필·산재 전문 블로그·산업안전 실무 안내·실로판다 전문서비스몰·공식 법인 포함)",
   );
   assert.match(layoutSource, /PERSON_SAFETY_SITE_URL/, "footer 산업안전 실무 안내 링크");
   assert.match(aboutSource, /inline-flex min-h-11 items-center gap-1\.5 px-5 py-2\.5/, "소개 버튼형 링크");
