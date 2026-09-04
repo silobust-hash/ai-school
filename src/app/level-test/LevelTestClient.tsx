@@ -15,6 +15,7 @@ import {
   restoreLevelTestResult,
   LEVEL_TEST_STORAGE_VERSION,
 } from "@/lib/levelTest";
+import GrowthPath from "@/components/GrowthPath";
 
 const STORAGE_KEY = getDefaultResultStorageKey();
 const CATEGORY_LABELS: Record<string, string> = {
@@ -269,6 +270,8 @@ export default function LevelTestClient() {
                 ))}
               </ul>
             </section>
+
+            <GrowthPath compact />
 
             <div className="flex flex-wrap gap-3">
               <button

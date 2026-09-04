@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Reveal from "@/components/Reveal";
+import GrowthPath from "@/components/GrowthPath";
 import { lessons } from "@/data/lessons";
 import {
   AI_SCHOOL_ORGANIZATION_ID,
@@ -668,6 +669,10 @@ export default function Home() {
             </Link>
           </div>
         </Reveal>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <GrowthPath />
       </section>
 
       {/* ============ FAQ ============ */}
