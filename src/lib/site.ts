@@ -35,5 +35,4 @@ export const PERSON_SAME_AS = [
   "https://www.threads.com/@silrobag",
   "https://www.youtube.com/@코딩하는노무사",
   "https://www.linkedin.com/in/%EC%8B%A4%EB%A1%9C-%EB%B0%95-385a1a104",
-  PERSON_SILROPANDA_URL,
 ];
