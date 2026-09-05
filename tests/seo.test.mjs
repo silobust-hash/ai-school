@@ -484,22 +484,45 @@ test("admin 목록 API는 6과 정합과 전체 강의 수를 제공한다", asy
   assert.equal(phases.size, 6, "6개 과 정합");
 });
 
-test("수준진단 모듈은 20문항·영역 가중치·타입 경계·안전기초 규칙을 충족한다", async () => {
+test("수준진단 모듈은 20문항·영역 가중치·질문·읽기 학습방향·안전기초 규칙을 충족한다", async () => {
   const levelTestModule = await import(new URL("../src/lib/levelTest.ts", import.meta.url));
   const lessonExists = (id) => /^\d+-\d+$/.test(id);
   const levelTestClientSource = await readFile(new URL("../src/app/level-test/LevelTestClient.tsx", import.meta.url), "utf8");
 
   assert.equal(levelTestModule.LEVEL_TEST_QUESTION_COUNT, 20, "문항 수 20개");
-  assert.equal(levelTestModule.LEVEL_QUESTIONS[1].text, "개념 적용 시 가장 바람직한 접근은?", "q2 문항 텍스트");
-  assert.equal(levelTestModule.LEVEL_QUESTIONS[1].options[0].point, 0, "q2 1번은 조건/검증 생략");
-  assert.equal(levelTestModule.LEVEL_QUESTIONS[1].options[1].point, 1, "q2 2번은 선행 조건 부재");
-  assert.equal(levelTestModule.LEVEL_QUESTIONS[1].options[2].point, 2, "q2 3번은 검증 타이밍 지연");
-  assert.equal(levelTestModule.LEVEL_QUESTIONS[1].options[3].point, 3, "q2 4번은 규격/반복 피드백(안전)");
+  assert.equal(levelTestModule.LEVEL_TEST_STORAGE_VERSION, 3, "문항 변경에 맞춘 저장 버전");
+  const questions = levelTestModule.LEVEL_QUESTIONS;
+  const byId = Object.fromEntries(questions.map((question) => [question.id, question]));
+  assert.match(byId.q1.text, /목적·대상·맥락·제약/, "q1은 질문의 조건을 관찰");
+  assert.match(byId.q2.text, /후속질문/, "q2는 누락 정보 확인을 관찰");
+  assert.match(byId.q3.text, /제한된 조직에 단계적으로 제공/, "q3은 원문 사실 읽기를 관찰");
+  assert.match(byId.q4.text, /긴급 장애/, "q4는 요약의 예외 누락을 관찰");
+  assert.match(byId.q5.text, /단계적 제공/, "q5는 새 근거에 따른 판단 수정을 관찰");
+  assert.match(byId.q6.text, /새 모델 출시/, "q6은 모델 선택 기준을 관찰");
+  for (const question of questions) {
+    assert.deepEqual([...question.options.map((option) => option.point)].sort(), [0, 1, 2, 3], `${question.id}의 0~3점 선택지`);
+  }
+  assert.equal(questions.filter((question) => question.safetyCritical).length >= 5, true, "안전 게이트용 핵심 문항 유지");
+  const safetyRiskChoices = [
+    ["q8", /인증을 생략/],
+    ["q14", /마스킹하지 않으면/],
+    ["q15", /내용 검토는 생략/],
+    ["q16", /결과만 빠르게/],
+    ["q18", /키를 코드에 고정/],
+    ["q20", /승인 체크리스트 없이 자동 전송/],
+  ];
+  for (const [id, label] of safetyRiskChoices) {
+    const option = byId[id].options.find((item) => label.test(item.label));
+    assert.equal(option?.point, 0, `${id}의 명백한 안전 위험 선택지는 0점`);
+  }
   assert.ok(levelTestModule.LEVEL_TYPES?.prework?.crossLinks.some((item) => item.url.includes("https://edu.silronomu.com/lessons/2-1")), "실무준비형 교차링크에 edu 2-1");
   assert.ok(levelTestModule.LEVEL_TYPES?.automation?.crossLinks.some((item) => item.url.includes("https://edu.silronomu.com/lessons/5-1")), "자동화실행형 교차링크에 edu 5-1");
   assert.ok(levelTestModule.LEVEL_TYPES?.architecture?.crossLinks.some((item) => item.url.includes("https://edu.silronomu.com/lessons/13-1")), "설계·운영형 교차링크에 edu 13-1");
   assert.match(levelTestClientSource, /target=\"_blank\"/g, "결과 교차 링크 새 창 속성");
   assert.match(levelTestClientSource, /rel=\"noopener noreferrer\"/g, "결과 교차 링크 rel 안전 속성");
+  assert.match(levelTestClientSource, /교육용 간이진단/, "구술 능력 직접측정이 아닌 간이진단 안내");
+  assert.match(levelTestClientSource, /30초 판단 설명 연습/, "질문·읽기·설명 자가점검 제공");
+  assert.match(levelTestClientSource, /말의 속도·유창함은 채점하지 않고/, "말솜씨 비채점 원칙");
 
   const totalWeight = Object.values(levelTestModule.LEVEL_WEIGHTS).reduce((sum, value) => sum + value, 0);
   assert.equal(totalWeight, 100, "영역 가중치 합계 100");
@@ -528,7 +551,9 @@ test("수준진단 모듈은 20문항·영역 가중치·타입 경계·안전�
   assert.equal(architecture.type.key, "architecture", "최고 점수는 설계·운영형");
 
   const safeCritical = toAnswers(3);
-  safeCritical[1] = 0;
+  const safetyQuestionIndex = questions.findIndex((question) => question.safetyCritical);
+  assert.ok(safetyQuestionIndex >= 0, "안전 핵심 문항 인덱스");
+  safeCritical[safetyQuestionIndex] = 0;
   const safeResult = levelTestModule.calculateLevelResult(safeCritical, lessonExists);
   assert.equal(safeResult.isSafeEssential, true, "안전기초 필수 플래그");
   assert.ok(safeResult.type.key, "타입 계산은 유지");
@@ -541,9 +566,9 @@ test("수준진단 모듈은 20문항·영역 가중치·타입 경계·안전�
 test("수준진단 키보드 번호는 화면 선택지 순서의 실제 점수로 저장된다", async () => {
   const levelTestModule = await import(new URL("../src/lib/levelTest.ts", import.meta.url));
   const q1 = levelTestModule.LEVEL_QUESTIONS[0];
-  assert.equal(q1.options[0].point, 3, "q1 첫 선택지는 안전 행동");
-  assert.equal(levelTestModule.getPointForChoiceKey(q1, "1"), 3, "숫자 1은 첫 선택지의 3점");
-  assert.equal(levelTestModule.getPointForChoiceKey(q1, "4"), 0, "숫자 4는 네 번째 선택지의 0점");
+  assert.equal(q1.options[0].point, 0, "q1 첫 선택지는 조건 없는 요청");
+  assert.equal(levelTestModule.getPointForChoiceKey(q1, "1"), 0, "숫자 1은 첫 선택지의 0점");
+  assert.equal(levelTestModule.getPointForChoiceKey(q1, "4"), 3, "숫자 4는 네 번째 선택지의 3점");
   assert.equal(levelTestModule.getPointForChoiceKey(q1, "5"), null, "범위 밖 키 무시");
 });
 
@@ -568,6 +593,37 @@ test("수준진단 저장 결과는 무시하고 검증된 답변으로 안전�
   assert.ok(restored, "답변으로 결과 재계산");
   assert.doesNotMatch(JSON.stringify(restored), /attacker\.invalid|javascript:/, "조작 링크 미포함");
   assert.ok(restored.recommendedLessonUrls.every((url) => /^\/lessons\/\d+-\d+$/.test(url)), "추천 링크 허용 형식");
+
+  const stale = levelTestModule.parseLevelTestState(JSON.stringify({
+    version: levelTestModule.LEVEL_TEST_STORAGE_VERSION - 1,
+    answers,
+    currentIndex: 0,
+    completed: true,
+  }));
+  assert.equal(stale, null, "이전 문항 버전의 답안과 결과는 재해석하지 않음");
+  assert.equal(levelTestModule.getDefaultResultStorageKey(), "level-test:v2", "새 진단 저장소를 이전 결과와 분리");
+});
+
+test("최신 모델 강의는 기준일·제공 범위·공식 출처와 목록 제목을 일치시킨다", async () => {
+  const lessonsModule = await import(new URL("../src/data/lessons-course6.ts", import.meta.url));
+  const course6 = lessonsModule.lessonsCourse6;
+  const [homeSource, listSource, curriculumSource] = await Promise.all([
+    readFile(new URL("../src/app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/app/lessons/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../src/app/curriculum/page.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(course6["6-2"].title, "2026 최신 모델·제품 지도: Claude Fable 5.1 · GPT-6 Astra");
+  assert.equal(course6["6-9"].title, "Claude Fable 5.1 — 일반 제공과 Mythos 5.1 구분하기");
+  assert.match(course6["6-2"].summary, /2026년 9월 5일 확인 기준/);
+  assert.match(course6["6-2"].sections.map((section) => section.content).join("\n"), /제한된 조직을 대상으로 단계적으로 제공/);
+  assert.match(course6["6-9"].sections.map((section) => section.content).join("\n"), /발표를 잘하는지 시험하는 것이 아니라/);
+  assert.ok(course6["6-2"].relatedLinks.some((link) => link.url === "https://openai.com/index/gpt-6-astra/"));
+  assert.ok(course6["6-2"].relatedLinks.some((link) => link.url === "https://www.anthropic.com/claude-fable-and-mythos-5-1"));
+  for (const source of [homeSource, listSource, curriculumSource]) {
+    assert.match(source, /Claude Fable 5\.1/);
+    assert.match(source, /GPT-6 Astra/);
+  }
 });
 
 test("학습 진도 파싱은 버전 불일치 시 기본값으로 되돌리고 lastVisited 타임스탬프를 검증한다", async () => {

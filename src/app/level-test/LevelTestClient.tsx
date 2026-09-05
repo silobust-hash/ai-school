@@ -1,6 +1,7 @@
 "use client";
 
 import { KeyboardEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   CATEGORY_WEIGHTS,
   calculateLevelResult,
@@ -18,6 +19,7 @@ import {
 import GrowthPath from "@/components/GrowthPath";
 
 const STORAGE_KEY = getDefaultResultStorageKey();
+const LEGACY_STORAGE_KEYS = ["level-test:v1"];
 const CATEGORY_LABELS: Record<string, string> = {
   concept: "개념이해",
   tool: "도구숙련",
@@ -48,6 +50,8 @@ export default function LevelTestClient() {
   const currentQuestion = LEVEL_QUESTIONS[currentIndex] ?? LEVEL_QUESTIONS[0];
 
   useEffect(() => {
+    // 문항 의미가 바뀐 이전 진단은 새 문항의 답으로 해석하지 않습니다.
+    LEGACY_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) {
       setHydrated(true);
@@ -252,6 +256,26 @@ export default function LevelTestClient() {
               </ul>
             </section>
 
+            <section className="mb-6 rounded-xl border border-teal-200 bg-teal-50 p-4" aria-label="질문 읽기 설명 연습">
+              <h2 className="font-semibold text-slate-900 mb-2">30초 판단 설명 연습</h2>
+              <p className="text-sm leading-relaxed text-slate-700">
+                이 진단 점수와 별도로, 방금 다룬 업무 하나를 소리 내어 설명해 보세요. 말의 속도·유창함은 채점하지 않고, 근거를 읽고 판단을 조정하는지 스스로 점검하는 연습입니다.
+              </p>
+              <ul className="mt-3 space-y-1 text-sm text-slate-700 list-disc pl-5">
+                <li>누구에게 어떤 한 가지를 알리고, 다음에 어떤 판단·행동을 요청할지 정합니다.</li>
+                <li>결론 1문장 · 핵심어 3개 · 확인한 근거 2개를 말합니다.</li>
+                <li>반론 또는 한계 1개와, 어떤 새 근거가 나오면 유지·수정·유보할지 말합니다.</li>
+              </ul>
+              <p className="mt-3 text-sm text-slate-700">
+                같은 내용을 30초·1분·3분으로 길이만 바꿔 설명해 보세요. 원고를 더 매끄럽게 외우는 것보다 질문 → 근거 읽기 → 자기 언어 설명 → 반론·조건 변화 대응의 흐름이 남는지가 기준입니다.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                <Link href="/lessons/1-3" className="text-teal-700 hover:underline">좋은 프롬프트의 조건 →</Link>
+                <Link href="/lessons/1-5" className="text-teal-700 hover:underline">AI와 대화하는 기술 →</Link>
+                <Link href="/lessons/6-17" className="text-teal-700 hover:underline">판단력과 도구의 증폭 →</Link>
+              </div>
+            </section>
+
             <section className="mb-6" aria-label="교차 안내">
               <h2 className="font-semibold text-slate-900 mb-3">추천 진입 경로</h2>
               <ul className="space-y-2">
@@ -300,12 +324,13 @@ export default function LevelTestClient() {
         <section className="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 p-6 md:p-8">
           <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">AI업무능력 수준진단</h1>
           <p className="text-slate-600 leading-relaxed">
-            총 20문항으로 4개 핵심 영역을 평가하고
-            지금 바로 시작할 추천 강의 루트를 제안합니다. 답변은 브라우저의 localStorage에만 저장되며 서버로 전송되지 않습니다.
+            총 20문항으로 질문 설계, 근거 읽기, 업무 적용, 검증·보안습관을 살피고
+            지금 바로 시작할 추천 강의 루트를 제안합니다. 교육용 간이진단이므로 실제 구술 능력이나 말의 속도·유창함을 측정하지 않습니다. 답변은 브라우저의 localStorage에만 저장되며 서버로 전송되지 않습니다.
           </p>
           <div className="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-600">
             <p>완성 기준: 20문항 완성</p>
             <p>영역 비중: 개념이해 25%, 도구숙련 25%, 업무적용 30%, 검증·보안습관 20%</p>
+            <p>결과 뒤에는 질문 → 근거 읽기 → 자기 언어 설명 → 반론·조건 변화 대응을 30초로 연습합니다.</p>
           </div>
           <button
             type="button"

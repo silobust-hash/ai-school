@@ -65,7 +65,8 @@ export type PersistedLevelTestState = {
   completed: boolean;
 };
 
-export const LEVEL_TEST_STORAGE_VERSION = 2;
+// 문항의 관찰 대상이 바뀌면 기존 점수의 의미도 바뀝니다. 이전 응답은 재채점하지 않습니다.
+export const LEVEL_TEST_STORAGE_VERSION = 3;
 
 const lessonTitlesById: Record<string, string> = {
   "1-1": "AI가 바꾸는 일하는 방식",
@@ -80,7 +81,7 @@ const lessonTitlesById: Record<string, string> = {
   "5-1": "프론트엔드와 백엔드",
   "5-3": "데이터베이스 기초",
   "6-1": "프롬프트에서 루프까지: 5단 진화",
-  "6-2": "2026 최신 모델·제품 지도: Fable 5 · GPT-5.6",
+  "6-2": "2026 최신 모델·제품 지도: Claude Fable 5.1 · GPT-6 Astra",
   "5-5": "실무 자동화 기초",
   "6-4": "업무 루틴 자동화",
   "6-5": "루프 기반 AI 운영",
@@ -93,68 +94,68 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
   {
     id: "q1",
     category: "concept",
-    text: "AI에게 작업 지시를 할 때 가장 먼저 정하는 것이 가장 중요하다고 보는 것은?",
+    text: "신입사원 대상 교육 안내문 초안을 AI에게 맡깁니다. 목적·대상·맥락·제약을 가장 잘 갖춘 요청은?",
     options: [
-      { label: "민감한 정보 유무를 점검하고 제외한다", point: 3 },
-      { label: "문맥보다 출력 형식만 정한다", point: 1 },
-      { label: "목표, 제약, 대상 독자를 한 번에 정의한다", point: 2 },
-      { label: "결과물이 완성되면 바로 공개 공유한다", point: 0 },
+      { label: "교육 안내문을 멋지게 써줘.", point: 0 },
+      { label: "이번 달 교육 안내문을 짧게 써줘.", point: 1 },
+      { label: "신입사원에게 보낼 교육 안내문을 이메일 형식으로 써줘.", point: 2 },
+      { label: "다음 주 신입사원 30명에게 교육 참여 목적을 알리는 이메일 초안을 250자 안으로 작성해줘. 일정 미확정 부분은 [확인 필요]로 표시해줘.", point: 3 },
     ],
   },
   {
     id: "q2",
     category: "concept",
-    text: "개념 적용 시 가장 바람직한 접근은?",
+    text: "노무 담당자가 AI에 ‘취업규칙 개정 안내문을 작성해줘’라고만 요청했습니다. 먼저 할 후속질문으로 가장 적절한 것은?",
     options: [
-      { label: "요구사항에서 핵심 조건과 확인 항목을 생략한다", point: 0 },
-      { label: "요구사항만 전달하고 반영 조건은 나중에 본다", point: 1 },
-      { label: "검증 항목은 정의하되 수행 시점은 미루어 둔다", point: 2 },
-      { label: "요구사항·제약·검증 기준을 명시하고 반복 피드백한다", point: 3 },
+      { label: "예전 안내문과 같은 형식으로 바로 작성할게요.", point: 0 },
+      { label: "개정 취지만 알려주시면 나머지는 일반적인 내용으로 채울게요.", point: 1 },
+      { label: "수신자와 시행일만 확인하면 될까요?", point: 2 },
+      { label: "확정된 개정 조항·시행일·적용 대상·확인한 근거·안내 목적과 수신자를 먼저 확인해 주세요.", point: 3 },
     ],
     safetyCritical: "law",
   },
   {
     id: "q3",
     category: "concept",
-    text: "프롬프트에서 가장 먼저 점검할 항목은?",
+    text: "원문: ‘GPT-6 Astra는 9월 3일 발표됐고 제한된 조직에 단계적으로 제공된다.’ 이 원문을 읽은 뒤 가장 정확한 정리는?",
     options: [
-      { label: "단어 선택의 화려함", point: 2 },
-      { label: "입력 데이터의 신뢰도", point: 3 },
-      { label: "시스템 요구를 지연하지 않기 위해 비우기", point: 0 },
-      { label: "출력 길이만 줄이기", point: 1 },
+      { label: "발표됐으므로 모든 계정에서 이미 사용할 수 있다는 사실이다.", point: 0 },
+      { label: "발표일과 제한 제공은 적지만, 출처와 내 계정 제공 여부는 확인하지 않는다.", point: 1 },
+      { label: "발표일과 제한·단계 제공은 원문 사실이고, 내 계정 사용 가능 여부는 아직 따로 확인해야 한다.", point: 2 },
+      { label: "발표일과 제한·단계 제공은 원문 사실이며, 내 계정 사용 가능 여부는 제품 화면과 공식 안내로 별도 확인한다.", point: 3 },
     ],
   },
   {
     id: "q4",
     category: "concept",
-    text: "업무용 AI 응답의 신뢰도를 높이는 방식은?",
+    text: "원문: ‘외부 발송은 담당자 승인 후 진행한다. 다만 긴급 장애 공지는 사후 보고할 수 있다.’ 요약을 검토할 때 가장 먼저 확인할 것은?",
     options: [
-      { label: "근거 출처, 날짜, 가정 조건을 함께 받는다", point: 3 },
-      { label: "길고 상세한 답변만 요구한다", point: 1 },
-      { label: "검토 없이 바로 승인한다", point: 0 },
-      { label: "출력 템플릿은 생략한다", point: 2 },
+      { label: "승인 원칙과 긴급 장애의 예외·사후 보고 조건이 함께 남았는지 원문과 대조한다.", point: 3 },
+      { label: "요약이 짧고 단정적이면 예외를 빼도 된다.", point: 0 },
+      { label: "예외가 있다는 것만 표시하고 사후 보고 조건은 생략한다.", point: 1 },
+      { label: "예외와 사후 보고를 적되, 원문과 대조하지는 않는다.", point: 2 },
     ],
   },
   {
     id: "q5",
     category: "concept",
-    text: "실무 적용 전, AI 출력 확인 기준은?",
+    text: "기존 자료에는 ‘GPT-6 Astra는 일반 제공’이라고 적혀 있습니다. 새 공식 공지에는 ‘제한된 조직에 단계적 제공’이라고 나옵니다. 다음 행동으로 가장 적절한 것은?",
     options: [
-      { label: "작성자는 보통 잘 하니까 검토 불필요", point: 0 },
-      { label: "법령·규정·사실관계를 최소 한 번 교차 확인", point: 3 },
-      { label: "오타만 없으면 충분하다", point: 1 },
-      { label: "결과의 일관성만 체크한다", point: 2 },
+      { label: "기존 자료를 유지한다. 이미 한 번 작성했기 때문이다.", point: 0 },
+      { label: "두 공지의 차이는 메모하지만, 추가 확인 전까지 기존 결론은 수정하지 않는다.", point: 1 },
+      { label: "제공 범위를 단계적 제공으로 수정하고, 계정별 접근은 확인이 필요하다고 남긴다.", point: 3 },
+      { label: "제공 범위를 단계적 제공으로 고치되, 계정별 접근 조건은 적지 않는다.", point: 2 },
     ],
   },
   {
     id: "q6",
     category: "tool",
-    text: "도구 조합 설계 시 가장 우선할 기준은?",
+    text: "새 모델 출시 소식을 보고 업무용 모델을 고르려 합니다. 가장 신뢰할 수 있는 첫 비교 방법은?",
     options: [
-      { label: "한 번에 가능한 도구를 모두 합친다", point: 1 },
-      { label: "업무 단계별 실패 지점과 복구 계획을 본다", point: 3 },
-      { label: "기본 설정만으로 시작", point: 2 },
-      { label: "도구가 없으면 바로 수동 처리", point: 0 },
+      { label: "발표 제목만 보고 가장 새 이름을 모든 업무의 기본값으로 정한다.", point: 0 },
+      { label: "모델과 제품을 구분하고 계정 제공 조건을 확인한 뒤, 같은 비식별 과제로 결과·근거·검수 부담을 비교한다.", point: 3 },
+      { label: "다른 사람의 한 번의 성공 사례만 보고 도입한다.", point: 1 },
+      { label: "같은 과제를 비교하지만 계정 제공 조건과 근거 검토는 나중에 한다.", point: 2 },
     ],
   },
   {
@@ -165,7 +166,7 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "좋은 문장만 모아두고 버전 관리 안 한다", point: 1 },
       { label: "버전, 용도, 결과물을 함께 기록한다", point: 3 },
       { label: "필요할 때만 다시 만들어 쓴다", point: 0 },
-      { label: "보안/권한은 나중에 정한다", point: 2 },
+      { label: "버전·용도·결과물은 기록하되, 접근 권한 검토는 실제 연결 전에 따로 한다", point: 2 },
     ],
   },
   {
@@ -175,8 +176,8 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
     options: [
       { label: "속도 우선으로 인증을 생략한다", point: 0 },
       { label: "요청 제한·오류 처리·로깅을 함께 설계한다", point: 3 },
-      { label: "한 번 성공한 키를 영구 보관한다", point: 1 },
-      { label: "데이터 스키마는 생략 가능", point: 2 },
+      { label: "키는 안전한 비밀 저장소에 두지만 교체·폐기 기준은 아직 정하지 않는다", point: 1 },
+      { label: "데이터 스키마는 정하지만 필드별 유효성 검증과 예외 처리는 아직 보완하지 않는다", point: 2 },
     ],
     safetyCritical: "privacy",
   },
@@ -188,7 +189,7 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "직접 본 운영 데이터로 바로 실행", point: 0 },
       { label: "샘플 케이스로 시뮬레이션하고 실패 조건을 재현한다", point: 3 },
       { label: "문서화 없이 UI만 만든다", point: 1 },
-      { label: "예외 규칙은 필요 없다고 본다", point: 2 },
+      { label: "정상 흐름부터 시험하고, 운영 전 예외 규칙과 복구 방법을 보완한다", point: 2 },
     ],
   },
   {
@@ -210,7 +211,7 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "전 부서로 전면 배포 후 조정", point: 0 },
       { label: "반복 빈도 높은 작업을 파일럿으로 시작", point: 3 },
       { label: "매뉴얼 없이 개인 실험만 진행", point: 1 },
-      { label: "결과 책임을 AI에 맡기고 승인 생략", point: 0 },
+      { label: "반복 업무 파일럿을 하되 검증 기준은 나중에 정한다", point: 2 },
     ],
   },
   {
@@ -221,18 +222,18 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "정성적 느낌만 기록", point: 0 },
       { label: "처리시간, 재작업률, 오탈자율 등 기준을 둔다", point: 3 },
       { label: "측정은 나중에 한다", point: 1 },
-      { label: "좋은 점수만 공개하고 실패는 제외", point: 2 },
+      { label: "성과 지표는 기록하지만 실패·재작업 원인 분석은 다음 점검으로 미룬다", point: 2 },
     ],
   },
   {
     id: "q13",
     category: "work",
-    text: "동료와 협업할 때 AI 산출물을 전달할 때 가장 적절한 태도는?",
+    text: "AI 도움으로 만든 업무 요약을 동료에게 전달하기 전, 자기 판단을 점검하는 행동으로 가장 적절한 것은?",
     options: [
-      { label: "사실 검증 없이 전달", point: 0 },
-      { label: "원본 근거·한계·검토 포인트를 함께 전달", point: 3 },
-      { label: "최종본처럼 보이기 위해 부연하지 않는다", point: 1 },
-      { label: "피드백 창구를 닫아둔다", point: 2 },
+      { label: "AI가 만든 원고를 더 매끄럽게 외워서 그대로 읽는다.", point: 0 },
+      { label: "결론만 자기 말로 말하고 근거는 원문을 보라고 한다.", point: 1 },
+      { label: "결론과 근거는 설명하지만 반론·한계와 판단을 바꿀 조건은 생략한다.", point: 2 },
+      { label: "결론 한 문장, 확인한 근거, 반론 또는 한계, 새 근거가 나오면 수정할 조건을 자기 말로 정리한다.", point: 3 },
     ],
   },
   {
@@ -243,7 +244,7 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "민감정보는 마스킹하지 않으면 빠르다", point: 0 },
       { label: "처리 범위와 보관 기한을 선행 정한다", point: 3 },
       { label: "기본 UI 값으로 처리한다", point: 1 },
-      { label: "동의 이력은 선택사항", point: 2 },
+      { label: "처리 범위와 보관 기한은 정하지만 동의 이력의 확인 방법은 아직 정하지 않는다", point: 2 },
     ],
     safetyCritical: "privacy",
   },
@@ -267,7 +268,7 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "근거 조항을 함께 제시하게 한다", point: 3 },
       { label: "결과만 빠르게 출력하게 한다", point: 0 },
       { label: "근거 출처를 임의로 추정", point: 1 },
-      { label: "해석은 모두 AI 판단으로 확정", point: 2 },
+      { label: "근거 조항과 AI 해석을 함께 받지만 최종 적용 판단 주체는 정하지 않는다", point: 2 },
     ],
     safetyCritical: "law",
   },
@@ -291,7 +292,7 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "토큰/키 보관 위치와 사용 범위 제한을 정한다", point: 3 },
       { label: "키를 코드에 고정 후 공유", point: 0 },
       { label: "오류 처리 생략", point: 1 },
-      { label: "권한은 넓어도 괜찮다", point: 2 },
+      { label: "작업에 필요한 권한만 고르지만 정기 권한 재검토 계획은 아직 없다", point: 2 },
     ],
     safetyCritical: "privacy",
   },
@@ -303,7 +304,7 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
       { label: "출력 후 즉시 배포", point: 0 },
       { label: "샘플 검증, 동료 검토, 변경이력 기록", point: 3 },
       { label: "최종본만 저장", point: 1 },
-      { label: "오류가 보여도 사용자 책임이라 공지", point: 2 },
+      { label: "오류를 기록하고 알리지만 수정·재검증 담당과 기한은 아직 정하지 않는다", point: 2 },
     ],
   },
   {
@@ -313,8 +314,8 @@ export const LEVEL_QUESTIONS: readonly TestQuestion[] = [
     options: [
       { label: "승인 체크리스트 없이 자동 전송", point: 0 },
       { label: "승인·저장·감사 로그를 남긴다", point: 3 },
-      { label: "로그는 나중에 일괄 생성", point: 2 },
-      { label: "실수 로그는 삭제한다", point: 1 },
+      { label: "승인만 확인하고 저장·감사 기록은 남기지 않는다", point: 1 },
+      { label: "승인·저장 기록은 남기지만 감사 내역 검토는 다음 점검으로 미룬다", point: 2 },
     ],
     safetyCritical: "approval",
   },
@@ -605,5 +606,5 @@ export function restoreLevelTestResult(state: PersistedLevelTestState): LevelTes
 }
 
 export function getDefaultResultStorageKey(): string {
-  return "level-test:v1";
+  return "level-test:v2";
 }
