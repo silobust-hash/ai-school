@@ -66,6 +66,14 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
+      name: "수강료와 강의안 열람 조건은 어떻게 되나요?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "수강료는 무료입니다. 강의안 열람에는 강사가 안내한 당일 접근 코드가 필요합니다. 커리큘럼은 코드 없이 확인할 수 있습니다.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "AI업무학교는 비개발자도 들을 수 있나요?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -382,7 +390,7 @@ export default function Home() {
               {[
                 { n: "6과", l: "체계적 커리큘럼" },
                 { n: `${lessonCount}강`, l: "단계별 실전 강의" },
-                { n: "0원", l: "누구나 무료 수강" },
+                { n: "0원", l: "수강료 무료" },
               ].map((s) => (
                 <div key={s.l} className="px-5 first:pl-0">
                   <dt className="font-display text-3xl md:text-4xl font-extrabold text-[var(--color-ink)] tabular-nums">
